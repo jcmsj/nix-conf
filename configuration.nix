@@ -217,6 +217,9 @@ in
     php
   ];
 
+  # For Piper to work
+  services.ratbagd.enable = true;
+
   home-manager.users.jcsan = {
     /* The home.stateVersion option does not have a default and must be set */
     home.stateVersion = "23.05";
@@ -244,6 +247,13 @@ in
       };
     };
   };
+
+  environment.gnome.excludePackages = (with pkgs; [
+    gnome.totem
+    gnome-tour
+    gnome.gnome-music
+    epiphany
+  ]);
 
   services.udev.packages = with pkgs; [
     gnome.gnome-settings-daemon
