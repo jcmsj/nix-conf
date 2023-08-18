@@ -148,6 +148,9 @@ in
   # services.xserver.libinput.enable = true;
 
   nixpkgs.config = {
+    # Allow unfree packages
+    allowUnfree = true;
+    firefox.speechSynthesisSupport = true;
     packageOverrides = pkgs: {
       unstable = import unstableTarball {
         config = config.nixpkgs.config;
@@ -159,7 +162,7 @@ in
   users.users.jcsan = {
     isNormalUser = true;
     description = "Jean Carlo M. San Juan";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "adbuser" ];
     packages = with pkgs; [
       firefox-bin
       firefox-devedition-bin
@@ -170,9 +173,6 @@ in
     ];
   };
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.firefox.speechSynthesisSupport = true;
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -186,8 +186,9 @@ in
     htop
     glxinfo
     lshw
-    gnomeExtensions.appindicator
-
+    unstable.gnomeExtensions.appindicator
+    unstable.gnomeExtensions.gtk4-desktop-icons-ng-ding
+    unstable.gnomeExtensions.dash-to-dock
     ## Gaming
     lutris
     # support 32-bit only
@@ -224,9 +225,7 @@ in
     /* The home.stateVersion option does not have a default and must be set */
     home.stateVersion = "23.05";
     /* Here goes the rest of your home-manager config, e.g. home.packages = [ pkgs.foo ]; */
-    nixpkgs.config = {
-      allowUnfree = true;
-    };
+   
     programs.git = {
       enable = true;
       userName = "Jean Carlo San Juan";
