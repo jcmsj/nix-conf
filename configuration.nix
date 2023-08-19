@@ -95,7 +95,7 @@ in
   };
   environment.shellAliases = {
     sudo = "sudo ";
-    "list-gens" = "nix-env --list-generations --profile /nix/var/nix/profiles/system";
+    "ls-gens" = "nix-env --list-generations --profile /nix/var/nix/profiles/system";
     "rm-gens" = "nix-env --profile /nix/var/nix/profiles/system --delete-generations";
     pn = "pnpm";
   };
@@ -221,11 +221,27 @@ in
   # For Piper to work
   services.ratbagd.enable = true;
 
+  # Power Management - https://nixos.wiki/wiki/Laptop
+  services.power-profiles-daemon.enable = false;
+  services.tlp = {
+    enable = true;
+    settings = {
+      CPU_SCALING_GOVERNOR_ON_AC = "performance";
+      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
+
+      CPU_MIN_PERF_ON_AC = 0;
+      CPU_MAX_PERF_ON_AC = 100;
+      CPU_MIN_PERF_ON_BAT = 0;
+      CPU_MAX_PERF_ON_BAT = 40;
+    };
+  };
+
   home-manager.users.jcsan = {
     /* The home.stateVersion option does not have a default and must be set */
     home.stateVersion = "23.05";
     /* Here goes the rest of your home-manager config, e.g. home.packages = [ pkgs.foo ]; */
-   
     programs.git = {
       enable = true;
       userName = "Jean Carlo San Juan";
