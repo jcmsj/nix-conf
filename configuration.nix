@@ -16,6 +16,7 @@ in
       ./hardware-configuration.nix
       <home-manager/nixos>
     ];
+
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -217,10 +218,10 @@ in
     nodePackages.pnpm
     php
   ];
+  programs.adb.enable = true;
 
   # For Piper to work
   services.ratbagd.enable = true;
-
   # Power Management - https://nixos.wiki/wiki/Laptop
   services.power-profiles-daemon.enable = false;
   services.tlp = {
