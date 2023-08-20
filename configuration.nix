@@ -93,6 +93,7 @@ in
     __NV_PRIME_RENDER_OFFLOAD_PROVIDER = "NVIDIA-GO";
     __GLX_VENDOR_LIBRARY_NAME = "nvidia";
     __VK_LAYER_NV_OPTIMUS = "NVIDIA_only";
+    CHROME_EXECUTABLE = "google-chrome-unstable";
   };
   environment.shellAliases = {
     sudo = "sudo ";
@@ -170,6 +171,7 @@ in
       discord
       speechd
       nixpkgs-fmt
+      google-chrome-dev
       #  thunderbird
     ];
   };
@@ -229,9 +231,7 @@ in
     settings = {
       CPU_SCALING_GOVERNOR_ON_AC = "performance";
       CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-
+      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";      
       CPU_MIN_PERF_ON_AC = 0;
       CPU_MAX_PERF_ON_AC = 100;
       CPU_MIN_PERF_ON_BAT = 0;
