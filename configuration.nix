@@ -13,7 +13,7 @@ let
     export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
     export __GLX_VENDOR_LIBRARY_NAME=nvidia
     export __VK_LAYER_NV_optimus=NVIDIA_only
-    exec -a "$0" "$@"
+    exec "$@"
   '';
 in
 {
@@ -237,7 +237,7 @@ in
   #     CPU_MAX_PERF_ON_BAT = 40;
   #   };
   # };
-
+ 
   home-manager.users.jcsan = {
     /* The home.stateVersion option does not have a default and must be set */
     home.stateVersion = "23.05";
