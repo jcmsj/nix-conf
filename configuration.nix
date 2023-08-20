@@ -8,6 +8,13 @@ let
   unstableTarball =
     fetchTarball
       https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz;
+  nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
+    export __NV_PRIME_RENDER_OFFLOAD=1
+    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+    export __GLX_VENDOR_LIBRARY_NAME=nvidia
+    export __VK_LAYER_NV_optimus=NVIDIA_only
+    exec -a "$0" "$@"
+  '';
 in
 {
   imports =
@@ -52,16 +59,34 @@ in
   };
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
   services.xserver = {
+    enable = true;
+
+    # Configure keymap in X11
     layout = "us";
     xkbVariant = "";
+
+    # Enable the GNOME Desktop Environment.
+    displayManager.gdm = {
+      enable = true;
+      #wayland = false;
+    };
+    desktopManager.gnome.enable = true;
+  };
+
+  nixpkgs.config = {
+    allowUnfree = true;
+    allowUnfreePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "nvidia-x11"
+      "nvidia-settings"
+    ];
+    firefox.speechSynthesisSupport = true;
+    packageOverrides = pkgs: {
+      unstable = import unstableTarball {
+        config = config.nixpkgs.config;
+      };
+    };
   };
 
   # Make sure opengl is enabled
@@ -71,28 +96,26 @@ in
     driSupport32Bit = true;
   };
 
+  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
-
-    # Modesetting is needed for most Wayland compositors
+    # Modesetting is needed for most Wayland compositors 
     modesetting.enable = true;
-
-    # Use the open source version of the kernel module
-    # Only available on driver 515.43.04+
     open = false;
-
-    # Enable the nvidia settings menu
     nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
+    prime = {
+      offload = {
+        enable = true;
+        enableOffloadCmd = true;
+      };
 
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-
+      # Find it using `lspci -c display`
+      nvidiaBusId = "PCI:1:0:0";
+      intelBusId = "PCI:0:2:0";
+    };
   };
 
   environment.sessionVariables = rec {
-    __NV_PRIME_RENDER_OFFLOAD = "1";
-    __NV_PRIME_RENDER_OFFLOAD_PROVIDER = "NVIDIA-GO";
-    __GLX_VENDOR_LIBRARY_NAME = "nvidia";
-    __VK_LAYER_NV_OPTIMUS = "NVIDIA_only";
     CHROME_EXECUTABLE = "google-chrome-unstable";
   };
   environment.shellAliases = {
@@ -100,20 +123,6 @@ in
     "ls-gens" = "nix-env --list-generations --profile /nix/var/nix/profiles/system";
     "rm-gens" = "nix-env --profile /nix/var/nix/profiles/system --delete-generations";
     pn = "pnpm";
-  };
-
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.prime = {
-    offload = {
-      enable = true;
-      enableOffloadCmd = true;
-    };
-
-    # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
-    intelBusId = "PCI:0:2:0";
-
-    # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
-    nvidiaBusId = "PCI:1:0:0";
   };
   # External display
   #specialisation = {
@@ -149,17 +158,6 @@ in
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-  nixpkgs.config = {
-    # Allow unfree packages
-    allowUnfree = true;
-    firefox.speechSynthesisSupport = true;
-    packageOverrides = pkgs: {
-      unstable = import unstableTarball {
-        config = config.nixpkgs.config;
-      };
-    };
-  };
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jcsan = {
     isNormalUser = true;
@@ -189,6 +187,7 @@ in
     htop
     glxinfo
     lshw
+    nvidia-offload
     unstable.gnomeExtensions.appindicator
     unstable.gnomeExtensions.gtk4-desktop-icons-ng-ding
     unstable.gnomeExtensions.dash-to-dock
@@ -225,19 +224,19 @@ in
   # For Piper to work
   services.ratbagd.enable = true;
   # Power Management - https://nixos.wiki/wiki/Laptop
-  services.power-profiles-daemon.enable = false;
-  services.tlp = {
-    enable = true;
-    settings = {
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";      
-      CPU_MIN_PERF_ON_AC = 0;
-      CPU_MAX_PERF_ON_AC = 100;
-      CPU_MIN_PERF_ON_BAT = 0;
-      CPU_MAX_PERF_ON_BAT = 40;
-    };
-  };
+  # services.power-profiles-daemon.enable = false;
+  # services.tlp = {
+  #   enable = true;
+  #   settings = {
+  #     CPU_SCALING_GOVERNOR_ON_AC = "performance";
+  #     CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
+  #     CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
+  #     CPU_MIN_PERF_ON_AC = 0;
+  #     CPU_MAX_PERF_ON_AC = 100;
+  #     CPU_MIN_PERF_ON_BAT = 0;
+  #     CPU_MAX_PERF_ON_BAT = 40;
+  #   };
+  # };
 
   home-manager.users.jcsan = {
     /* The home.stateVersion option does not have a default and must be set */
