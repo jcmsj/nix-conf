@@ -24,7 +24,10 @@ in
       <home-manager/nixos>
     ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    auto-optimise-store = true;
+  }; 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -245,6 +248,7 @@ in
     };
   };
 
+  programs.gamemode.enable = true;
   home-manager.users.jcsan = {
     /* The home.stateVersion option does not have a default and must be set */
     home.stateVersion = "23.05";
