@@ -8,13 +8,6 @@ let
   unstableTarball =
     fetchTarball
       "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-  nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
-    export __NV_PRIME_RENDER_OFFLOAD=1
-    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
-    export __GLX_VENDOR_LIBRARY_NAME=nvidia
-    export __VK_LAYER_NV_optimus=NVIDIA_only
-    exec "$@"
-  '';
 in
 {
   imports =
@@ -23,13 +16,15 @@ in
       ./hardware-configuration.nix
       ./i18n.nix
       ./power.nix
-      <home-manager/nixos>
+      ./de.nix
+      ./nvidia.nix
+      ./home.nix
     ];
 
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;
-  }; 
+  };
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -44,22 +39,6 @@ in
 
   # Enable networking
   networking.networkmanager.enable = true;
-
-  # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-
-    # Configure keymap in X11
-    layout = "us";
-    xkbVariant = "";
-
-    # Enable the GNOME Desktop Environment.
-    displayManager.gdm = {
-      enable = true;
-      #wayland = false;
-    };
-    desktopManager.gnome.enable = true;
-  };
 
   nixpkgs.config = {
     allowUnfree = true;
@@ -76,25 +55,6 @@ in
     enable = true;
     driSupport = true;
     driSupport32Bit = true;
-  };
-
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia = {
-    # Modesetting is needed for most Wayland compositors 
-    modesetting.enable = true;
-    open = false;
-    nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    prime = {
-      offload = {
-        enable = true;
-        enableOffloadCmd = true;
-      };
-
-      # Find it using `lspci -c display`
-      nvidiaBusId = "PCI:1:0:0";
-      intelBusId = "PCI:0:2:0";
-    };
   };
 
   environment.sessionVariables = rec {
@@ -221,42 +181,7 @@ in
   services.ratbagd.enable = true;
 
   programs.gamemode.enable = true;
-  home-manager.users.jcsan = {
-    /* The home.stateVersion option does not have a default and must be set */
-    home.stateVersion = "23.05";
-    /* Here goes the rest of your home-manager config, e.g. home.packages = [ pkgs.foo ]; */
-    programs.git = {
-      enable = true;
-      userName = "Jean Carlo San Juan";
-      userEmail = "sanjuan.jeancarlo@gmail.com";
-      extraConfig = {
-        init.defaultBranch = "main";
-      };
-      aliases = {
-        ci = "commit";
-        co = "checkout";
-        s = "status";
-        ac = "commit -am";
-        uncommit = "reset HEAD~1";
-        recommit = "commit --amend --no-edit";
-        edit = "commit --amend";
-        undo = "uncommit";
-        redo = "recommit";
-      };
-    };
-  };
 
-  environment.gnome.excludePackages = (with pkgs; [
-    gnome.totem
-    gnome-tour
-    gnome.gnome-music
-    epiphany
-  ]);
-
-  services.udev.packages = with pkgs; [
-    gnome.gnome-settings-daemon
-  ];
-  #programs.dconf.enable = true;
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
