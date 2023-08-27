@@ -7,7 +7,7 @@
 let
   unstableTarball =
     fetchTarball
-      https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz;
+      "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
   nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
     export __NV_PRIME_RENDER_OFFLOAD=1
     export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
@@ -21,6 +21,8 @@ in
     [
       # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./i18n.nix
+      ./power.nix
       <home-manager/nixos>
     ];
 
@@ -42,24 +44,6 @@ in
 
   # Enable networking
   networking.networkmanager.enable = true;
-
-  # Set your time zone.
-  time.timeZone = "Asia/Manila";
-
-  # Select internationalisation properties.
-  i18n.defaultLocale = "en_PH.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_PH.UTF-8";
-    LC_IDENTIFICATION = "en_PH.UTF-8";
-    LC_MEASUREMENT = "en_PH.UTF-8";
-    LC_MONETARY = "en_PH.UTF-8";
-    LC_NAME = "en_PH.UTF-8";
-    LC_NUMERIC = "en_PH.UTF-8";
-    LC_PAPER = "en_PH.UTF-8";
-    LC_TELEPHONE = "en_PH.UTF-8";
-    LC_TIME = "en_PH.UTF-8";
-  };
 
   # Enable the X11 windowing system.
   services.xserver = {
@@ -193,6 +177,7 @@ in
     lutris
     # support 32-bit only
     wine
+
     # support 64-bit only
     (wine.override { wineBuild = "wine64"; })
     wineWowPackages.stable
@@ -213,14 +198,15 @@ in
     git
 
     ### Language Runtimes & Managers
+    unstable.nil
     unstable.nodejs_20
     nodePackages.pnpm
     php
     (python311.withPackages (ps: with ps; [
-      (buildPythonPackage rec {
+      (buildPythonPackage {
         pname = "envycontrol";
         version = "3.2.0";
-        src = fetchTarball https://github.com/bayasdev/envycontrol/archive/refs/tags/v3.2.0.tar.gz;
+        src = fetchTarball "https://github.com/bayasdev/envycontrol/archive/refs/tags/v3.2.0.tar.gz";
         doCheck = false;
         propogatedBuildInputs = [
 
@@ -228,25 +214,11 @@ in
       })
     ]))
   ];
+
   programs.adb.enable = true;
 
   # For Piper to work
   services.ratbagd.enable = true;
-  # Power Management - https://nixos.wiki/wiki/Laptop
-  services.power-profiles-daemon.enable = false;
-  services.tlp = {
-    enable = true;
-    settings = {
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-      CPU_ENERGY_PERF_POLICY_ON_AC = "balance_performance";
-      CPU_MIN_PERF_ON_AC = 0;
-      CPU_MAX_PERF_ON_AC = 100;
-      CPU_MIN_PERF_ON_BAT = 0;
-      CPU_MAX_PERF_ON_BAT = 40;
-    };
-  };
 
   programs.gamemode.enable = true;
   home-manager.users.jcsan = {
