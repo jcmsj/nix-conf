@@ -66,16 +66,6 @@ in
     "rm-gens" = "nix-env --profile /nix/var/nix/profiles/system --delete-generations";
     pn = "pnpm";
   };
-  # External display
-  #specialisation = {
-  #  external-display.configuration = {
-  #    system.nixos.tags = [ "external-display" ];
-  #    hardware.nvidia = {
-  #      prime.offload.enable = lib.mkForce false;
-  #      powerManagement.enable = lib.mkForce false;
-  #    };
-  #  };
-  #};
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
