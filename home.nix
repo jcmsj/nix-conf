@@ -12,6 +12,7 @@
       userEmail = "sanjuan.jeancarlo@gmail.com";
       extraConfig = {
         init.defaultBranch = "main";
+        push.autoSetupRemote = true;
       };
       aliases = {
         ci = "commit";
