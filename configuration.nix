@@ -127,7 +127,6 @@ in
     lutris
     # support 32-bit only
     wine
-
     # support 64-bit only
     (wine.override { wineBuild = "wine64"; })
     wineWowPackages.stable
@@ -137,6 +136,8 @@ in
     winetricks
     #nvtop
     gamescope
+
+    inkscape
 
     ## Development
     ### Editors
@@ -172,6 +173,22 @@ in
 
   programs.gamemode.enable = true;
 
+  nixpkgs.overlays = [
+    (final: prev: {
+      inkscape = prev.inkscape.overrideAttrs
+        (old: rec {
+          version = "1.3";
+          src = fetchTarball {
+            url = "https://media.inkscape.org/dl/resources/file/inkscape-${version}.tar.xz";
+            sha256 = "1gp0ay0kpy4nvgr98p535pqnzj5s2ryh552dpcxgx74grl0zrqfy";
+          };
+          buildInputs = old.buildInputs ++ [
+            pkgs.double-conversion
+            pkgs.libepoxy
+          ];
+        });
+    })
+  ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
