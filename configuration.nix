@@ -25,7 +25,7 @@ in
     experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;
   };
-  
+
   # Bootloader.
   boot = {
     loader = {
@@ -189,6 +189,18 @@ in
 
   nixpkgs.overlays = [
     (final: prev: {
+      gnome = prev.gnome.overrideScope'
+        (gfinal: gprev: {
+          version = "44.4";
+          mutter = gprev.mutter.overrideAttrs (old: rec {
+            version = "44.4";
+            src = fetchTarball {
+              url = "https://gitlab.gnome.org/GNOME/mutter/-/archive/${version}/mutter-${version}.tar.gz";
+              sha256 = "0dirap0qyhjxnjbc1b8g97qlrgcvzc562v468nmxd9l5y5jlg7r2";
+            };
+          });
+        });
+
       inkscape = prev.inkscape.overrideAttrs
         (old: rec {
           version = "1.3";
