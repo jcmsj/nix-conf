@@ -189,18 +189,6 @@ in
 
   nixpkgs.overlays = [
     (final: prev: {
-      gnome = prev.gnome.overrideScope'
-        (gfinal: gprev: {
-          version = "44.4";
-          mutter = gprev.mutter.overrideAttrs (old: rec {
-            version = "44.4";
-            src = fetchTarball {
-              url = "https://gitlab.gnome.org/GNOME/mutter/-/archive/${version}/mutter-${version}.tar.gz";
-              sha256 = "0dirap0qyhjxnjbc1b8g97qlrgcvzc562v468nmxd9l5y5jlg7r2";
-            };
-          });
-        });
-
       inkscape = prev.inkscape.overrideAttrs
         (old: rec {
           version = "1.3";
@@ -240,5 +228,5 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.05"; # Did you read the comment?
+  system.stateVersion = "unstable"; # Did you read the comment?
 }
