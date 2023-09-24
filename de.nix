@@ -1,6 +1,13 @@
 { pkgs, ... }:
 
 {
+  programs.nm-applet = {
+    enable = true;
+  };
+  programs.waybar = {
+    enable = true;
+  };
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
@@ -9,24 +16,21 @@
     layout = "us";
     xkbVariant = "";
 
-    # Enable the GNOME Desktop Environment.
+    # GDM for lockscreen
     displayManager.gdm = {
       enable = true;
-      #wayland = false;
+      wayland = true;
     };
-    desktopManager.gnome.enable = true;
+    #desktopManager.gnome.enable = true;
   };
 
-  environment.gnome.excludePackages = (with pkgs; [
-    gnome.totem
-    gnome-tour
-    gnome.gnome-music
-    epiphany
-  ]);
+  services.gnome = {
+    gnome-keyring.enable = true;
+  };
 
-  services.udev.packages = with pkgs; [
-    gnome.gnome-settings-daemon
-  ];
+  # services.udev.packages = with pkgs; [
+  #   gnome.gnome-settings-daemon
+  # ];
 
   #programs.dconf.enable = true;
 }

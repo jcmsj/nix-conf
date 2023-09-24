@@ -73,12 +73,23 @@ in
 
   environment.sessionVariables = rec {
     CHROME_EXECUTABLE = "google-chrome-unstable";
+
+    # If cursor becomes invisible
+    #WLR_NO_HARDWARE_CURSORS = "1";
+    # Hint electron apps to use wayland
+    #NIXOS_OZONE_WL = "1";
   };
   environment.shellAliases = {
     sudo = "sudo ";
     "ls-gens" = "nix-env --list-generations --profile /nix/var/nix/profiles/system";
     "rm-gens" = "nix-env --profile /nix/var/nix/profiles/system --delete-generations";
     pn = "pnpm";
+  };
+
+  programs.hyprland = {
+    enable = true;
+    nvidiaPatches = true;
+    xwayland.enable = true;
   };
 
   # Enable CUPS to print documents.
@@ -125,6 +136,29 @@ in
   environment.systemPackages = with pkgs; [
     ## Required Apps
     # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+
+    # notif daemon
+    mako
+    libnotify
+    # Wallpaper
+    hyprpaper
+
+    #Clipboards
+    cliphist
+    unstable.wl-clip-persist
+    
+    # hyprland's default terminal
+    kitty
+    # App launcher
+    rofi-wayland
+
+    #Screenshot Utility
+    grim
+    slurp
+    swappy
+    # Color picker
+    hyprpicker
+
     vim
     wget
     vlc
@@ -134,9 +168,6 @@ in
     glxinfo
     lshw
     nvidia-offload
-    unstable.gnomeExtensions.appindicator
-    unstable.gnomeExtensions.gtk4-desktop-icons-ng-ding
-    unstable.gnomeExtensions.dash-to-dock
     ## Gaming
     lutris
     # support 32-bit only
@@ -161,7 +192,7 @@ in
     ### Version Control
     unstable.gh
     git
-
+    
     ### Language Runtimes & Managers
     unstable.nil
     unstable.nodejs_20
@@ -178,6 +209,15 @@ in
         ];
       })
     ]))
+
+    gnome.gnome-system-monitor
+    gnome.nautilus
+    gnome-photos
+    gnome.cheese
+    gnome.simple-scan
+    gnome-text-editor
+
+    neofetch
   ];
 
   programs.adb.enable = true;

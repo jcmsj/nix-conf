@@ -1,3 +1,5 @@
+{pkgs, ...}:
+
 {
   imports = [
       <home-manager/nixos>
@@ -26,5 +28,11 @@
         redo = "recommit";
       };
     };
+
+    programs.obs-studio = {
+      enable = true;
+    };
+
+    programs.obs-studio.plugins = [ pkgs.unstable.obs-studio-plugins.wlrobs ];
   };
 }
