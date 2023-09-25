@@ -31,8 +31,8 @@
 
     programs.obs-studio = {
       enable = true;
+      plugins = [ pkgs.unstable.obs-studio-plugins.wlrobs ];
     };
 
-    programs.obs-studio.plugins = [ pkgs.unstable.obs-studio-plugins.wlrobs ];
   };
 }
