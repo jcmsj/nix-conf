@@ -4,11 +4,6 @@
 
 { config, lib, pkgs, ... }:
 
-let
-  unstableTarball =
-    fetchTarball
-      "https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz";
-in
 {
   imports =
     [
@@ -53,15 +48,17 @@ in
 
   # Enable networking
   networking.networkmanager.enable = true;
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
   nixpkgs.config = {
     allowUnfree = true;
     firefox.speechSynthesisSupport = true;
-    packageOverrides = pkgs: {
-      unstable = import unstableTarball {
-        config = config.nixpkgs.config;
-      };
-    };
+    # packageOverrides = pkgs: {
+    #   unstable = import unstableTarball {
+    #     config = config.nixpkgs.config;
+    #   };
+    # };
   };
 
   # Make sure opengl is enabled
@@ -88,7 +85,7 @@ in
 
   programs.hyprland = {
     enable = true;
-    nvidiaPatches = true;
+    enableNvidiaPatches = true;
     xwayland.enable = true;
   };
 
@@ -136,7 +133,7 @@ in
   environment.systemPackages = with pkgs; [
     ## Required Apps
     # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-
+    home-manager
     # notif daemon
     mako
     libnotify
@@ -145,20 +142,23 @@ in
 
     #Clipboards
     cliphist
-    unstable.wl-clip-persist
+    wl-clip-persist
     
     # hyprland's default terminal
     kitty
     # App launcher
     rofi-wayland
-
+    
     #Screenshot Utility
     grim
     slurp
     swappy
     # Color picker
     hyprpicker
-
+    nerdfonts
+    # bar
+    eww-wayland
+    playerctl
     vim
     wget
     vlc
@@ -183,19 +183,21 @@ in
     gamescope
 
     inkscape
-
+    jq
+    brightnessctl
+    socat
     ## Development
     ### Editors
-    unstable.vscode
-    unstable.vscode-fhs
+    vscode
+    vscode-fhs
 
     ### Version Control
-    unstable.gh
+    gh
     git
     
     ### Language Runtimes & Managers
-    unstable.nil
-    unstable.nodejs_20
+    nil
+    nodejs_20
     nodePackages.pnpm
     php
     (python311.withPackages (ps: with ps; [
@@ -220,6 +222,13 @@ in
     neofetch
   ];
 
+  fonts = {
+    fontDir.enable = true;
+    enableDefaultPackages = true;
+    packages = with pkgs; [
+      nerdfonts
+    ];
+  };
   programs.adb.enable = true;
 
   # For Piper to work
@@ -228,20 +237,20 @@ in
   programs.gamemode.enable = true;
 
   nixpkgs.overlays = [
-    (final: prev: {
-      inkscape = prev.inkscape.overrideAttrs
-        (old: rec {
-          version = "1.3";
-          src = fetchTarball {
-            url = "https://media.inkscape.org/dl/resources/file/inkscape-${version}.tar.xz";
-            sha256 = "1gp0ay0kpy4nvgr98p535pqnzj5s2ryh552dpcxgx74grl0zrqfy";
-          };
-          buildInputs = old.buildInputs ++ [
-            pkgs.double-conversion
-            pkgs.libepoxy
-          ];
-        });
-    })
+    # (final: prev: {
+    #   inkscape = prev.inkscape.overrideAttrs
+    #     (old: rec {
+    #       version = "1.3";
+    #       src = fetchTarball {
+    #         url = "https://media.inkscape.org/dl/resources/file/inkscape-${version}.tar.xz";
+    #         sha256 = "1gp0ay0kpy4nvgr98p535pqnzj5s2ryh552dpcxgx74grl0zrqfy";
+    #       };
+    #       buildInputs = old.buildInputs ++ [
+    #         pkgs.double-conversion
+    #         pkgs.libepoxy
+    #       ];
+    #     });
+    # })
   ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -268,5 +277,6 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "unstable"; # Did you read the comment?
+  system.stateVersion = "24.05"; # Did you read the comment?
 }
+ 
