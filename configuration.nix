@@ -149,6 +149,9 @@
     # App launcher
     rofi-wayland
     
+    networkmanagerapplet
+    blueman
+
     #Screenshot Utility
     grim
     slurp
@@ -199,7 +202,7 @@
     nil
     nodejs_20
     nodePackages.pnpm
-    networkmanagerapplet
+
     php
     (python311.withPackages (ps: with ps; [
       (buildPythonPackage {
