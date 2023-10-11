@@ -70,7 +70,6 @@
 
   environment.sessionVariables = rec {
     CHROME_EXECUTABLE = "google-chrome-unstable";
-
     # If cursor becomes invisible
     #WLR_NO_HARDWARE_CURSORS = "1";
     # Hint electron apps to use wayland
@@ -81,6 +80,7 @@
     "ls-gens" = "nix-env --list-generations --profile /nix/var/nix/profiles/system";
     "rm-gens" = "nix-env --profile /nix/var/nix/profiles/system --delete-generations";
     pn = "pnpm";
+    py = "python";
   };
 
   programs.hyprland = {
@@ -143,12 +143,12 @@
     #Clipboards
     cliphist
     wl-clip-persist
-    
+
     # hyprland's default terminal
     kitty
     # App launcher
     rofi-wayland
-    
+
     networkmanagerapplet
     blueman
 
@@ -184,7 +184,7 @@
     winetricks
     #nvtop
     gamescope
-
+    p7zip
     inkscape
     jq
     brightnessctl
@@ -197,7 +197,7 @@
     ### Version Control
     gh
     git
-    
+
     ### Language Runtimes & Managers
     nil
     nodejs_20
@@ -231,7 +231,21 @@
     enableDefaultPackages = true;
     packages = with pkgs; [
       nerdfonts
+      fira-code
+      fira-code-symbols
+      noto-fonts
+      noto-fonts-cjk
+      noto-fonts-emoji
     ];
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        sansSerif = [ "Roboto" ];
+        monospace = [ "Fira Code" ];
+        serif = [ "Noto Fonts CJK" "Fira Code" ];
+        emoji = ["noto-fonts-emoji"];
+      };
+    };
   };
   programs.adb.enable = true;
 

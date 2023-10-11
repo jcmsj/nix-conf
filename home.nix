@@ -1,13 +1,25 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 
 {
   imports = [
-      <home-manager/nixos>
+    <home-manager/nixos>
   ];
-    home-manager.users.jcsan = {
+  home-manager.users.jcsan = {
     /* The home.stateVersion option does not have a default and must be set */
     home.stateVersion = "23.11";
     /* Here goes the rest of your home-manager config, e.g. home.packages = [ pkgs.foo ]; */
+    gtk = {
+      enable = true;
+      theme = {
+        package = pkgs.adw-gtk3;
+        # package = pkgs.graphite-gtk-theme.override {
+          # colorVariants = ["dark"];
+          # themeVariants = [ "green" ];
+        # };
+        # name = "graphite-gtk-dark";
+        name = "adw-gtk3-dark";
+      };
+    };
     programs.home-manager.enable = true;
     programs.git = {
       enable = true;
