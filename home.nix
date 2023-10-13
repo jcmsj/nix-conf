@@ -13,8 +13,8 @@
       theme = {
         package = pkgs.adw-gtk3;
         # package = pkgs.graphite-gtk-theme.override {
-          # colorVariants = ["dark"];
-          # themeVariants = [ "green" ];
+        # colorVariants = ["dark"];
+        # themeVariants = [ "green" ];
         # };
         # name = "graphite-gtk-dark";
         name = "adw-gtk3-dark";
@@ -41,7 +41,16 @@
         redo = "recommit";
       };
     };
-
+    programs.kitty = {
+      enable = true;
+      font = {
+        name = "Fira Code";
+      };
+      keybindings = {
+        "ctrl+c" = "copy_or_interrupt";
+        "ctrl+f>2" = "set_font_size 20";
+      };
+    };
     programs.obs-studio = {
       enable = true;
       plugins = [ pkgs.obs-studio-plugins.wlrobs ];
