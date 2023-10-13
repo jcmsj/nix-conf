@@ -222,7 +222,9 @@
     gnome.cheese
     gnome.simple-scan
     gnome-text-editor
+    gnome.eog
 
+    krita
     neofetch
   ];
 
@@ -243,7 +245,7 @@
         sansSerif = [ "Roboto" ];
         monospace = [ "Fira Code" ];
         serif = [ "Noto Fonts CJK" "Fira Code" ];
-        emoji = ["noto-fonts-emoji"];
+        emoji = [ "noto-fonts-emoji" ];
       };
     };
   };
@@ -277,7 +279,11 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
+  # programs.steam = {
+  #   enable = true;
+  #   remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+  #   dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+  # };
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
