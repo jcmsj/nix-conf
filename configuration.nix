@@ -70,6 +70,7 @@
 
   environment.sessionVariables = rec {
     CHROME_EXECUTABLE = "google-chrome-unstable";
+    MOZ_ENABLE_WAYLAND = "1";
     # If cursor becomes invisible
     #WLR_NO_HARDWARE_CURSORS = "1";
     # Hint electron apps to use wayland
@@ -151,7 +152,6 @@
 
     networkmanagerapplet
     blueman
-
     #Screenshot Utility
     grim
     slurp
@@ -211,9 +211,11 @@
         src = fetchTarball "https://github.com/bayasdev/envycontrol/archive/refs/tags/v3.2.0.tar.gz";
         doCheck = false;
         propogatedBuildInputs = [
-
+          
         ];
       })
+      pygame
+      numpy
     ]))
 
     gnome.gnome-system-monitor
@@ -222,8 +224,9 @@
     gnome.cheese
     gnome.simple-scan
     gnome-text-editor
+    gnome.gnome-clocks
     gnome.eog
-
+    authenticator
     krita
     neofetch
   ];
