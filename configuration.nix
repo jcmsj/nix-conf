@@ -119,13 +119,7 @@
     description = "Jean Carlo M. San Juan";
     extraGroups = [ "networkmanager" "wheel" "adbuser" ];
     packages = with pkgs; [
-      firefox-bin
-      firefox-devedition-bin
-      discord
-      speechd
-      nixpkgs-fmt
-      google-chrome-dev
-      #  thunderbird
+
     ];
   };
 
@@ -229,6 +223,13 @@
     authenticator
     krita
     neofetch
+
+    firefox-bin
+    firefox-devedition-bin
+    discord
+    speechd
+    nixpkgs-fmt
+    google-chrome-dev
   ];
 
   fonts = {
@@ -258,6 +259,11 @@
   services.ratbagd.enable = true;
 
   programs.gamemode.enable = true;
+
+  services.logind.extraConfig = ''
+    # don't shutdown when power button is short-pressed
+    HandlePowerKey=ignore
+  '';
 
   nixpkgs.overlays = [
     # (final: prev: {
