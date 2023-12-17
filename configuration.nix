@@ -61,17 +61,17 @@
     libnotify
     # Wallpaper
     hyprpaper
-
     #Clipboards
     cliphist
     wl-clip-persist
+    # Wifi GUI
+    wpa_supplicant_gui
 
     # hyprland's default terminal
     kitty
     # App launcher
     rofi-wayland
 
-    networkmanagerapplet
     blueman
     #Screenshot Utility
     grim
