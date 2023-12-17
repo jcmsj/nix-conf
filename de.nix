@@ -1,6 +1,12 @@
 { pkgs, ... }:
 
 {
+  programs.hyprland = {
+    enable = true;
+    enableNvidiaPatches = true;
+    xwayland.enable = true;
+  };
+
   programs.nm-applet = {
     enable = true;
   };
