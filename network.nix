@@ -1,3 +1,4 @@
+{pkgs, ...}:
 {
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -11,4 +12,15 @@
   systemd.services.NetworkManager-wait-online.enable = false; 
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
+  # powers up the default Bluetooth controller on boot
+  hardware.bluetooth.powerOnBoot = true;
+  # Using Bluetooth headset buttons to control media player
+  # TODO: Try home manager service
+  # https://nixos.wiki/wiki/Bluetooth
+  systemd.user.services.mpris-proxy = {
+    description = "Mpris proxy";
+    after = [ "network.target" "sound.target" ];
+    wantedBy = [ "default.target" ];
+    serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
+  };
 }
