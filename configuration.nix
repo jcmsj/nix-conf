@@ -18,6 +18,7 @@
       ./home.nix
       ./shell-environment.nix
       ./network.nix
+      ./sound.nix
     ];
 
   nix.settings = {
@@ -131,7 +132,7 @@
         src = fetchTarball "https://github.com/bayasdev/envycontrol/archive/refs/tags/v3.3.1.tar.gz";
         doCheck = false;
         propogatedBuildInputs = [
-          
+
         ];
       })
     ]))
@@ -174,7 +175,7 @@
   '';
 
   nixpkgs.overlays = [
- 
+
   ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
