@@ -15,7 +15,6 @@
       ./i18n.nix
       ./de.nix
       ./nvidia.nix
-      ./home.nix
       ./shell-environment.nix
       ./network.nix
       ./sound.nix
@@ -56,8 +55,8 @@
   environment.systemPackages = with pkgs; [
     ## Required Apps
     # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    home-manager
     # notif daemon
+    home-manager
     mako
     libnotify
     # Wallpaper
@@ -123,14 +122,17 @@
     ### Language Runtimes & Managers
     nil
     nodejs_21
-    nodePackages.pnpm
+    nodePackages_latest.pnpm
 
     php
     (python311.withPackages (ps: with ps; [
       (buildPythonPackage {
         pname = "envycontrol";
-        version = "3.3.1";
-        src = fetchTarball "https://github.com/bayasdev/envycontrol/archive/refs/tags/v3.3.1.tar.gz";
+        version = "3.4.0";
+        src = fetchTarball {
+          url ="https://github.com/bayasdev/envycontrol/archive/refs/tags/v3.4.0.tar.gz";
+          sha256 = "sha256-m0ZH6kqLg15IfFtmoBqZgEe7wpIde/bIEyn6YY/L/xU=";
+        };
         doCheck = false;
         propogatedBuildInputs = [
 
@@ -159,7 +161,6 @@
     google-chrome
 
     qbittorrent
-    ags
   ];
 
   # Enable CUPS to print documents.

@@ -6,12 +6,13 @@
     pn = "pnpm";
     py = "python";
   };
-
+  environment.localBinInPath = true;
   environment.sessionVariables = rec {
     CHROME_EXECUTABLE = "google-chrome-unstable";
     MOZ_ENABLE_WAYLAND = "1";
     # If cursor becomes invisible
     WLR_NO_HARDWARE_CURSORS = "1";
+    PNPM_HOME = "$HOME/.pnpm";
     # Hint electron apps to use wayland
     #NIXOS_OZONE_WL = "1";
   };
