@@ -1,14 +1,10 @@
-{ ... }:
+{ inputs, pkgs, ... }:
 {
+  # https://wiki.hyprland.org/Nix/Hyprland-on-NixOS/
   programs.hyprland = {
     enable = true;
-    xwayland.enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   };
-
-  programs.waybar = {
-   #enable = true;
-  };
-
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
@@ -31,22 +27,4 @@
     gnome-keyring.enable = true;
   };
 
-  # xdg = {
-  #   mime = {
-  #     enable = true;
-  #     defaultApplications = {
-  #       "application/pdf" = "firefox-devedition.desktop";
-  #       "inode/directory" = "nautilus.desktop";
-  #     };
-
-  #     addedAssociations = {
-  #       "inode/directory" = "nautilus.desktop";
-  #     };
-  #   };
-  # };
-  # services.udev.packages = with pkgs; [
-  #   gnome.gnome-settings-daemon
-  # ];
-
-  #programs.dconf.enable = true;
 }
