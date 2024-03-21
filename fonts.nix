@@ -5,19 +5,18 @@
     fontDir.enable = true;
     enableDefaultPackages = true;
     packages = with pkgs; [
-      nerdfonts
-      fira-code
-      fira-code-symbols
-      noto-fonts
+      iosevka-bin
+      source-serif-pro
       noto-fonts-cjk
       noto-fonts-emoji
+      nerdfonts
     ];
     fontconfig = {
       enable = true;
       defaultFonts = {
-        sansSerif = [ "Roboto" ];
-        monospace = [ "Fira Code" ];
-        serif = [ "Noto Fonts CJK" "Fira Code" ];
+        sansSerif = [ "Iosevka" ];
+        monospace = [ "Iosevka" ];
+        serif = [ "Source Serif Pro" "Ioesevka" ];
         emoji = [ "noto-fonts-emoji" ];
       };
     };
