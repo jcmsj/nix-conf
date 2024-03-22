@@ -13,7 +13,8 @@
     # If cursor becomes invisible
     WLR_NO_HARDWARE_CURSORS = "1";
     PNPM_HOME = "$HOME/.pnpm";
+    GDK_BACKEND = "wayland";
     # Hint electron apps to use wayland
-    #NIXOS_OZONE_WL = "1";
+    NIXOS_OZONE_WL = "1";
   };
 }
