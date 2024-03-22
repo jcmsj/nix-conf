@@ -14,17 +14,32 @@
       variant = "";
       layout = "us";
     };
-
     # GDM for lockscreen
-    displayManager.gdm = {
-      enable = true;
-      wayland = true;
-    };
+    # displayManager.gdm = {
+    #   enable = true;
+    #   wayland = true;
+    # };
     #desktopManager.gnome.enable = true;
   };
+  services.greetd = {
+    enable = true;
+    settings = {
+      default_session = {
+        command = "Hyprland";
+        user = "jcsan";
+      };
+    };
+  };
 
+  systemd.services.greetd.serviceConfig = {
+    Type = "idle";
+    StandardInput = "tty";
+    Standardoutput = "tty";
+    TTYReset = true;
+    TTYVHangup = true;
+    TTYVTDisallocate = true;
+  };
   services.gnome = {
     gnome-keyring.enable = true;
   };
-
 }

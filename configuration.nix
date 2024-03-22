@@ -64,8 +64,11 @@
     mako
     libnotify
     # Wallpaper
+    # hyprecosystem
     hyprpaper
-
+    hypridle # idle management
+    hyprpicker # Color picker
+    hyprlock
     #Clipboards
     cliphist
     wl-clip-persist
@@ -81,8 +84,7 @@
     grim
     slurp
     swappy
-    # Color picker
-    hyprpicker
+
     nerdfonts
     # bar
     eww
@@ -152,7 +154,9 @@
     gnome-text-editor
     gnome.gnome-clocks
     gnome.eog
+    health
     authenticator
+    
     krita
     neofetch
     inkscape

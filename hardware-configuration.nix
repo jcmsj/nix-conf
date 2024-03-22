@@ -13,7 +13,8 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
-
+  # boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
+  
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/89950afe-83d6-4b6e-b5cd-200fbd8ac5fb";
       fsType = "ext4";
