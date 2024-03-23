@@ -1,4 +1,4 @@
-{ pkgs, config, ... }:
+{ pkgs, lib, config, ... }:
 
 let
   nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
@@ -10,6 +10,13 @@ let
   '';
 in
 {
+  # Make sure opengl is enabled
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    driSupport32Bit = true;
+  };
+
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
     # Modesetting is needed for most Wayland compositors 
@@ -17,8 +24,9 @@ in
     open = false;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
-    # powerManagement.enable = true;
+    powerManagement.enable = true;
     prime = {
+      sync.enable = false;
       offload = {
         enable = true;
         enableOffloadCmd = true;
@@ -31,13 +39,18 @@ in
   };
   nixpkgs.config.packageOverrides.nvidia-offload = nvidia-offload;
   # External display
-  #specialisation = {
-  #  external-display.configuration = {
-  #    system.nixos.tags = [ "external-display" ];
-  #    hardware.nvidia = {
-  #      prime.offload.enable = lib.mkForce false;
-  #      powerManagement.enable = lib.mkForce false;
-  #    };
-  #  };
-  #};
+  specialisation = {
+    optimus-prime.configuration = {
+      system.nixos.tags = [ "OPTIMUS-PRIME" ];
+      hardware.nvidia = {
+        prime = {
+          sync.enable = lib.mkForce true;
+          offload = {
+            enable = lib.mkForce false;
+            enableOffloadCmd = lib.mkForce false;
+          } ;
+        };
+      };
+    };
+  };
 }

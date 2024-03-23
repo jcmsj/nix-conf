@@ -3,7 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, lib, pkgs, ... }:
-
 {
   imports =
     [
@@ -33,12 +32,6 @@
   nixpkgs.config = {
     allowUnfree = true;
     firefox.speechSynthesisSupport = true;
-  };
-  # Make sure opengl is enabled
-  hardware.opengl = {
-    enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -105,8 +98,9 @@
     # support 64-bit only
     (wine.override { wineBuild = "wine64"; })
     wineWowPackages.stable
-    # wine-staging (version with experimental features)
     wineWowPackages.staging
+    wineWowPackages.waylandFull
+    bottles-unwrapped
     # winetricks (all versions)
     winetricks
     #nvtop
@@ -188,6 +182,7 @@
   nixpkgs.overlays = [
 
   ];
+  
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

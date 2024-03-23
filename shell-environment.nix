@@ -5,6 +5,7 @@
     "rm-gens" = "nix-env --profile /nix/var/nix/profiles/system --delete-generations";
     pn = "pnpm";
     py = "python";
+    remake = "cd ~/.config/nix-conf && nixos-rebuild switch --flake .#nixos";
   };
   environment.localBinInPath = true;
   environment.sessionVariables = rec {
