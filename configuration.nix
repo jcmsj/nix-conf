@@ -25,14 +25,15 @@
 
     # Cachix for hyprland - https://wiki.hyprland.org/Nix/Cachix/
     # not using it for now, for maximum perf
-    # substituters = ["https://hyprland.cachix.org"];
-    # trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+    substituters = ["https://hyprland.cachix.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
   };
 
   nixpkgs.config = {
     allowUnfree = true;
     firefox.speechSynthesisSupport = true;
   };
+  # start auth agen on login by creating a systemd user service: 
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -48,6 +49,7 @@
 
     ];
   };
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -77,17 +79,15 @@
     grim
     slurp
     swappy
-
     nerdfonts
     # bar
-    eww
     playerctl
     vim
     wget
     vlc
     piper
     ## System utils
-    htop
+
     glxinfo
     lshw
     nvidia-offload
@@ -100,7 +100,6 @@
     wineWowPackages.stable
     wineWowPackages.staging
     wineWowPackages.waylandFull
-    bottles-unwrapped
     # winetricks (all versions)
     winetricks
     #nvtop
@@ -140,6 +139,7 @@
       })
     ]))
 
+    polkit_gnome
     gnome.gnome-system-monitor
     gnome.nautilus
     gnome-photos
@@ -148,6 +148,8 @@
     gnome-text-editor
     gnome.gnome-clocks
     gnome.eog
+    gparted
+    varia
     health
     authenticator
     
@@ -163,11 +165,12 @@
     google-chrome
 
     qbittorrent
+    # osu-lazer
   ];
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-
+  services.upower.enable = true; # needed by ags
   # For Piper to work
   services.ratbagd.enable = true;
 

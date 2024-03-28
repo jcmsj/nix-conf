@@ -26,7 +26,7 @@ in
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     powerManagement.enable = true;
     prime = {
-      sync.enable = false;
+      reverseSync.enable = false;
       offload = {
         enable = true;
         enableOffloadCmd = true;
@@ -44,7 +44,7 @@ in
       system.nixos.tags = [ "OPTIMUS-PRIME" ];
       hardware.nvidia = {
         prime = {
-          sync.enable = lib.mkForce true;
+          reverseSync.enable = lib.mkForce true;
           offload = {
             enable = lib.mkForce false;
             enableOffloadCmd = lib.mkForce false;

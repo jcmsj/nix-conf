@@ -1,3 +1,4 @@
+{pkgs, ...}:
 {
   environment.shellAliases = {
     sudo = "sudo ";
@@ -5,7 +6,7 @@
     "rm-gens" = "nix-env --profile /nix/var/nix/profiles/system --delete-generations";
     pn = "pnpm";
     py = "python";
-    remake = "cd ~/.config/nix-conf && sudo nixos-rebuild switch --flake .#nixos";
+    remake = "nixos-rebuild switch --flake ~/.config/nix-conf/.#nixos";
   };
   environment.localBinInPath = true;
   environment.sessionVariables = rec {
@@ -17,5 +18,6 @@
     GDK_BACKEND = "wayland";
     # Hint electron apps to use wayland
     NIXOS_OZONE_WL = "1";
+    gnomeAuthAgent = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
   };
 }
