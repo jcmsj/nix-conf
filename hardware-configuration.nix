@@ -16,11 +16,11 @@
   # boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
   
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/89950afe-83d6-4b6e-b5cd-200fbd8ac5fb";
+    { device = "/dev/disk/by-uuid/4d42d00e-3f2e-4df2-855c-1e9e9f8ea925";
       fsType = "ext4";
     };
 
-  fileSystems."/boot/efi" =
+  fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/6073-87F8";
       fsType = "vfat";
     };

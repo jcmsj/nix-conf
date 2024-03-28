@@ -22,7 +22,6 @@
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;
-
     # Cachix for hyprland - https://wiki.hyprland.org/Nix/Cachix/
     # not using it for now, for maximum perf
     substituters = ["https://hyprland.cachix.org"];
@@ -31,6 +30,7 @@
 
   nixpkgs.config = {
     allowUnfree = true;
+    allowUnfreePredicate = true;
     firefox.speechSynthesisSupport = true;
   };
   # start auth agen on login by creating a systemd user service: 
@@ -215,6 +215,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "24.05"; # Did you read the comment?
+  system.stateVersion = "23.11"; # Did you read the comment?
 }
  
