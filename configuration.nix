@@ -18,7 +18,6 @@
       ./network.nix
       ./sound.nix
     ];
-
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;
@@ -30,7 +29,6 @@
 
   nixpkgs.config = {
     allowUnfree = true;
-    allowUnfreePredicate = true;
     firefox.speechSynthesisSupport = true;
   };
   # start auth agen on login by creating a systemd user service: 
@@ -90,7 +88,6 @@
 
     glxinfo
     lshw
-    nvidia-offload
     ## Gaming
     lutris
     # support 32-bit only
@@ -105,7 +102,6 @@
     #nvtop
     gamescope
     p7zip
-    inkscape
     jq
     brightnessctl
     socat
