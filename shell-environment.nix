@@ -7,6 +7,7 @@
     pn = "pnpm";
     py = "python";
     remake = "nixos-rebuild switch --flake ~/.config/nix-conf/.#nixos";
+    reisen-list-pkg-sizes = "du -sh /nix/store/* | sort -h";
   };
   environment.localBinInPath = true;
   environment.sessionVariables = rec {
