@@ -121,6 +121,11 @@
 
     php
     (python311.withPackages (ps: with ps; [
+      jupyter
+      notebook
+      pandas
+      scikit-learn
+      matplotlib
       (buildPythonPackage {
         pname = "envycontrol";
         version = "3.4.0";
@@ -149,6 +154,7 @@
     health
     authenticator
     
+    espeak
     krita
     neofetch
     inkscape
