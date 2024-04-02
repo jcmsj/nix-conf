@@ -9,12 +9,13 @@
     #   url = "github:Aylur/ags";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
+    monitorSwitcher.url = "github:jcmsj/hypr-conf/main";
   };  
     outputs = inputs@{ nixpkgs, ... }: 
     let 
       username = "jcsan"; 
       system = "x86_64-linux";
-    legacyPackages = nixpkgs.lib.genAttrs [ "x86_64-linux" ] (system:
+    legacyPackages = nixpkgs.lib.genAttrs [ system ] (system:
       import inputs.nixpkgs {
         inherit system;
         # NOTE: Using `nixpkgs.config` in your NixOS config won't work
@@ -34,7 +35,6 @@
             inherit pkgs;
             inherit inputs; # will let de.nix be able to use the hyprland flake.
           };
-          
         modules = [
           ./configuration.nix
         # FIX: option `home` does not exist
