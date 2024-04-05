@@ -17,6 +17,7 @@
       ./shell-environment.nix
       ./network.nix
       ./sound.nix
+      ./steam.nix
     ];
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
@@ -86,21 +87,14 @@
     piper
     ## System utils
 
+    ## Gaming
     glxinfo
     lshw
-    ## Gaming
-    lutris
-    # support 32-bit only
-    wine
-    # support 64-bit only
-    (wine.override { wineBuild = "wine64"; })
-    wineWowPackages.stable
-    wineWowPackages.staging
-    wineWowPackages.waylandFull
-    # winetricks (all versions)
-    winetricks
+    steam-run
     #nvtop
     gamescope
+    protonup-qt
+
     p7zip
     jq
     brightnessctl
@@ -168,6 +162,7 @@
 
     qbittorrent
     inputs.monitorSwitcher.packages.${system}.default
+    
     # osu-lazer
   ];
 
