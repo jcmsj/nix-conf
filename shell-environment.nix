@@ -5,6 +5,7 @@
     "ls-gens" = "nix-env --list-generations --profile /nix/var/nix/profiles/system";
     "rm-gens" = "nix-env --profile /nix/var/nix/profiles/system --delete-generations";
     pn = "pnpm";
+    pnx = "pnpm dlx";
     py = "python";
     remake = "nixos-rebuild switch --flake ~/.config/nix-conf/.#nixos";
     reisen-list-pkg-sizes = "du -sh /nix/store/* | sort -h";

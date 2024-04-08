@@ -23,9 +23,15 @@
     experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;
     # Cachix for hyprland - https://wiki.hyprland.org/Nix/Cachix/
-    # not using it for now, for maximum perf
-    substituters = ["https://hyprland.cachix.org"];
-    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+    # cachic for devenv - https://devenv.sh/guides/using-with-flakes/#modifying-your-flakenix-file
+    substituters = [
+      "https://hyprland.cachix.org" 
+      "https://devenv.cachix.org"
+    ];
+    trusted-public-keys = [
+      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
+      "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
+      ];
   };
 
   nixpkgs.config = {
@@ -101,7 +107,6 @@
     socat
     ## Development
     ### Editors
-    vscode
     vscode-fhs
 
     ### Version Control
@@ -180,6 +185,8 @@
     HandlePowerKey=ignore
   '';
 
+  programs.direnv.enable = true;
+  
   nixpkgs.overlays = [
 
   ];
