@@ -166,7 +166,8 @@
     google-chrome
 
     qbittorrent
-    inputs.monitorSwitcher.packages.${system}.default
+    inputs.monitorSwitcher.packages.${system}.monitor
+    inputs.monitorSwitcher.packages.${system}.restore
     
     # osu-lazer
   ];
