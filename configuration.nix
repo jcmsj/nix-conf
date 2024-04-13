@@ -162,7 +162,6 @@
     inkscape
 
     firefox-bin
-    firefox-devedition-bin
     discord
     speechd
     nixpkgs-fmt
