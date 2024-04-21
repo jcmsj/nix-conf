@@ -125,6 +125,7 @@
       jupyter
       notebook
       pandas
+      xlrd # optional dep of pandas for xlsx
       scikit-learn
       matplotlib
       (buildPythonPackage {
@@ -170,12 +171,14 @@
     qbittorrent
     inputs.monitorSwitcher.packages.${system}.monitor
     inputs.monitorSwitcher.packages.${system}.restore
-    
-    # osu-lazer
+    ffmpeg_7-headless
   ];
   
   # Enable CUPS to print documents.
   services.printing.enable = true;
+  # services.printing.drivers = [ 
+  #   pkgs.epson_201207w
+  # ];
   services.upower.enable = true; # needed by ags
   # For Piper to work
   services.ratbagd.enable = true;
@@ -201,11 +204,7 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-  # programs.steam = {
-  #   enable = true;
-  #   remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
-  #   dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
-  # };
+
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
