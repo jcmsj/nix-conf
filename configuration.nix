@@ -117,7 +117,7 @@
 
     ### Language Runtimes & Managers
     nil
-    nodejs_21
+    nodejs_22
     nodePackages_latest.pnpm
 
     php
@@ -172,6 +172,7 @@
     inputs.monitorSwitcher.packages.${system}.monitor
     inputs.monitorSwitcher.packages.${system}.restore
     ffmpeg_7-headless
+    yt-dlp
   ];
   
   # Enable CUPS to print documents.
