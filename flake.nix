@@ -14,6 +14,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     monitorSwitcher.url = "github:jcmsj/hypr-conf/main";
+    reisen.url = "./reisen";
   };
   outputs = inputs@{ nixpkgs, auto-cpufreq, ... }:
     let

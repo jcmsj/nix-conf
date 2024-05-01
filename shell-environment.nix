@@ -7,8 +7,6 @@
     pn = "pnpm";
     pnx = "pnpm dlx";
     py = "python";
-    remake = "nixos-rebuild switch --flake ~/.config/nix-conf/.#nixos";
-    reisen-list-pkg-sizes = "du -sh /nix/store/* | sort -h";
   };
   environment.localBinInPath = true;
   environment.sessionVariables = rec {
@@ -17,8 +15,6 @@
     # If cursor becomes invisible
     WLR_NO_HARDWARE_CURSORS = "1";
     PNPM_HOME = "$HOME/.pnpm";
-    GDK_BACKEND = "wayland";
-    # Hint electron apps to use wayland
     NIXOS_OZONE_WL = "1";
     gnomeAuthAgent = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
   };

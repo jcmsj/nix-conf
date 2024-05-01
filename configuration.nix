@@ -56,7 +56,6 @@
 
     ];
   };
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -75,6 +74,8 @@
     cliphist
     wl-clip-persist
 
+    # My scripts
+    inputs.reisen.packages.${system}.default
     # hyprland's default terminal
     kitty
     # App launcher
@@ -128,6 +129,7 @@
       xlrd # optional dep of pandas for xlsx
       scikit-learn
       matplotlib
+      memory-profiler
       (buildPythonPackage {
         pname = "envycontrol";
         version = "3.4.0";
@@ -177,8 +179,12 @@
   
   # Enable CUPS to print documents.
   services.printing.enable = true;
-  # services.printing.drivers = [ 
-  #   pkgs.epson_201207w
+  # services.printing.drivers = with pkgs; [ 
+  #   epson_201207w
+  #   gutenprint
+  #   gutenprintBin 
+  #   epson-escpr2
+  #   epson-escpr
   # ];
   services.upower.enable = true; # needed by ags
   # For Piper to work
