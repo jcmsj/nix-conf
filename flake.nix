@@ -15,6 +15,7 @@
     };
     monitorSwitcher.url = "github:jcmsj/hypr-conf/main";
     reisen.url = "./reisen";
+    rednix.url =  "github:jcmsj/RedNix";
   };
   outputs = inputs@{ nixpkgs, auto-cpufreq, ... }:
     let
@@ -28,6 +29,7 @@
           # (https://nixos.org/manual/nixpkgs/stable/#idm140737322551056)
 
           config.allowUnfree = true;
+          config.allowBroken = true; # FOR CTF ONLY
           config.firefox.speechSynthesisSupport = true;
         });
       pkgs = legacyPackages.${system};

@@ -1,6 +1,6 @@
-conf=$HOME/.config/nix-conf
+conf=$HOME/.config/nix-conf/.#nixos;
 remake() {
-    nixos-rebuild switch --flake $conf;
+    sudo nixos-rebuild switch --flake $conf;
 }
 
 update() {
@@ -11,15 +11,16 @@ listPkgs() {
     # find /nix/store/ -maxdepth 1 -type d  | du -sh | sort -h
     # DOES NOT WORK cause of arguments list too long
     # du -sh /nix/store/* | sort -h
-    echo TODO
+    echo TODO;
 }
 
 help() {
-    echo "Usage: reisen command]"
-    echo "Commands:"
-    echo "  remake: Rebuild the system"
-    echo "  update: Update the flake"
-    echo "  pkgs: List all packages in the store sorted by size"
+    echo "Usage: reisen command]";
+    echo "Commands:";
+    echo "  remake: Rebuild the system";
+    echo "     Note: Dont use sudo, it will invoke it itself";
+    echo "  update: Update the flake";
+    echo "  pkgs: List all packages in the store sorted by size";
 }
 
 case $1 in

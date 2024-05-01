@@ -18,6 +18,7 @@
       ./network.nix
       ./sound.nix
       ./steam.nix
+      # inputs.rednix.container
     ];
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
@@ -27,17 +28,16 @@
     substituters = [
       "https://hyprland.cachix.org" 
       "https://devenv.cachix.org"
-      "https://anmonteiro.nix-cache.workers.dev"
     ];
     trusted-public-keys = [
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
-      "ocaml.nix-cache.com-1:/xI2h2+56rwFfKyyFVbkJSeGqSIYMC/Je+7XXqGKDIY="
       ];
   };
 
   nixpkgs.config = {
     allowUnfree = true;
+    allowBroken = true; # FOR CTF ONLY
     firefox.speechSynthesisSupport = true;
   };
   # start auth agen on login by creating a systemd user service: 
@@ -143,8 +143,6 @@
         ];
       })
     ]))
-    opam
-        
     polkit_gnome
     gnome.gnome-system-monitor
     gnome.nautilus
@@ -203,6 +201,13 @@
   nixpkgs.overlays = [
 
   ];
+  specialisation.hackforgov2.configuration = {
+      system.nixos.tags = [ "HACKFORGOV2" ];
+      environment.systemPackages = (import ./ctf.nix {
+        inherit pkgs;
+        inherit inputs;
+      }).hackforgov2;
+  };
   
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

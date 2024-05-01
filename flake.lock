@@ -20,6 +20,52 @@
         "type": "github"
       }
     },
+    "chainsaw": {
+      "inputs": {
+        "nixpkgs": [
+          "rednix",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1713202051,
+        "narHash": "sha256-Uijbe4m5BpR2y6v6w9tsrOg2pd3XBL69h+l/W5sGx3Q=",
+        "owner": "WithSecureLabs",
+        "repo": "chainsaw",
+        "rev": "3b2a9eb409d73b89fb51bf4122333ad1484091e8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "WithSecureLabs",
+        "repo": "chainsaw",
+        "type": "github"
+      }
+    },
+    "hackpkgs": {
+      "inputs": {
+        "flake-utils": [
+          "rednix",
+          "utils"
+        ],
+        "nixpkgs": [
+          "rednix",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1658745217,
+        "narHash": "sha256-VyP2WOYmMZG5zmysQWDAXri8H1KwIQ0c+YU9eRiKjc0=",
+        "owner": "applePrincess",
+        "repo": "hackpkgs",
+        "rev": "dd31e977fb99a6f7226954d2cb1d6f48869d8a55",
+        "type": "github"
+      },
+      "original": {
+        "owner": "applePrincess",
+        "repo": "hackpkgs",
+        "type": "github"
+      }
+    },
     "hyprcursor": {
       "inputs": {
         "hyprlang": [
@@ -61,11 +107,11 @@
         "xdph": "xdph"
       },
       "locked": {
-        "lastModified": 1714519962,
-        "narHash": "sha256-A0tt9RRjygsy8HO2xIp6GjKcJTac8abBDBGXA1OlYJI=",
+        "lastModified": 1714568252,
+        "narHash": "sha256-sPHpRfM+D5P4ZuADRSCiAhhk1/ZQHHX0SYUIoD2l4DQ=",
         "owner": "hyprwm",
         "repo": "Hyprland",
-        "rev": "3d09c6d526a37b3bfd81bdd6d7427272d1ba90ac",
+        "rev": "4ed6b69b68a544a81cec583a1ad8aff218f7db5d",
         "type": "github"
       },
       "original": {
@@ -154,11 +200,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1713695056,
-        "narHash": "sha256-t/j10eDv/SGpbsKzyxNcMtUABNKcFBCcgm1O0wcta3U=",
+        "lastModified": 1714525770,
+        "narHash": "sha256-/WC+CNS92rDHxv+6h52K4K91DSjZdi5mDVnd4359YEQ=",
         "owner": "jcmsj",
         "repo": "hypr-conf",
-        "rev": "a847721009a5dbefe4804f899cdf618cd0087424",
+        "rev": "623f3c7fb5965ae4327817cafa0bc07b1ec0895f",
         "type": "github"
       },
       "original": {
@@ -186,11 +232,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1711703276,
-        "narHash": "sha256-iMUFArF0WCatKK6RzfUJknjem0H9m4KgorO/p3Dopkk=",
+        "lastModified": 1714253743,
+        "narHash": "sha256-mdTQw2XlariysyScCv2tTE45QSU9v/ezLcHJ22f0Nxc=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "d8fe5e6c92d0d190646fb9f1056741a229980089",
+        "rev": "58a1abdbae3217ca6b702f03d3b35125d88a2994",
         "type": "github"
       },
       "original": {
@@ -218,6 +264,22 @@
     },
     "nixpkgs_4": {
       "locked": {
+        "lastModified": 1714314149,
+        "narHash": "sha256-yNAevSKF4krRWacmLUsLK7D7PlfuY3zF0lYnGYNi9vQ=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "cf8cc1201be8bc71b7cbbbdaf349b22f4f99c7ae",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_5": {
+      "locked": {
         "lastModified": 1714253743,
         "narHash": "sha256-mdTQw2XlariysyScCv2tTE45QSU9v/ezLcHJ22f0Nxc=",
         "owner": "NixOS",
@@ -232,18 +294,39 @@
         "type": "github"
       }
     },
+    "rednix": {
+      "inputs": {
+        "chainsaw": "chainsaw",
+        "hackpkgs": "hackpkgs",
+        "nixpkgs": "nixpkgs_4",
+        "utils": "utils"
+      },
+      "locked": {
+        "lastModified": 1714573496,
+        "narHash": "sha256-RqPDTnGZrcx97/eXJX3vP1axWgCkFzDsg99uHri6/U8=",
+        "owner": "jcmsj",
+        "repo": "RedNix",
+        "rev": "82928d68e6dd63e46f4b6a673f752dd89731c1b3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jcmsj",
+        "repo": "RedNix",
+        "type": "github"
+      }
+    },
     "reisen": {
       "inputs": {
-        "nixpkgs": "nixpkgs_4"
+        "nixpkgs": "nixpkgs_5"
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-G77aROwfJvyLd0BSPSd96ICyENUg9c6cHObWCpz16UM=",
-        "path": "/nix/store/hzhq5ig1z71736bz58zy3dvnd4p58d2n-source/reisen",
+        "narHash": "sha256-2YZvjymQq2rxxgDgz5846t4B9Zei28ZbPmVdifvleo0=",
+        "path": "/nix/store/brjd2v9na5cjp8wh3693mk01v222rmab-source/reisen",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/hzhq5ig1z71736bz58zy3dvnd4p58d2n-source/reisen",
+        "path": "/nix/store/brjd2v9na5cjp8wh3693mk01v222rmab-source/reisen",
         "type": "path"
       }
     },
@@ -253,6 +336,7 @@
         "hyprland": "hyprland",
         "monitorSwitcher": "monitorSwitcher",
         "nixpkgs": "nixpkgs_3",
+        "rednix": "rednix",
         "reisen": "reisen"
       }
     },
@@ -268,6 +352,39 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default-linux",
+        "type": "github"
+      }
+    },
+    "systems_2": {
+      "locked": {
+        "lastModified": 1681028828,
+        "narHash": "sha256-Vy1rq5AaRuLzOxct8nz4T6wlgyUR7zLU309k9mBC768=",
+        "owner": "nix-systems",
+        "repo": "default",
+        "rev": "da67096a3b9bf56a91d16901293e51ba5b49a27e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-systems",
+        "repo": "default",
+        "type": "github"
+      }
+    },
+    "utils": {
+      "inputs": {
+        "systems": "systems_2"
+      },
+      "locked": {
+        "lastModified": 1710146030,
+        "narHash": "sha256-SZ5L6eA7HJ/nmkzGG7/ISclqe6oZdOZTNoesiInkXPQ=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "b1d9ab70662946ef0850d488da1c9019f3a9752a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
         "type": "github"
       }
     },

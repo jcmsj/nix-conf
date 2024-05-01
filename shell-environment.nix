@@ -7,6 +7,7 @@
     pn = "pnpm";
     pnx = "pnpm dlx";
     py = "python";
+    remake = "nixos-rebuild switch --flake ~/.config/nix-conf/.#nixos"; 
   };
   environment.localBinInPath = true;
   environment.sessionVariables = rec {
