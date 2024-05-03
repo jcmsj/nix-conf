@@ -16,6 +16,8 @@
     monitorSwitcher.url = "github:jcmsj/hypr-conf/main";
     reisen.url = "./reisen";
     rednix.url =  "github:jcmsj/RedNix";
+    fix-python.url = "github:GuillaumeDesforges/fix-python";
+    nix-alien.url = "github:thiagokokada/nix-alien";
   };
   outputs = inputs@{ nixpkgs, auto-cpufreq, ... }:
     let

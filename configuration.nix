@@ -122,6 +122,8 @@
     nodePackages_latest.pnpm
 
     php
+    inputs.nix-alien.packages.${system}.default
+    inputs.fix-python.packages.${system}.default
     (python311.withPackages (ps: with ps; [
       jupyter
       notebook
@@ -130,6 +132,17 @@
       scikit-learn
       matplotlib
       memory-profiler
+      cryptography
+
+      requests 
+      beautifulsoup4
+      scapy
+      httpx 
+      paramiko
+      angr 
+      cle 
+      pwntools
+      xortool
       (buildPythonPackage {
         pname = "envycontrol";
         version = "3.4.0";

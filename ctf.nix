@@ -361,6 +361,7 @@
       rustscan
       sx-go
       zmap
+      zeek
     ];
 
     protocols = with pkgs; [
@@ -402,6 +403,7 @@
       python3Packages.malduck
       python3Packages.r2pipe
       python3Packages.unicorn
+      python3Packages.utils
       radare2
       rizin
       stacks
@@ -412,6 +414,13 @@
       yara
       zkar
       # zydis
+
+    ];
+
+    steno = with pkgs; [
+      zsteg
+      exiftool
+      stegextract
     ];
 
     services = with pkgs; [
@@ -642,7 +651,7 @@
       dbmonster
     ];
 
-    hackforgov2 = with packages; general ++ network ++ misc ++ info-gathering ++ forensics ++ dns ++ crypto ++ fuzzers ++ passwords ++ protocols ++ reverse-engineering ++ sql ++ ssh ++ traffic;
+    hackforgov2 = with packages; general ++ network ++ misc ++ info-gathering ++ forensics ++ dns ++ crypto ++ fuzzers ++ passwords ++ protocols ++ reverse-engineering ++ sql ++ ssh ++ traffic ++ web;
   };
 in
 packages
