@@ -3,6 +3,9 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { inputs, config, lib, pkgs, system, ... }:
+let 
+  reisen = pkgs.callPackage ./reisen/reisen.nix { };
+in
 {
   imports =
     [
@@ -75,7 +78,7 @@
     wl-clip-persist
 
     # My scripts
-    inputs.reisen.packages.${system}.default
+    reisen
     # hyprland's default terminal
     kitty
     # App launcher
@@ -120,7 +123,6 @@
     nil
     nodejs_22
     nodePackages_latest.pnpm
-
     php
     (python311.withPackages (ps: with ps; [
       jupyter

@@ -1,10 +1,12 @@
 conf=$HOME/.config/nix-conf
 remake() {
-    nixos-rebuild switch --flake $conf;
+    shift 1
+    sudo nixos-rebuild switch --flake $conf $@;
 }
 
 update() {
-    nix flake update $conf;
+    shift 1
+    nix flake update $conf $@;
 }
 
 listPkgs() {

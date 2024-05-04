@@ -5,16 +5,11 @@
     hyprland.url = "github:hyprwm/Hyprland";
     # home-manager.url = "github:nix-community/home-manager";
     # home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    # ags = {
-    #   url = "github:Aylur/ags";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     auto-cpufreq = {
       url = "github:AdnanHodzic/auto-cpufreq";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     monitorSwitcher.url = "github:jcmsj/hypr-conf/main";
-    reisen.url = "./reisen";
   };
   outputs = inputs@{ nixpkgs, auto-cpufreq, ... }:
     let
