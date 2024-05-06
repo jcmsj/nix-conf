@@ -38,7 +38,8 @@ in
       "ocaml.nix-cache.com-1:/xI2h2+56rwFfKyyFVbkJSeGqSIYMC/Je+7XXqGKDIY="
       ];
   };
-
+  programs.zsh.enable = true;
+  users.defaultUserShell = pkgs.zsh;
   nixpkgs.config = {
     allowUnfree = true;
     firefox.speechSynthesisSupport = true;
@@ -163,7 +164,7 @@ in
     
     espeak
     krita
-    neofetch
+    fastfetch
     inkscape
 
     firefox-bin

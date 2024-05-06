@@ -1,15 +1,18 @@
 {
   description = "Nixos flake configuration";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    hyprland.url = "github:hyprwm/Hyprland";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     # home-manager.url = "github:nix-community/home-manager";
     # home-manager.inputs.nixpkgs.follows = "nixpkgs";
     auto-cpufreq = {
       url = "github:AdnanHodzic/auto-cpufreq";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    monitorSwitcher.url = "github:jcmsj/hypr-conf/main";
+    monitorSwitcher = {
+      url = "github:jcmsj/hypr-conf/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = inputs@{ nixpkgs, auto-cpufreq, ... }:
     let
