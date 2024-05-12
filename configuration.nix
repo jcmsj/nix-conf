@@ -5,6 +5,7 @@
 { inputs, config, lib, pkgs, system, ... }:
 let 
   reisen = pkgs.callPackage ./reisen/reisen.nix { };
+  my-firefox = pkgs.callPackage ./firefox.nix { };
 in
 {
   imports =
@@ -60,6 +61,8 @@ in
 
     ];
   };
+  # Add this for xdg settings in home-manager to work
+  environment.pathsToLink = [ "/share/xdg-desktop-portal" "/share/applications" ];
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
@@ -146,38 +149,58 @@ in
         ];
       })
     ]))
-    opam
+    inputs.fix-python.packages.${system}.default
         
     polkit_gnome
+    libsecret
+    libsForQt5.qt5ct
+    gnome.libgnome-keyring
     gnome.gnome-system-monitor
     gnome.nautilus
-    gnome-photos
     gnome.cheese
     gnome.simple-scan
     gnome-text-editor
     gnome.gnome-clocks
     gnome.eog
+    gnome.sushi
+    gnome.gnome-calendar
+    gnome-online-accounts
+    gnome-online-accounts-gtk
+    gnome-decoder
+    gnome.gnome-calculator
+    gnome.gnome-sound-recorder
+    gthumb
+    eyedropper
+    amberol
     gparted
     varia
     health
     authenticator
+    gnome.ghex
     
     espeak
     krita
     fastfetch
     inkscape
 
-    firefox-bin
+    firefox
+    my-firefox
     discord
     speechd
     nixpkgs-fmt
     google-chrome
+    celluloid
 
     qbittorrent
     inputs.monitorSwitcher.packages.${system}.monitor
     inputs.monitorSwitcher.packages.${system}.restore
     ffmpeg_7-headless
     yt-dlp
+    
+    libreoffice-fresh
+    hunspell
+    hunspellDicts.uk_UA
+    hunspellDicts.th_TH
   ];
   
   # Enable CUPS to print documents.

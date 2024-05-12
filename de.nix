@@ -41,5 +41,7 @@
   };
   services.gnome = {
     gnome-keyring.enable = true;
+    sushi.enable = true;
+    gnome-online-accounts.enable = true;
   };
 }

@@ -7,6 +7,7 @@
     pn = "pnpm";
     pnx = "pnpm dlx";
     py = "python";
+    hm = "home-manager";
   };
   environment.localBinInPath = true;
   environment.sessionVariables = rec {
@@ -16,6 +17,6 @@
     WLR_NO_HARDWARE_CURSORS = "1";
     PNPM_HOME = "$HOME/.pnpm";
     NIXOS_OZONE_WL = "1";
-    gnomeAuthAgent = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+    # gnomeAuthAgent = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
   };
 }

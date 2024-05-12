@@ -1,7 +1,7 @@
 {
   description = "Nixos flake configuration";
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable-small";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     # home-manager.url = "github:nix-community/home-manager";
     # home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -13,6 +13,7 @@
       url = "github:jcmsj/hypr-conf/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    fix-python.url = "github:GuillaumeDesforges/fix-python";
   };
   outputs = inputs@{ nixpkgs, auto-cpufreq, ... }:
     let
