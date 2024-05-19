@@ -26,7 +26,7 @@
             id = "dgagj-ckacd";
             path = "/media/sorairo/Music";
             devices = [ "CPH2219" ];
-            ignorePerms = true; # By default, Syncthing doesn't sync file permissions. This line enables it for this folder.
+            ignorePerms = true; 
           };
         };
       };
