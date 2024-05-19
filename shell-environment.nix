@@ -17,6 +17,7 @@
     WLR_NO_HARDWARE_CURSORS = "1";
     PNPM_HOME = "$HOME/.pnpm";
     NIXOS_OZONE_WL = "1";
+    VSCODE_EXTENSIONS = "/opt/code/extensions";
     # gnomeAuthAgent = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
   };
 }

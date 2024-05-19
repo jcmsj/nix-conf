@@ -3,9 +3,10 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { inputs, config, lib, pkgs, system, ... }:
-let 
+let
   reisen = pkgs.callPackage ./reisen/reisen.nix { };
   my-firefox = pkgs.callPackage ./firefox.nix { };
+  pnpm-shim = pkgs.callPackage ./pnpm-shim.nix { };
 in
 {
   imports =
@@ -22,6 +23,7 @@ in
       ./network.nix
       ./sound.nix
       ./steam.nix
+      ./syncthing.nix
     ];
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
@@ -29,7 +31,7 @@ in
     # Cachix for hyprland - https://wiki.hyprland.org/Nix/Cachix/
     # cachic for devenv - https://devenv.sh/guides/using-with-flakes/#modifying-your-flakenix-file
     substituters = [
-      "https://hyprland.cachix.org" 
+      "https://hyprland.cachix.org"
       "https://devenv.cachix.org"
       "https://anmonteiro.nix-cache.workers.dev"
     ];
@@ -37,7 +39,7 @@ in
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
       "ocaml.nix-cache.com-1:/xI2h2+56rwFfKyyFVbkJSeGqSIYMC/Je+7XXqGKDIY="
-      ];
+    ];
   };
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
@@ -51,7 +53,7 @@ in
   # services.xserver.libinput.enable = true;
   # Automounting external drives
   services.gvfs.enable = true;
-  services.udisks2.enable = true; 
+  services.udisks2.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jcsan = {
     isNormalUser = true;
@@ -126,7 +128,7 @@ in
     ### Language Runtimes & Managers
     nil
     nodejs_22
-    nodePackages_latest.pnpm
+    pnpm-shim
     php
     (python311.withPackages (ps: with ps; [
       jupyter
@@ -140,7 +142,7 @@ in
         pname = "envycontrol";
         version = "3.4.0";
         src = fetchTarball {
-          url ="https://github.com/bayasdev/envycontrol/archive/refs/tags/v3.4.0.tar.gz";
+          url = "https://github.com/bayasdev/envycontrol/archive/refs/tags/v3.4.0.tar.gz";
           sha256 = "sha256-m0ZH6kqLg15IfFtmoBqZgEe7wpIde/bIEyn6YY/L/xU=";
         };
         doCheck = false;
@@ -150,7 +152,7 @@ in
       })
     ]))
     inputs.fix-python.packages.${system}.default
-        
+
     polkit_gnome
     libsecret
     libsForQt5.qt5ct
@@ -177,7 +179,7 @@ in
     health
     authenticator
     gnome.ghex
-    
+
     espeak
     krita
     fastfetch
@@ -196,13 +198,13 @@ in
     inputs.monitorSwitcher.packages.${system}.restore
     ffmpeg_7-headless
     yt-dlp
-    
+
     libreoffice-fresh
     hunspell
     hunspellDicts.uk_UA
     hunspellDicts.th_TH
   ];
-  
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
   # services.printing.drivers = with pkgs; [ 
@@ -215,7 +217,6 @@ in
   services.upower.enable = true; # needed by ags
   # For Piper to work
   services.ratbagd.enable = true;
-
   programs.gamemode.enable = true;
 
   programs.adb.enable = true;
@@ -225,11 +226,11 @@ in
   '';
 
   programs.direnv.enable = true;
-  
+
   nixpkgs.overlays = [
 
   ];
-  
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
