@@ -67,6 +67,7 @@ in
   environment.pathsToLink = [ "/share/xdg-desktop-portal" "/share/applications" ];
   # List packages installed in system profile. To search, run:
   # $ nix search wget
+  # Note: ./de.nix adds more pkgs
   environment.systemPackages = with pkgs; [
     ## Required Apps
     # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
@@ -74,11 +75,7 @@ in
     mako
     libnotify
     # Wallpaper
-    # hyprecosystem
-    hyprpaper
-    hypridle # idle management
-    hyprpicker # Color picker
-    hyprlock
+
     #Clipboards
     cliphist
     wl-clip-persist
@@ -152,33 +149,6 @@ in
       })
     ]))
     inputs.fix-python.packages.${system}.default
-
-    polkit_gnome
-    libsecret
-    libsForQt5.qt5ct
-    gnome.libgnome-keyring
-    gnome.gnome-system-monitor
-    gnome.nautilus
-    gnome.cheese
-    gnome.simple-scan
-    gnome-text-editor
-    gnome.gnome-clocks
-    gnome.eog
-    gnome.sushi
-    gnome.gnome-calendar
-    gnome-online-accounts
-    gnome-online-accounts-gtk
-    gnome-decoder
-    gnome.gnome-calculator
-    gnome.gnome-sound-recorder
-    gthumb
-    eyedropper
-    amberol
-    gparted
-    varia
-    health
-    authenticator
-    gnome.ghex
 
     espeak
     krita

@@ -1,3 +1,4 @@
+{pkgs, ...}:
 {
   # https://nixos.wiki/wiki/Syncthing
   services = {
@@ -5,7 +6,7 @@
       enable = true;
       user = "jcsan";
       dataDir = "/media/sorairo/Docs"; # Default folder for new synced folders
-      configDir = "/home/jcsan/config/.syncthing"; # Folder for Syncthing's settings and keys
+      configDir = "/home/jcsan/.config/syncthing"; # Folder for Syncthing's settings and keys
       overrideDevices = true; # overrides any devices added or deleted through the WebUI
       overrideFolders = true; # overrides any folders added or deleted through the WebUI
       settings = {
@@ -38,4 +39,9 @@
   # source: https://docs.syncthing.net/users/firewall.html
   networking.firewall.allowedTCPPorts = [ 8384 22000 ];
   networking.firewall.allowedUDPPorts = [ 22000 21027 ];
+
+  environment.systemPackages = with pkgs; [
+    syncthingtray
+  ];
+
 }

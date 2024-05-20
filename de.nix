@@ -30,18 +30,46 @@
       };
     };
   };
-
-  systemd.services.greetd.serviceConfig = {
-    Type = "idle";
-    StandardInput = "tty";
-    Standardoutput = "tty";
-    TTYReset = true;
-    TTYVHangup = true;
-    TTYVTDisallocate = true;
-  };
+  # security.pam.services.greetd.enableGnomeKeyring = true;
   services.gnome = {
+    core-utilities.enable = true;
     gnome-keyring.enable = true;
     sushi.enable = true;
     gnome-online-accounts.enable = true;
   };
+
+  environment.systemPackages = with pkgs; [
+    # hyprecosystem
+    hyprpaper
+    hypridle # idle management
+    hyprpicker # Color picker
+    hyprlock
+
+    # gnome apps
+    # libsecret
+    libsForQt5.qt5ct
+    # gnome.libgnome-keyring
+    gnome.gnome-system-monitor
+    gnome.nautilus
+    gnome.cheese
+    gnome.simple-scan
+    gnome-text-editor
+    gnome.gnome-clocks
+    gnome.eog
+    gnome.sushi
+    gnome.gnome-calendar
+    gnome-online-accounts
+    gnome-online-accounts-gtk
+    gnome-decoder
+    gnome.gnome-calculator
+    gnome.gnome-sound-recorder
+    gthumb
+    eyedropper
+    amberol
+    gparted
+    varia
+    health
+    authenticator
+    gnome.ghex
+  ];
 }
