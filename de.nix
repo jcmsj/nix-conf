@@ -44,7 +44,8 @@
     hypridle # idle management
     hyprpicker # Color picker
     hyprlock
-
+    # https://github.com/hyprwm/contrib?tab=readme-ov-file#nix
+    inputs.hyprland-contrib.packages.${pkgs.system}.grimblast
     # gnome apps
     # libsecret
     libsForQt5.qt5ct

@@ -78,6 +78,7 @@ in
 
     #Clipboards
     cliphist
+    wl-clipboard
     wl-clip-persist
 
     # My scripts
@@ -164,8 +165,9 @@ in
     celluloid
 
     qbittorrent
-    inputs.monitorSwitcher.packages.${system}.monitor
-    inputs.monitorSwitcher.packages.${system}.restore
+    inputs.reisenScripts.packages.${system}.monitor
+    inputs.reisenScripts.packages.${system}.restore
+    inputs.reisenScripts.packages.${system}.nexus
     ffmpeg_7-headless
     yt-dlp
 

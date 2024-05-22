@@ -18,6 +18,8 @@
     PNPM_HOME = "$HOME/.pnpm";
     NIXOS_OZONE_WL = "1";
     VSCODE_EXTENSIONS = "/opt/code/extensions";
+    GRIMBLAST_EDITOR = "swappy";
+
     # XDG_RUNTIME_DIR="/run/user/$UID"; # Unlocks gnome keyring in time
     # gnomeAuthAgent = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
   };
