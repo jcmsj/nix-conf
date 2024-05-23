@@ -33,14 +33,14 @@
   fileSystems."/media/zero" =
     {
       device = "/dev/disk/by-uuid/01D817E4B22E7100";
-      fsType = "ntfs-3g";
+      fsType = "ntfs3";
       options = [ "rw" "uid=1000" ];
     };
 
   fileSystems."/media/sorairo" =
     {
       device = "/dev/disk/by-uuid/01D7F2992C04D030";
-      fsType = "ntfs-3g";
+      fsType = "ntfs3";
       options = [ "rw" "uid=1000" ];
     };
     
