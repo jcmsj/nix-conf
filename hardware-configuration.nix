@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/installer/scan/not-detected.nix")
+    [
+      (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -14,19 +15,22 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
   # boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
-  
+
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/4d42d00e-3f2e-4df2-855c-1e9e9f8ea925";
+    {
+      device = "/dev/disk/by-uuid/4d42d00e-3f2e-4df2-855c-1e9e9f8ea925";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/6073-87F8";
+    {
+      device = "/dev/disk/by-uuid/6073-87F8";
       fsType = "vfat";
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/eb511ecf-cd6b-47d9-8adb-e9ec291906b3";
+    {
+      device = "/dev/disk/by-uuid/eb511ecf-cd6b-47d9-8adb-e9ec291906b3";
       fsType = "ext4";
     };
 
@@ -43,8 +47,11 @@
       fsType = "ntfs3";
       options = [ "rw" "uid=1000" ];
     };
-    
-  swapDevices = [ ];
+
+  swapDevices = [{
+    device = "/swapfile";
+    size = 8 * 1024; # 8GB
+  }];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

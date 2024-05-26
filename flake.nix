@@ -18,8 +18,16 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     fix-python.url = "github:GuillaumeDesforges/fix-python";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    ags = {
+      url = "github:Aylur/ags";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-  outputs = inputs@{ nixpkgs, auto-cpufreq, ... }:
+  outputs = inputs@{ nixpkgs, auto-cpufreq, home-manager, ags, ... }:
     let
       username = "jcsan";
       system = "x86_64-linux";
@@ -47,31 +55,17 @@
             ./configuration.nix
             auto-cpufreq.nixosModules.default
             # FIX: option `home` does not exist
-            # ags.homeManagerModules.default  # another could be ags
-            #  home-manager.nixosModules.home-manager
-            # {
-            #  home-manager.useGlobalPkgs = true;
-            #   home-manager.useUserPackages = true;
-            #   home-manager.users.${username} = import ./home.nix;
-            # Optionally, use home-manager.extraSpecialArgs to pass
-            # arguments to home.nix
-            # }
+            ags.homeManagerModules.default # another could be ags
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.${username}  = import ./home.nix;
+              # Optionally, use home-manager.extraSpecialArgs to pass
+              # arguments to home.nix
+            }
           ];
         };
       };
-
-      # FIX: service doesnt start
-      # home-manager.useGlobalPkgs = true;
-      # home-manager.useUserPackages = true;
-      # homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
-      #   inherit pkgs;
-      #   # Specify your home configuration modules here, for example,
-
-      #   # the path to your home.nix.
-      #   modules = [
-      #     ./home.nix
-      #     ags.homeManagerModules.default  # another could be ags
-      #     ];
-      # };
     };
 }
