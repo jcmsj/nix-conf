@@ -115,7 +115,7 @@ in
     socat
     ## Development
     ### Editors
-    vscode-fhs
+    vscode.fhs
 
     ### Version Control
     gh
@@ -173,6 +173,8 @@ in
     hunspell
     hunspellDicts.uk_UA
     hunspellDicts.th_TH
+
+    osu-lazer
   ];
 
   # Enable CUPS to print documents.

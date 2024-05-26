@@ -7,8 +7,6 @@
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # home-manager.url = "github:nix-community/home-manager";
-    # home-manager.inputs.nixpkgs.follows = "nixpkgs";
     auto-cpufreq = {
       url = "github:AdnanHodzic/auto-cpufreq";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -27,7 +25,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = inputs@{ nixpkgs, auto-cpufreq, home-manager, ags, ... }:
+  outputs = inputs@{ self, nixpkgs, auto-cpufreq, home-manager, ags, ... }:
     let
       username = "jcsan";
       system = "x86_64-linux";
@@ -54,14 +52,14 @@
           modules = [
             ./configuration.nix
             auto-cpufreq.nixosModules.default
-            # FIX: option `home` does not exist
-            ags.homeManagerModules.default # another could be ags
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.${username}  = import ./home.nix;
+              home-manager.users.${username} = import ./home.nix;
+
               # Optionally, use home-manager.extraSpecialArgs to pass
+              home-manager.extraSpecialArgs = { inherit inputs; };
               # arguments to home.nix
             }
           ];
