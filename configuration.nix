@@ -84,15 +84,14 @@ in
     # hyprland's default terminal
     kitty
     # App launcher
-    rofi-wayland
-
+    inputs.rofi-vscode-mode.packages.${system}.default
     networkmanagerapplet
     blueman
     #Screenshot Utility
     grim
     slurp
     swappy
-    nerdfonts
+    # nerdfonts
     # bar
     playerctl
     vim
@@ -174,7 +173,7 @@ in
     hunspellDicts.uk_UA
     hunspellDicts.th_TH
 
-    osu-lazer
+    osu-lazer-bin # app image ver w/ online functionality
   ];
 
   # Enable CUPS to print documents.
@@ -200,7 +199,7 @@ in
   programs.direnv.enable = true;
 
   nixpkgs.overlays = [
-
+    
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

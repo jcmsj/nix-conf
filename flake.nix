@@ -24,6 +24,10 @@
       url = "github:Aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    rofi-vscode-mode = {
+      url = "github:jcmsj/rofi-vscode-mode";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = inputs@{ self, nixpkgs, auto-cpufreq, home-manager, ags, ... }:
     let
@@ -52,6 +56,7 @@
           modules = [
             ./configuration.nix
             auto-cpufreq.nixosModules.default
+     
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;

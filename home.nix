@@ -176,4 +176,18 @@
       accountsservice
     ];
   };
+
+  programs.rofi = {
+    enable = true;
+    package = pkgs.rofi-wayland;
+    # .override {
+    #   plugins = [
+    #     inputs.rofi-vscode-mode.packages.x86_64-linux.default
+    #   ];
+    # };
+    # modi: 
+    extraConfig = {
+      modi = "drun,run,window,ssh";
+    };
+  };
 }
