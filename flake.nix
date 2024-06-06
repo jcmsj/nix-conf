@@ -8,7 +8,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     auto-cpufreq = {
-      url = "github:AdnanHodzic/auto-cpufreq";
+      url = "github:AdnanHodzic/auto-cpufreq?rev=3f6d7a3e77732c1dbe4873b69404fefd899ad35e";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     reisenScripts = {

@@ -114,7 +114,16 @@ in
     socat
     ## Development
     ### Editors
-    vscode.fhs
+    (vscode.overrideAttrs
+    (oldAttrs: rec {
+      src = (builtins.fetchTarball {
+        url = "https://code.visualstudio.com/sha/download?build=stable&os=linux-x64";
+        sha256 = "sha256:1q6ajy7kn6dxh07gcnwz5bz90sqqyy3w515g73p2vmnkr940agrq";
+      });
+      version = "latest"; 
+
+      buildInputs = oldAttrs.buildInputs ++ [ krb5 ];
+    })).fhs # IMPORTANT!!!: I NEED FHS for VSCODE
 
     ### Version Control
     gh
@@ -165,7 +174,7 @@ in
     inputs.reisenScripts.packages.${system}.monitor
     inputs.reisenScripts.packages.${system}.restore
     inputs.reisenScripts.packages.${system}.nexus
-    ffmpeg_7-headless
+    ffmpeg-full
     yt-dlp
 
     libreoffice-fresh
@@ -199,7 +208,7 @@ in
   programs.direnv.enable = true;
 
   nixpkgs.overlays = [
-    
+
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
