@@ -1,5 +1,5 @@
 {
-    # Bootloader.
+  # Bootloader.
   boot = {
     loader = {
       efi = {
@@ -12,6 +12,17 @@
         # efiInstallAsRemovable = true; # in case canTouchEfiVariables doesn't work for your system
         device = "nodev";
         useOSProber = true;
+        extraEntries = ''
+          menuentry "Reboot" {
+            reboot
+          }
+          menuentry "Poweroff" {
+            halt
+          }
+          menuentry "uefi-firmware" {
+            fwsetup
+          }
+        '';
       };
     };
     supportedFilesystems = [ "ntfs" ];
