@@ -33,7 +33,7 @@ in
         enableOffloadCmd = true;
       };
 
-      # Find it using `lspci -c display`
+      # Find it using `lshw -c display`
       nvidiaBusId = "PCI:1:0:0";
       intelBusId = "PCI:0:2:0";
     };
