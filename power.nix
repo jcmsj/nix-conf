@@ -2,8 +2,8 @@
 
 {
   # Power management https://wiki.nixos.org/wiki/Laptop
-  services.power-profiles-daemon.enable = false;
-
+  powerManagement.enable = true;
+  # services.power-profiles-daemon.enable = false;
   programs.auto-cpufreq = {
     enable = true;
     settings = {

@@ -4,6 +4,7 @@
   services = {
     syncthing = {
       enable = true;
+      systemService = true; # Syncthing as a system service
       user = "jcsan";
       dataDir = "/media/sorairo/Docs"; # Default folder for new synced folders
       configDir = "/home/jcsan/.config/syncthing"; # Folder for Syncthing's settings and keys

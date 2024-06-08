@@ -211,6 +211,20 @@ in
 
   ];
 
+  # Faster bootup
+  systemd.services."auto-cpufreq" = {
+    enable = true;
+    after = [ "default.target" ];
+  };
+  systemd.services."syncthing" = {
+    enable = true;
+    after = [ "default.target" ];
+  };
+
+  systemd.services."home-manager-jcsan" = {
+    enable = true;
+    after = [ "default.target" ];
+  };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
