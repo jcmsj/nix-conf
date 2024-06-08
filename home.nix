@@ -148,6 +148,7 @@
     history.path = "${config.home.homeDirectory}/zsh/history";
     initExtra = ''
       # pass
+      bindkey '^H' backward-kill-word
     '';
   };
   programs.kitty = {
