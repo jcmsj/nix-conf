@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, lib,... }:
 {
   environment.shellAliases = {
     sudo = "sudo ";
@@ -20,6 +20,13 @@
     VSCODE_EXTENSIONS = "/opt/code/extensions";
     GRIMBLAST_EDITOR = "swappy";
 
+    # For nautilus to show media information
+    GST_PLUGIN_SYSTEM_PATH_1_0 = lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" (with pkgs.gst_all_1; [
+      gst-plugins-good
+      gst-plugins-bad
+      gst-plugins-ugly
+      gst-libav
+    ]);
     # XDG_RUNTIME_DIR="/run/user/$UID"; # Unlocks gnome keyring in time
     # gnomeAuthAgent = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
   };

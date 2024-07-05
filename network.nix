@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 {
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   # Configure network proxy if necessary
@@ -13,7 +13,7 @@
   };
   # To be able to use wpa_gui or wpa_cli as user put the following in your
   # networking.wireless.userControlled.enable = true;
-  systemd.services.NetworkManager-wait-online.enable = false; 
+  systemd.services.NetworkManager-wait-online.enable = false;
 
   # wifi gui
   programs.nm-applet = {
@@ -33,5 +33,12 @@
     after = [ "network.target" "sound.target" ];
     wantedBy = [ "default.target" ];
     serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
+  };
+  
+  hardware.bluetooth.settings = {
+    General = {
+      Enable = "Source,Sink,Media,Socket";
+      Experimental = true;
+    };
   };
 }

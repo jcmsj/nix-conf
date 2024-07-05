@@ -14,7 +14,7 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
-  # boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
+  boot.kernelParams = [ "nvidia.NVreg_PreserveVideoMemoryAllocations=1" ];
 
   fileSystems."/" =
     {
@@ -38,14 +38,14 @@
     {
       device = "/dev/disk/by-uuid/01D817E4B22E7100";
       fsType = "ntfs3";
-      options = [ "rw" "uid=1000" ];
+      options = [ "rw" "uid=1000" "nofail" ];
     };
 
   fileSystems."/media/sorairo" =
     {
       device = "/dev/disk/by-uuid/01D7F2992C04D030";
       fsType = "ntfs3";
-      options = [ "rw" "uid=1000" ];
+      options = [ "rw" "uid=1000" "nofail" ];
     };
   swapDevices = [
     

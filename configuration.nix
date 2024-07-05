@@ -114,16 +114,7 @@ in
     socat
     ## Development
     ### Editors
-    (vscode.overrideAttrs
-    (oldAttrs: rec {
-      src = (builtins.fetchTarball {
-        url = "https://code.visualstudio.com/sha/download?build=stable&os=linux-x64";
-        sha256 = "sha256:1q6ajy7kn6dxh07gcnwz5bz90sqqyy3w515g73p2vmnkr940agrq";
-      });
-      version = "latest"; 
-
-      buildInputs = oldAttrs.buildInputs ++ [ krb5 ];
-    })).fhs # IMPORTANT!!!: I NEED FHS for VSCODE
+    vscode.fhs # IMPORTANT!!!: I NEED FHS for VSCODE
 
     ### Version Control
     gh
@@ -154,6 +145,7 @@ in
 
         ];
       })
+      pyqt6
     ]))
     inputs.fix-python.packages.${system}.default
 
@@ -212,19 +204,15 @@ in
   ];
 
   # Faster bootup
-  systemd.services."auto-cpufreq" = {
-    enable = true;
-    after = [ "default.target" ];
-  };
-  systemd.services."syncthing" = {
-    enable = true;
-    after = [ "default.target" ];
-  };
+  # systemd.services."syncthing" = {
+  #   enable = true;
+  #   after = [ "graphical.target" ];
+  # };
 
-  systemd.services."home-manager-jcsan" = {
-    enable = true;
-    after = [ "default.target" ];
-  };
+  # systemd.services."home-manager-jcsan" = {
+  #   enable = true;
+  #   after = [ "default.target" ];
+  # };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

@@ -3,6 +3,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+      inputs.hyprland.follows = "hyprland";
+    };
     hyprland-contrib = {
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -56,7 +60,7 @@
           modules = [
             ./configuration.nix
             auto-cpufreq.nixosModules.default
-     
+
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;

@@ -12,10 +12,8 @@ let
 in
 {
   # Make sure opengl is enabled
-  hardware.opengl = {
+  hardware.graphics = {
     enable = true;
-    driSupport = true;
-    driSupport32Bit = true;
   };
 
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -27,7 +25,7 @@ in
     package = config.boot.kernelPackages.nvidiaPackages.beta;
     powerManagement.enable = true;
     prime = {
-      reverseSync.enable = false;
+      sync.enable = false;
       offload = {
         enable = true;
         enableOffloadCmd = true;
@@ -45,13 +43,19 @@ in
       system.nixos.tags = [ "OPTIMUS-PRIME" ];
       hardware.nvidia = {
         prime = {
-          reverseSync.enable = lib.mkForce true;
+          # reverseSync.enable = lib.mkForce true; does not work w/ hyprland yet
+          sync.enable = lib.mkForce true;
           offload = {
             enable = lib.mkForce false;
             enableOffloadCmd = lib.mkForce false;
           };
         };
       };
+      environment.sessionVariables = {
+        WLR_DRM_DEVICES ="$HOME/.config/hypr/nvidia:$HOME/.config/hypr/intel";
+      };
+      # blacklist intel gpu driver
+      boot.kernelParams = [ "module_blacklist=i915" ];
     };
 
     intel-only.configuration = {

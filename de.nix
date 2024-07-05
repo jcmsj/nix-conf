@@ -5,6 +5,7 @@
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   };
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
@@ -65,12 +66,14 @@
     gnome.gnome-calculator
     gnome.gnome-sound-recorder
     gthumb
-    eyedropper
     amberol
     gparted
     varia
     health
     authenticator
     gnome.ghex
+
+    # For nvidia
+    egl-wayland
   ];
 }
