@@ -169,6 +169,10 @@
       "ctrl+f6" = "launch --location=vsplit";
       "ctrl+f4" = "launch --location=split";
       "ctrl+f7" = "layout_action rotate";
+      "ctrl+left" = "neighboring_window left";
+      "ctrl+right" = "neighboring_window right";
+      "ctrl+up" = "neighboring_window up";
+      "ctrl+down" = "neighboring_window down";
     };
   };
   programs.obs-studio = {
@@ -198,4 +202,12 @@
     };
   };
 
+  # wayland.windowManager.hyprland = {
+  #   enable = true;
+  #   # ...
+  #   plugins = [
+  #     inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+  #     # ...
+  #   ];
+  # };
 }
