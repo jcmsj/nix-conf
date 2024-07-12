@@ -159,6 +159,9 @@
     font = {
       name = "Iosevka";
     };
+    settings = {
+      enabled_layouts = "tall:bias=50;full_size=1;mirrored=false";
+    };
     keybindings = {
       "ctrl+c" = "copy_or_interrupt";
       "ctrl+f>2" = "set_font_size 20";
@@ -194,4 +197,5 @@
       modi = "drun,run,window,ssh";
     };
   };
+
 }
