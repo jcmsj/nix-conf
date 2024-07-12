@@ -16,7 +16,7 @@ in
       ./bootloader.nix
       ./power.nix
       ./fonts.nix
-      ./i18n.nix
+      ./language.nix
       ./de.nix
       ./nvidia.nix
       ./shell-environment.nix
@@ -171,8 +171,8 @@ in
 
     libreoffice-fresh
     hunspell
-    hunspellDicts.uk_UA
-    hunspellDicts.th_TH
+    hunspellDicts.en_US
+    hyphen
 
     osu-lazer-bin # app image ver w/ online functionality
   ];
@@ -190,7 +190,6 @@ in
   # For Piper to work
   services.ratbagd.enable = true;
   programs.gamemode.enable = true;
-
   programs.adb.enable = true;
   services.logind.extraConfig = ''
     # don't shutdown when power button is short-pressed

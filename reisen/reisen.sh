@@ -8,6 +8,12 @@ update() {
     shift 1
     nix flake update $conf $@;
 }
+latest() {
+    update
+    # notify password prompt
+    notify-send "NixOS" "Password prompt for nixos-rebuild" -t 5000
+    remake
+}
 
 listPkgs() {
     # find /nix/store/ -maxdepth 1 -type d  | du -sh | sort -h
@@ -38,6 +44,8 @@ help() {
     echo "Commands:"
     echo "  remake|re <...args>: Rebuild the system"
     echo "  update <...args>: Update the flake"
+    # latest
+    echo "  latest: update then remake";
     echo "  pkgs: List all packages in the store sorted by size"
     # del
     echo "  gens: list generations"
@@ -54,6 +62,9 @@ case $1 in
         ;;
     update)
         update
+        ;;
+    latest)
+        latest
         ;;
     gens)
         listGens $@

@@ -51,19 +51,19 @@
     # libsecret
     libsForQt5.qt5ct
     # gnome.libgnome-keyring
-    gnome.gnome-system-monitor
-    gnome.nautilus
-    gnome.cheese
-    gnome.simple-scan
+    gnome-system-monitor
+    nautilus
+    cheese
+    simple-scan
     gnome-text-editor
     gnome.gnome-clocks
-    gnome.eog
-    gnome.sushi
-    gnome.gnome-calendar
+    eog
+    sushi
+    gnome-calendar
     gnome-online-accounts
     gnome-online-accounts-gtk
     gnome-decoder
-    gnome.gnome-calculator
+    gnome-calculator
     gnome.gnome-sound-recorder
     gthumb
     amberol
@@ -71,7 +71,7 @@
     varia
     health
     authenticator
-    gnome.ghex
+    ghex
 
     # For nvidia
     egl-wayland

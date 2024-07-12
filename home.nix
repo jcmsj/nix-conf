@@ -37,7 +37,7 @@
     # EDITOR = "emacs";
   };
   home.sessionPath = [
-    "$HOME/.pnpm"
+    # pass
   ];
   services.mpd-mpris.enable = true;
   xdg = {
@@ -91,7 +91,7 @@
     };
     iconTheme = {
       name = "Adwaita";
-      package = pkgs.gnome.adwaita-icon-theme;
+      package = pkgs.adwaita-icon-theme;
     };
 
     gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
@@ -103,16 +103,18 @@
     ];
   };
   # Prefer dark theme
-  dconf = {
-    enable = true;
-    settings."org/gnome/desktop/interface" = {
-      color-scheme = "prefer-dark";
-    };
-  };
+  # dconf = {
+  #   enable = true;
+  #   settings."org/gnome/desktop/interface" = {
+  #     color-scheme = "prefer-dark";
+  #   };
+  # };
   qt = {
     enable = true;
     platformTheme.name = "adwaita";
-    style.name = "adw-gtk3-dark";
+    style = {
+      name = "adwaita-dark";
+    };
   };
   programs.git = {
     enable = true;
