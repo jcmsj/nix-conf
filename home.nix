@@ -37,7 +37,8 @@
     # EDITOR = "emacs";
   };
   home.sessionPath = [
-    # pass
+    # for pnpm to work
+    "$HOME/.pnpm"
   ];
   services.mpd-mpris.enable = true;
   xdg = {
