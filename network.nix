@@ -27,7 +27,7 @@
   hardware.bluetooth.powerOnBoot = true;
   # Using Bluetooth headset buttons to control media player
   # TODO: Try home manager service
-  # https://nixos.wiki/wiki/Bluetooth
+  # https://wiki.nixos.org/wiki/Bluetooth
   systemd.user.services.mpris-proxy = {
     description = "Mpris proxy";
     after = [ "network.target" "sound.target" ];
