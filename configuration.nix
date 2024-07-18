@@ -70,7 +70,7 @@ in
     ## Required Apps
     # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     # notif daemon
-    mako
+    # mako
     libnotify
     # Wallpaper
 
@@ -161,6 +161,7 @@ in
     nixpkgs-fmt
     google-chrome
     celluloid
+    caprine-bin
 
     qbittorrent
     inputs.reisenScripts.packages.${system}.monitor
@@ -175,6 +176,7 @@ in
     hyphen
 
     osu-lazer-bin # app image ver w/ online functionality
+
   ];
 
   # Enable CUPS to print documents.
