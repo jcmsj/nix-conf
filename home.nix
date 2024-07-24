@@ -2,6 +2,9 @@
 {
   imports = [
     inputs.ags.homeManagerModules.default
+    ./hypr/lock.nix
+    ./hypr/paper.nix
+    ./hypr/idle.nix
   ];
   nixpkgs.config.allowUnfree = true;
   # Home Manager needs a bit of information about you and the paths it should
