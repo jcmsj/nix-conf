@@ -22,7 +22,7 @@ in
       ./shell-environment.nix
       ./network.nix
       ./sound.nix
-      ./steam.nix
+      ./gaming.nix
       ./syncthing.nix
       ./bluetooth.nix
     ];
@@ -89,31 +89,15 @@ in
     # App launcher
     inputs.rofi-vscode-mode.packages.${system}.default
     networkmanagerapplet
-    blueman
-    #Screenshot Utility
-    grim
-    slurp
-    swappy
     # nerdfonts
     # bar
-    playerctl
     vim
     wget
     vlc
     piper
     ## System utils
-
-    ## Gaming
-    glxinfo
-    lshw
-    steam-run
-    #nvtop
-    gamescope
-    protonup-qt
-
     p7zip
     jq
-    brightnessctl
     socat
     ## Development
     ### Editors
@@ -169,7 +153,6 @@ in
     qbittorrent
     inputs.reisenScripts.packages.${system}.monitor
     inputs.reisenScripts.packages.${system}.restore
-    inputs.reisenScripts.packages.${system}.nexus
     ffmpeg-full
     yt-dlp
 

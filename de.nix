@@ -1,11 +1,14 @@
 { inputs, pkgs, ... }:
 {
+  imports = [
+    ./reisen/nexus.nix
+  ];
   # https://wiki.hyprland.org/Nix/Hyprland-on-NixOS/
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   };
-
+  
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
@@ -31,13 +34,15 @@
       };
     };
   };
-  # security.pam.services.greetd.enableGnomeKeyring = true;
   services.gnome = {
     core-utilities.enable = true;
-    gnome-keyring.enable = true;
     sushi.enable = true;
     gnome-online-accounts.enable = true;
   };
+
+  # unlock GPG keyring on login
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.greetd.enableGnomeKeyring = true;
 
   environment.systemPackages = with pkgs; [
     # hyprecosystem
@@ -75,5 +80,9 @@
 
     # For nvidia
     egl-wayland
+
+    # For ags
+    brightnessctl
+    playerctl
   ];
 }

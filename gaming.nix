@@ -9,4 +9,14 @@
 
   # programs.an-anime-game-launcher.enable = true;
   programs.wavey-launcher.enable = true;
+
+  environment.systemPackages = with pkgs; [
+    ## Gaming
+    glxinfo
+    lshw
+    steam-run
+    #nvtop
+    gamescope
+    protonup-qt
+  ];
 }
