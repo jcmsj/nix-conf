@@ -11,7 +11,7 @@ update() {
 latest() {
     update
     # notify password prompt
-    notify-send "NixOS" "Password prompt for nixos-rebuild" -t 5000
+    notify-send "NixOS" "Password prompt for nixos-rebuild" -u critical -t 0
     remake
 }
 
