@@ -83,7 +83,13 @@
       };
     };
   };
-  /* Here goes the rest of your home-manager config, e.g. home.packages = [ pkgs.foo ]; */
+   home.pointerCursor = {
+    gtk.enable = true;
+    # x11.enable = true;
+    package = pkgs.bibata-cursors;
+    name = "Bibata-Modern-Classic";
+    size = 24;
+  };
   gtk = {
     enable = true;
     theme = {
