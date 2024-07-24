@@ -13,6 +13,11 @@ in
   ];
   wayland.windowManager.hyprland = {
     enable = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    plugins = [
+      inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
+      # ...
+    ];
     settings = {
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
 
@@ -155,9 +160,5 @@ in
 
       # merge other stuff
     } // binds // rules // autostart;
-    plugins = [
-      inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-      # ...
-    ];
   };
 }

@@ -44,7 +44,6 @@
   services.mpd-mpris.enable = true;
   xdg = {
     enable = true;
-
     userDirs = {
       enable = true;
       documents = "/media/sorairo/Docs";

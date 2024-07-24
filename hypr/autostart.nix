@@ -1,7 +1,6 @@
 {
   exec-once = [
     "hyprlock"
-    "hyprpaper"
     "ags"
     # Network manager
     "nm-applet --indicator"
@@ -12,6 +11,5 @@
     "wl-paste --type text --watch cliphist store"
     "wl-paste --type image --watch cliphist store"
     # Auto sleep
-    "hypridle"
   ];
 }
