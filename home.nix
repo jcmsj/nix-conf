@@ -2,9 +2,7 @@
 {
   imports = [
     inputs.ags.homeManagerModules.default
-    ./hypr/lock.nix
-    ./hypr/paper.nix
-    ./hypr/idle.nix
+    ./hypr/hyprland.nix
   ];
   nixpkgs.config.allowUnfree = true;
   # Home Manager needs a bit of information about you and the paths it should
@@ -210,13 +208,4 @@
       modi = "drun,run,window,ssh";
     };
   };
-
-  # wayland.windowManager.hyprland = {
-  #   enable = true;
-  #   # ...
-  #   plugins = [
-  #     inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-  #     # ...
-  #   ];
-  # };
 }

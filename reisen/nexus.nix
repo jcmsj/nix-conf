@@ -8,6 +8,7 @@
     in
     with pkgs; [
       grimblast
+      slurp
       swappy
       nexus
     ];
