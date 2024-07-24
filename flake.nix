@@ -32,8 +32,10 @@
       url = "github:jcmsj/rofi-vscode-mode";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    aagl.url = "github:ezKEa/aagl-gtk-on-nix";
+    aagl.inputs.nixpkgs.follows = "nixpkgs"; # Name of nixpkgs input you want to use
   };
-  outputs = inputs@{ self, nixpkgs, auto-cpufreq, home-manager, ags, ... }:
+  outputs = inputs@{ self, nixpkgs, auto-cpufreq, home-manager, ags, aagl,... }:
     let
       username = "jcsan";
       system = "x86_64-linux";
@@ -66,11 +68,12 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.${username} = import ./home.nix;
-
+              home-manager.backupFileExtension = "backup";
               # Optionally, use home-manager.extraSpecialArgs to pass
               home-manager.extraSpecialArgs = { inherit inputs; };
               # arguments to home.nix
             }
+            aagl.nixosModules.default
           ];
         };
       };

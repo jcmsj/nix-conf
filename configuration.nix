@@ -24,6 +24,7 @@ in
       ./sound.nix
       ./steam.nix
       ./syncthing.nix
+      ./bluetooth.nix
     ];
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
@@ -33,10 +34,12 @@ in
     substituters = [
       "https://hyprland.cachix.org"
       "https://devenv.cachix.org"
+      "https://ezkea.cachix.org"
     ];
     trusted-public-keys = [
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
+      "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
     ];
   };
   programs.zsh.enable = true;
@@ -125,7 +128,7 @@ in
     nodejs_22
     pnpm-shim
     php
-    (python311.withPackages (ps: with ps; [
+    (python312.withPackages (ps: with ps; [
       jupyter
       notebook
       pandas
