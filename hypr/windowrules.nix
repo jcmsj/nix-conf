@@ -3,6 +3,9 @@
   "$tpip" = "title:^(Firefox|Picture-in-Picture)$";
   "$titleOW" = "title:^(Overwatch)$";
   windowrulev2 = [
+    # Group mode by default
+    "group, set, title:(.*)$"
+    
     # Picture-In-Picture mode Firefox
     "float, $cff, $tpip"
     "pin, $cff, $tpip"

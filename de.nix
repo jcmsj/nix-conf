@@ -8,7 +8,7 @@
     enable = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
   };
-  
+
   # Enable the X11 windowing system.
   services.xserver = {
     enable = true;
@@ -38,11 +38,12 @@
     core-utilities.enable = true;
     sushi.enable = true;
     gnome-online-accounts.enable = true;
+    gnome-keyring.enable = true;
+    tracker.enable = true;
   };
-
-  # unlock GPG keyring on login
-  services.gnome.gnome-keyring.enable = true;
-  security.pam.services.greetd.enableGnomeKeyring = true;
+  security = {
+    pam.services.greetd.enableGnomeKeyring = true;
+  };
 
   environment.systemPackages = with pkgs; [
     # hyprecosystem
