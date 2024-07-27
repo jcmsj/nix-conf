@@ -17,6 +17,7 @@ in
   bind = [
     # App binds
     (bmod exec "C" "kitty")
+    (bmod exec "W" "firefox")
     (bmod "killactive" "Q" "")
     (bmod exec "E" "nautilus")
     (bmod "exit" "M" "")
