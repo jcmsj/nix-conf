@@ -45,9 +45,10 @@
           # NOTE: Using `nixpkgs.config` in your NixOS config won't work
           # Instead, you should set nixpkgs configs here
           # (https://nixos.org/manual/nixpkgs/stable/#idm140737322551056)
-
-          config.allowUnfree = true;
-          config.firefox.speechSynthesisSupport = true;
+          config = {
+            allowUnfree = true;
+            firefox.speechSynthesisSupport = true;
+          };
         });
       pkgs = legacyPackages.${system};
     in

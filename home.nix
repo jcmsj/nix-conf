@@ -55,32 +55,23 @@
 
     mimeApps = {
       enable = true;
-      associations.added = {
-        "application/pdf" = "firefox.desktop";
-        "inode/directory" = "nautilus.desktop";
-        "image/*" = "org.gnome.gThumb.desktop";
-        "image/webp" = "org.gnome.gThumb.desktop";
-        "image/png" = "org.gnome.gThumb.desktop";
-        "image/jpeg" = "org.gnome.gThumb.desktop";
-        "image/gif" = "org.gnome.gThumb.desktop";
-        "image/jpg" = "org.gnome.gThumb.desktop";
-        "video/*" = "vlc.desktop";
-        "audio/*" = "vlc.desktop";
-      };
-
-      defaultApplications = {
-        "text/plain" = "org.gnome.TextEditor.desktop";
-        "text/*" = "org.gnome.TextEditor.desktop";
-        "inode/directory" = "org.gnome.Nautilus.desktop";
-        "image/*" = "org.gnome.gThumb.desktop";
-        "image/webp" = "org.gnome.gThumb.desktop";
-        "image/png" = "org.gnome.gThumb.desktop";
-        "image/jpeg" = "org.gnome.gThumb.desktop";
-        "image/gif" = "org.gnome.gThumb.desktop";
-        "image/jpg" = "org.gnome.gThumb.desktop";
-        "video/*" = "vlc.desktop";
-        "audio/*" = "vlc.desktop";
-      };
+      defaultApplications =
+        let 
+          video = [ "video/*" "video/mp4" "video/mkv" "video/webm" "video/avi" "video/ogg" ];
+          audio = ["audio/*"  "audio/mp3" "audio/flac" "audio/ogg" "audio/wav" "audio/m4a" ];
+          players = [ "vlc.desktop" "org.gnome.celluloid.desktop" ];
+          imageHandler = {
+            items = ["image/*" "image/webp" "image/png" "image/jpeg" "image/gif" "image/jpg"];
+            handler = "org.gnome.gThumb.desktop";
+          };
+          handlerToAttr = list: handler: builtins.listToAttrs (builtins.map (mime: {name = mime; value = handler; }) list);
+        in {
+          "application/pdf" = "firefox.desktop";
+          "text/plain" = "org.gnome.TextEditor.desktop";
+          "text/*" = "org.gnome.TextEditor.desktop";
+          "inode/directory" = "org.gnome.Nautilus.desktop";
+        } // (handlerToAttr (video ++ audio) players) 
+          // (handlerToAttr imageHandler.items imageHandler.handler);
     };
   };
   home.pointerCursor = {

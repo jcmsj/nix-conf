@@ -32,8 +32,6 @@ deleteGensRange() {
     start=$2
     end=$3
     echo "Removing generations from $start to $end"
-    echo $start
-    echo $end
     deleteGens $(seq $start $end)
 }
 cleanup() {
