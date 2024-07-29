@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  # https://nixos.wiki/wiki/Bluetooth
+  # https://wiki.nixos.org/wiki/Bluetooth
   hardware.bluetooth.enable = true;
   services.blueman.enable = true;
   # powers up the default Bluetooth controller on boot

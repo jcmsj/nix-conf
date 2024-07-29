@@ -1,6 +1,6 @@
 {pkgs, ...}:
 {
-  # https://nixos.wiki/wiki/Syncthing
+  # https://wiki.nixos.org/wiki/Syncthing
   services = {
     syncthing = {
       enable = true;

@@ -1,6 +1,6 @@
 { pkgs, lib, config, ... }:
 
-# https://nixos.wiki/wiki/Nvidia
+# https://wiki.nixos.org/wiki/Nvidia
 let
   nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
     export __NV_PRIME_RENDER_OFFLOAD=1
