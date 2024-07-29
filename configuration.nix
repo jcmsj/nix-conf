@@ -35,20 +35,17 @@ in
       "https://hyprland.cachix.org"
       "https://devenv.cachix.org"
       "https://ezkea.cachix.org"
+      "https://cuda-maintainers.cachix.org"
     ];
     trusted-public-keys = [
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
       "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
+      "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
     ];
   };
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
-  nixpkgs.config = {
-    allowUnfree = true;
-    firefox.speechSynthesisSupport = true;
-  };
-  # start auth agen on login by creating a systemd user service: 
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -120,6 +117,7 @@ in
       scikit-learn
       matplotlib
       memory-profiler
+      numpy
       (buildPythonPackage {
         pname = "envycontrol";
         version = "3.4.0";
@@ -133,6 +131,17 @@ in
         ];
       })
       pyqt6
+    ]))
+    (python311.withPackages (ps: with ps; [
+      jupyter
+      notebook
+      torch-bin
+      torchvision-bin
+      tensorflow-bin
+      matplotlib
+      scikit-learn
+      pandas
+      numpy
     ]))
     inputs.fix-python.packages.${system}.default
 
@@ -162,23 +171,25 @@ in
     hyphen
 
     osu-lazer-bin # app image ver w/ online functionality
-
+    patchelfUnstable
+    mullvad-vpn
   ];
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-  # services.printing.drivers = with pkgs; [ 
-  #   epson_201207w
-  #   gutenprint
-  #   gutenprintBin 
-  #   epson-escpr2
-  #   epson-escpr
-  # ];
+  services.printing.drivers = with pkgs; [ 
+    epson_201207w
+    gutenprint
+    gutenprintBin 
+    epson-escpr2
+    epson-escpr
+  ];
   services.upower.enable = true; # needed by ags
   # For Piper to work
   services.ratbagd.enable = true;
   programs.gamemode.enable = true;
   programs.adb.enable = true;
+  services.mullvad-vpn.enable = true;
   services.logind.extraConfig = ''
     # don't shutdown when power button is short-pressed
     HandlePowerKey=ignore
@@ -204,8 +215,7 @@ in
   # started in user sessions.
   # programs.mtr.enable = true;
   # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
+  #   enable = true;v
   # };
 
   # List services that you want to enable:

@@ -3,11 +3,11 @@
   imports = [
     ./reisen/nexus.nix
   ];
-  # https://wiki.hyprland.org/Nix/Hyprland-on-NixOS/
-  programs.hyprland = {
-    enable = true;
-    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
-  };
+  # # https://wiki.hyprland.org/Nix/Hyprland-on-NixOS/
+  # programs.hyprland = {
+  #   enable = true;
+  #   package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+  # };
 
   # Enable the X11 windowing system.
   services.xserver = {

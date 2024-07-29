@@ -34,8 +34,15 @@
     };
     aagl.url = "github:ezKEa/aagl-gtk-on-nix";
     aagl.inputs.nixpkgs.follows = "nixpkgs"; # Name of nixpkgs input you want to use
+
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.1";
+
+      # Optional but recommended to limit the size of your system closure.
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-  outputs = inputs@{ self, nixpkgs, auto-cpufreq, home-manager, ags, aagl,... }:
+  outputs = inputs@{ self, nixpkgs, auto-cpufreq, home-manager, ags, aagl,lanzaboote,... }:
     let
       username = "jcsan";
       system = "x86_64-linux";
@@ -75,6 +82,7 @@
               # arguments to home.nix
             }
             aagl.nixosModules.default
+            lanzaboote.nixosModules.lanzaboote
           ];
         };
       };
