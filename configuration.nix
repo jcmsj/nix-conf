@@ -5,7 +5,6 @@
 { inputs, config, lib, pkgs, system, ... }:
 let
   reisen = pkgs.callPackage ./reisen/reisen.nix { };
-  my-firefox = pkgs.callPackage ./firefox.nix { };
   pnpm-shim = pkgs.callPackage ./pnpm-shim.nix { };
 in
 {
@@ -151,7 +150,6 @@ in
     inkscape
 
     firefox
-    my-firefox
     discord
     speechd
     nixpkgs-fmt

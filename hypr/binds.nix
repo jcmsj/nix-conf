@@ -21,6 +21,8 @@ in
     (bmod "killactive" "Q" "")
     (bmod exec "E" "nautilus")
     (bmod "exit" "M" "")
+    # task mngr
+    "CTRL+SHIFT,ESCAPE, exec, gnome-system-monitor"
 
     # Layout
     (bmod "togglefloating" "V" "")

@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, config, nixpkgs, ... }:
 
 # https://wiki.nixos.org/wiki/Nvidia
 let
@@ -11,10 +11,24 @@ let
   '';
 in
 {
+
+  nixpkgs.config.packageOverrides = pkgs: {
+    nvidia-offload = nvidia-offload;
+    # See https://nixos.wiki/wiki/Accelerated_Video_Playback
+    intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
+  };
+
   # Make sure opengl is enabled
   hardware.graphics = {
     enable = true;
+    extraPackages = with pkgs; [ 
+      intel-media-driver   # LIBVA_DRIVER_NAME=iHD
+      intel-ocl 
+      intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+    ];
   };
+  environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; # Force intel-media-driver
+  # end of Accelerated Video Playback
 
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
@@ -36,7 +50,6 @@ in
       intelBusId = "PCI:0:2:0";
     };
   };
-  nixpkgs.config.packageOverrides.nvidia-offload = nvidia-offload;
   # External display
   specialisation = {
     optimus-prime.configuration = {
