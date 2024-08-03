@@ -57,7 +57,7 @@
       enable = true;
       defaultApplications =
         let 
-          video = [ "video/*" "video/mp4" "video/mkv" "video/webm" "video/avi" "video/ogg" ];
+          video = [ "video/*" "video/mp4" "video/x-matroska" "video/mkv" "video/webm" "video/avi" "video/ogg" ];
           audio = ["audio/*"  "audio/mp3" "audio/flac" "audio/ogg" "audio/wav" "audio/m4a" ];
           players = [ "vlc.desktop" "org.gnome.celluloid.desktop" ];
           imageHandler = {
@@ -112,6 +112,7 @@
     platformTheme.name = "adwaita";
     style = {
       name = "adwaita-dark";
+      package = pkgs.adwaita-qt6;
     };
   };
   programs.git = {
@@ -187,12 +188,11 @@
 
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi-wayland;
-    # .override {
-    #   plugins = [
-    #     inputs.rofi-vscode-mode.packages.x86_64-linux.default
-    #   ];
-    # };
+    package = pkgs.rofi-wayland.override {
+      plugins = [
+        inputs.rofi-vscode-mode.packages.${pkgs.stdenv.hostPlatform.system}.default
+      ];
+    };
     # modi: 
     extraConfig = {
       modi = "drun,run,window,ssh";

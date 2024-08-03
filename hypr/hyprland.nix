@@ -1,6 +1,5 @@
 { inputs, pkgs, ... }:
 let
-  # ./binds.nix
   binds = import ./binds.nix;
   rules = import ./windowrules.nix;
   autostart = import ./autostart.nix;
@@ -16,7 +15,6 @@ in
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     plugins = [
       inputs.hyprland-plugins.packages.${pkgs.system}.hyprexpo
-      # ...
     ];
     settings = {
       # See https://wiki.hyprland.org/Configuring/Keywords/ for more
@@ -27,12 +25,6 @@ in
         "eDP-1, 1920x1080@60, 1920x0, 1"
         ",highrr,auto,1"
       ];
-
-      env = [
-        "HYPRCURSOR_THEME, Bibata-Modern-Classic"
-        "HYPRCURSOR_SIZE,24"
-        "ELECTRON_OZONE_PLATFORM_HINT,auto"
-      ] ++ binds.env;
 
       # For all categories, see https://wiki.hyprland.org/Configuring/Variables/
 
@@ -159,6 +151,15 @@ in
       };
 
       # merge other stuff
-    } // binds // rules // autostart;
+    } // binds // rules // autostart // {
+      env = [
+        "HYPRCURSOR_THEME, Bibata-Modern-Classic"
+        "HYPRCURSOR_SIZE,24"
+        "ELECTRON_OZONE_PLATFORM_HINT,auto"
+        "QT_QPA_PLATFORM,wayland;xcb"
+        "QT_AUTO_SCREEN_SCALE_FACTOR,1"
+        "QT_WAYLAND_DISABLE_WINDOWDECORATION,1"
+      ] ++ binds.env;
+    };
   };
 }

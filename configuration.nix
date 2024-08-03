@@ -104,46 +104,42 @@ in
     git
 
     ### Language Runtimes & Managers
-    nil
+    nixd
     nodejs_22
     pnpm-shim
-    php
-    (python312.withPackages (ps: with ps; [
-      jupyter
-      notebook
-      pandas
-      xlrd # optional dep of pandas for xlsx
-      scikit-learn
-      matplotlib
-      memory-profiler
-      numpy
-      (buildPythonPackage {
-        pname = "envycontrol";
-        version = "3.4.0";
-        src = fetchTarball {
-          url = "https://github.com/bayasdev/envycontrol/archive/refs/tags/v3.4.0.tar.gz";
-          sha256 = "sha256-m0ZH6kqLg15IfFtmoBqZgEe7wpIde/bIEyn6YY/L/xU=";
-        };
-        doCheck = false;
-        propogatedBuildInputs = [
+    # (python312.withPackages (ps: with ps; [
+    #   jupyter
+    #   notebook
+    #   pandas
+    #   xlrd # optional dep of pandas for xlsx
+    #   scikit-learn
+    #   matplotlib
+    #   memory-profiler
+    #   numpy
+    #   (buildPythonPackage {
+    #     pname = "envycontrol";
+    #     version = "3.4.0";
+    #     src = fetchTarball {
+    #       url = "https://github.com/bayasdev/envycontrol/archive/refs/tags/v3.4.0.tar.gz";
+    #       sha256 = "sha256-m0ZH6kqLg15IfFtmoBqZgEe7wpIde/bIEyn6YY/L/xU=";
+    #     };
+    #     doCheck = false;
+    #     propogatedBuildInputs = [
 
-        ];
-      })
-      pyqt6
-    ]))
+    #     ];
+    #   })
+    #   pyqt6
+    # ]))
     (python311.withPackages (ps: with ps; [
       jupyter
       notebook
-      torch-bin
-      torchvision-bin
-      tensorflow-bin
       matplotlib
       scikit-learn
       pandas
       numpy
+      memory-profiler
+      xlrd # optional dep of pandas for xlsx
     ]))
-    inputs.fix-python.packages.${system}.default
-
     espeak
     krita
     fastfetch
@@ -158,8 +154,6 @@ in
     caprine-bin
 
     qbittorrent
-    inputs.reisenScripts.packages.${system}.monitor
-    inputs.reisenScripts.packages.${system}.restore
     ffmpeg-full
     yt-dlp
 

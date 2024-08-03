@@ -21,7 +21,9 @@
     VSCODE_EXTENSIONS = "/opt/code/extensions";
     GRIMBLAST_EDITOR = "swappy";
     NOTIFICATION_TIMEOUT = "5"; # in seconds
-
+    QT_QPA_PLATFORM = "wayland;xcb";
+    QT_QPA_PLATFORMTHEME = "adwaita";
+    QT_STYLE_OVERRIDE = "adwaita-dark";
     # For nautilus to show media information
     GST_PLUGIN_SYSTEM_PATH_1_0 = lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" (with pkgs.gst_all_1; [
       gst-plugins-good
@@ -29,7 +31,5 @@
       gst-plugins-ugly
       gst-libav
     ]);
-    # XDG_RUNTIME_DIR="/run/user/$UID"; # Unlocks gnome keyring in time
-    # gnomeAuthAgent = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
   };
 }

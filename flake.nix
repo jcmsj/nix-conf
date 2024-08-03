@@ -11,15 +11,6 @@
       url = "github:hyprwm/contrib";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    auto-cpufreq = {
-      url = "github:AdnanHodzic/auto-cpufreq?rev=3f6d7a3e77732c1dbe4873b69404fefd899ad35e";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    reisenScripts = {
-      url = "github:jcmsj/hypr-conf/main";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    fix-python.url = "github:GuillaumeDesforges/fix-python";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -32,8 +23,8 @@
       url = "github:jcmsj/rofi-vscode-mode";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    aagl.url = "github:ezKEa/aagl-gtk-on-nix";
-    aagl.inputs.nixpkgs.follows = "nixpkgs"; # Name of nixpkgs input you want to use
+    # aagl.url = "github:ezKEa/aagl-gtk-on-nix";
+    # aagl.inputs.nixpkgs.follows = "nixpkgs"; # Name of nixpkgs input you want to use
 
     lanzaboote = {
       url = "github:nix-community/lanzaboote/v0.4.1";
@@ -42,7 +33,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = inputs@{ self, nixpkgs, auto-cpufreq, home-manager, ags, aagl,lanzaboote,... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, ags, lanzaboote,... }:
     let
       username = "jcsan";
       system = "x86_64-linux";
@@ -54,6 +45,7 @@
           # (https://nixos.org/manual/nixpkgs/stable/#idm140737322551056)
           config = {
             allowUnfree = true;
+            # cudaSupport = true;
             firefox.speechSynthesisSupport = true;
           };
         });
@@ -69,8 +61,6 @@
           };
           modules = [
             ./configuration.nix
-            auto-cpufreq.nixosModules.default
-
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
@@ -81,7 +71,7 @@
               home-manager.extraSpecialArgs = { inherit inputs; };
               # arguments to home.nix
             }
-            aagl.nixosModules.default
+            # aagl.nixosModules.default
             lanzaboote.nixosModules.lanzaboote
           ];
         };
