@@ -13,8 +13,7 @@
     ## Gaming
     glxinfo
     lshw
-    steam-run
-    #nvtop
+    # steam-run
     gamescope
   ];
 }
