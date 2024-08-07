@@ -21,7 +21,7 @@ in
   # Make sure opengl is enabled
   hardware.graphics = {
     enable = true;
-    package = pkgs.mesa.drivers;
+    # package = pkgs.mesa.drivers;
     extraPackages = with pkgs; [ 
       intel-media-driver   # LIBVA_DRIVER_NAME=iHD
       intel-ocl 

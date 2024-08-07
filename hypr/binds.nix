@@ -99,9 +99,6 @@ in
     (bind "CTRL+ALT" exec "Delete" "ags -r \"togglePowerMenu()\"")
     (bind "ALT" exec "F4" "ags -r \"togglePowerMenu()\"")
 
-    # Task manager
-    (bind "CTRL+SHIFT" exec "Escape" "ags -r \"toggleTaskManager()\"")
-
     (bnone exec "PRINT" "nexus area")
     (bind "CTRL" exec "PRINT" "nexus active")
 

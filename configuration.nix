@@ -107,6 +107,7 @@ in
     nixd
     nodejs_22
     pnpm-shim
+    bun
     # (python312.withPackages (ps: with ps; [
     #   jupyter
     #   notebook
@@ -140,12 +141,13 @@ in
       memory-profiler
       xlrd # optional dep of pandas for xlsx
     ]))
+    undervolt
     espeak
     krita
     fastfetch
     inkscape
 
-    firefox
+    firefox-bin
     discord
     speechd
     nixpkgs-fmt
@@ -164,7 +166,7 @@ in
 
     osu-lazer-bin # app image ver w/ online functionality
     patchelfUnstable
-    mullvad-vpn
+    htop
   ];
 
   # Enable CUPS to print documents.
@@ -176,50 +178,19 @@ in
     epson-escpr2
     epson-escpr
   ];
-  services.upower.enable = true; # needed by ags
   # For Piper to work
   services.ratbagd.enable = true;
   programs.gamemode.enable = true;
   programs.adb.enable = true;
-  services.mullvad-vpn.enable = true;
   services.logind.extraConfig = ''
     # don't shutdown when power button is short-pressed
     HandlePowerKey=ignore
   '';
 
   programs.direnv.enable = true;
-
   nixpkgs.overlays = [
 
   ];
-
-  # Faster bootup
-  # systemd.services."syncthing" = {
-  #   enable = true;
-  #   after = [ "graphical.target" ];
-  # };
-
-  # systemd.services."home-manager-jcsan" = {
-  #   enable = true;
-  #   after = [ "default.target" ];
-  # };
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;v
-  # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

@@ -25,4 +25,15 @@
 
     };
   };
+
+  services.undervolt = {
+    enable = true;
+    coreOffset = -90;
+    gpuOffset = -20;
+    uncoreOffset = -20;
+    tempAc = 90;
+    tempBat = 80;
+  };
+
+  services.upower.enable = true; # needed by ags
 }

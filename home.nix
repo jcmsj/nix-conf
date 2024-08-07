@@ -76,7 +76,6 @@
   };
   home.pointerCursor = {
     gtk.enable = true;
-    # x11.enable = true;
     package = pkgs.bibata-cursors;
     name = "Bibata-Modern-Classic";
     size = 24;
@@ -127,7 +126,8 @@
       ci = "commit";
       co = "checkout";
       s = "status";
-      ac = "commit -am";
+      cam = "commit -am";
+      cm = "commit -m";
       uncommit = "reset HEAD~1";
       recommit = "commit --amend --no-edit";
       edit = "commit --amend";

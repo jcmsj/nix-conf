@@ -10,21 +10,20 @@
   # };
 
   # Enable the X11 windowing system.
-  services.xserver = {
-    enable = true;
-
-    # Configure keymap in X11
-    xkb = {
-      variant = "";
-      layout = "us";
-    };
-    # GDM for lockscreen
-    # displayManager.gdm = {
-    #   enable = true;
-    #   wayland = true;
-    # };
-    #desktopManager.gnome.enable = true;
-  };
+  # services.xserver = {
+  #   enable = true;
+  #   # Configure keymap in X11
+  #   xkb = {
+  #     variant = "";
+  #     layout = "us";
+  #   };
+  #   # GDM for lockscreen
+  #   # displayManager.gdm = {
+  #   #   enable = true;
+  #   #   wayland = true;
+  #   # };
+  #   #desktopManager.gnome.enable = true;
+  # };
   services.greetd = {
     enable = true;
     settings = {

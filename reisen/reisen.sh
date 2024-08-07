@@ -1,17 +1,25 @@
 conf=$HOME/.config/nix-conf
 remake() {
     shift 1
-    sudo nixos-rebuild switch --flake $conf $@;
+    sudo nixos-rebuild switch --flake $conf $@
 }
 
 update() {
     shift 1
     nix flake update $conf $@;
 }
+
+notifyIfNotSudo() {
+    sudo -v
+    if [ $? -ne 0 ]; then
+        notify-send "NixOS" "Password prompt for nixos-rebuild" -u critical -t 0
+    fi
+}
+
 latest() {
     update
     # notify password prompt
-    notify-send "NixOS" "Password prompt for nixos-rebuild" -u critical -t 0
+    notifyIfNotSudo
     remake
 }
 
