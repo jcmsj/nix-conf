@@ -140,8 +140,9 @@ in
       numpy
       memory-profiler
       xlrd # optional dep of pandas for xlsx
+      labelImg
     ]))
-    undervolt
+    
     espeak
     krita
     fastfetch
@@ -166,7 +167,6 @@ in
 
     osu-lazer-bin # app image ver w/ online functionality
     patchelfUnstable
-    htop
   ];
 
   # Enable CUPS to print documents.

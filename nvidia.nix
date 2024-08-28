@@ -37,7 +37,7 @@ in
     modesetting.enable = true;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.beta;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
     powerManagement.enable = true;
     prime = {
       sync.enable = false;
@@ -51,13 +51,16 @@ in
       intelBusId = "PCI:0:2:0";
     };
   };
+  environment.sessionVariables = {
+    AQ_DRM_DEVICES = "$HOME/.config/hypr/intel:$HOME/.config/hypr/nvidia";
+  };
   # External display
   specialisation = {
     optimus-prime.configuration = {
       system.nixos.tags = [ "OPTIMUS-PRIME" ];
       hardware.nvidia = {
         prime = {
-          # reverseSync.enable = lib.mkForce true; does not work w/ hyprland yet
+          # reverseSync.enable = lib.mkForce true; #does not work w/ hyprland yet
           sync.enable = lib.mkForce true;
           offload = {
             enable = lib.mkForce false;
@@ -66,7 +69,7 @@ in
         };
       };
       environment.sessionVariables = {
-        WLR_DRM_DEVICES ="$HOME/.config/hypr/nvidia:$HOME/.config/hypr/intel";
+        AQ_DRM_DEVICES = lib.mkForce "$HOME/.config/hypr/nvidia";
       };
       # blacklist intel gpu driver
       boot.kernelParams = [ "module_blacklist=i915" ];

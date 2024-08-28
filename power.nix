@@ -1,8 +1,9 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   # Power management https://wiki.nixos.org/wiki/Laptop
   powerManagement.enable = true;
+  # powerManagement.powertop.enable = true;
   # services.power-profiles-daemon.enable = false;
 
   services.tlp = {
@@ -25,15 +26,19 @@
 
     };
   };
-
   services.undervolt = {
     enable = true;
-    coreOffset = -90;
-    gpuOffset = -20;
-    uncoreOffset = -20;
+    coreOffset = -30;
+    gpuOffset = -10;
+    uncoreOffset = -10;
     tempAc = 90;
     tempBat = 80;
   };
 
   services.upower.enable = true; # needed by ags
+  environment.systemPackages = with pkgs; [
+    powertop
+    undervolt
+    htop
+  ];
 }
