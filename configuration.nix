@@ -24,7 +24,6 @@ in
       ./gaming.nix
       ./syncthing.nix
       ./bluetooth.nix
-      # ./ctf.nix
     ];
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
