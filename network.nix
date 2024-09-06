@@ -15,7 +15,7 @@
   # To be able to use wpa_gui or wpa_cli as user put the following in your
   # networking.wireless.userControlled.enable = true;
   systemd.services.NetworkManager-wait-online.enable = false;
-  # services.mullvad-vpn.enable = true;
+  services.mullvad-vpn.enable = true;
 
   # wifi gui
   programs.nm-applet = {

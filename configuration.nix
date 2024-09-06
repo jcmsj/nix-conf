@@ -24,6 +24,7 @@ in
       ./gaming.nix
       ./syncthing.nix
       ./bluetooth.nix
+      # ./ctf.nix
     ];
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
@@ -167,6 +168,7 @@ in
 
     osu-lazer-bin # app image ver w/ online functionality
     patchelfUnstable
+    mullvad-vpn
   ];
 
   # Enable CUPS to print documents.

@@ -61,7 +61,7 @@
     cheese
     simple-scan
     gnome-text-editor
-    gnome.gnome-clocks
+    gnome-clocks
     eog
     sushi
     gnome-calendar
@@ -69,7 +69,7 @@
     gnome-online-accounts-gtk
     gnome-decoder
     gnome-calculator
-    gnome.gnome-sound-recorder
+    gnome-sound-recorder
     gthumb
     amberol
     gparted
