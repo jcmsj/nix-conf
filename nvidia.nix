@@ -1,18 +1,17 @@
-{ pkgs, lib, config, nixpkgs, ... }:
-
+{ pkgs, lib, config, ... }:
 # https://wiki.nixos.org/wiki/Nvidia
-let
-  nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
-    export __NV_PRIME_RENDER_OFFLOAD=1
-    export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
-    export __GLX_VENDOR_LIBRARY_NAME=nvidia
-    export __VK_LAYER_NV_optimus=NVIDIA_only
-    exec "$@"
-  '';
-in
 {
-
-  nixpkgs.config.packageOverrides = pkgs: {
+  nixpkgs.config.packageOverrides = pkgs: 
+  let
+    nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
+      export __NV_PRIME_RENDER_OFFLOAD=1
+      export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+      export __GLX_VENDOR_LIBRARY_NAME=nvidia
+      export __VK_LAYER_NV_optimus=NVIDIA_only
+      exec "$@"
+    '';
+  in
+  {
     nvidia-offload = nvidia-offload;
     # See https://nixos.wiki/wiki/Accelerated_Video_Playback
     intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
@@ -52,7 +51,7 @@ in
     };
   };
   environment.sessionVariables = {
-    AQ_DRM_DEVICES = "$HOME/.config/hypr/intel:$HOME/.config/hypr/nvidia";
+    # AQ_DRM_DEVICES = "$HOME/.config/hypr/intel:$HOME/.config/hypr/nvidia";
   };
   # External display
   specialisation = {
@@ -69,7 +68,7 @@ in
         };
       };
       environment.sessionVariables = {
-        AQ_DRM_DEVICES = lib.mkForce "$HOME/.config/hypr/nvidia";
+        # AQ_DRM_DEVICES = lib.mkForce "$HOME/.config/hypr/nvidia";
       };
       # blacklist intel gpu driver
       boot.kernelParams = [ "module_blacklist=i915" ];

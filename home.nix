@@ -1,10 +1,10 @@
 { inputs, config, pkgs, ... }:
 {
   imports = [
-    inputs.ags.homeManagerModules.default
-    ./hypr/hyprland.nix
+    # inputs.ags.homeManagerModules.default
+    inputs.zen-browser.homeModules.beta
+    # ./hypr/hyprland.nix
   ];
-  nixpkgs.config.allowUnfree = true;
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "jcsan";
@@ -14,7 +14,7 @@
   # introduces backwards incompatible changes.
   #
   # Only change this value if doing a fresh install of NixOS
-  home.stateVersion = "23.11"; # Please read the comment before changing.
+  home.stateVersion = "24.11"; # Please read the comment before changing.
 
   home.packages = [
     # (pkgs.callPackage ./osu-lazer.nix {})
@@ -44,14 +44,14 @@
   services.mpd-mpris.enable = true;
   xdg = {
     enable = true;
-    userDirs = {
-      enable = true;
-      documents = "/media/sorairo/Docs";
-      videos = "/media/sorairo/Videos";
-      music = "/media/sorairo/Music";
-      pictures = "/media/sorairo/Pics";
-      download = "/media/sorairo/Downloads";
-    };
+    # userDirs = {
+    #   enable = true;
+    #   documents = "/media/sorairo/Docs";
+    #   videos = "/media/sorairo/Videos";
+    #   music = "/media/sorairo/Music";
+    #   pictures = "/media/sorairo/Pics";
+    #   download = "/media/sorairo/Downloads";
+    # };
 
     mimeApps = {
       enable = true;
@@ -66,7 +66,7 @@
           };
           handlerToAttr = list: handler: builtins.listToAttrs (builtins.map (mime: {name = mime; value = handler; }) list);
         in {
-          "application/pdf" = "firefox.desktop";
+          "application/pdf" = "zen-browser.desktop";
           "text/plain" = "org.gnome.TextEditor.desktop";
           "text/*" = "org.gnome.TextEditor.desktop";
           "inode/directory" = "org.gnome.Nautilus.desktop";
@@ -92,12 +92,12 @@
     };
 
     gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
-    gtk3.bookmarks = [
-      "file:///media/sorairo/Light%20Novels"
-      "file://${config.home.homeDirectory}/code"
-      "file://${config.home.homeDirectory}/.config/nix-conf"
-      "file:///media/sorairo/School"
-    ];
+    # gtk3.bookmarks = [
+    #   "file:///media/sorairo/Light%20Novels"
+    #   "file://${config.home.homeDirectory}/code"
+    #   "file://${config.home.homeDirectory}/.config/nix-conf"
+    #   "file:///media/sorairo/School"
+    # ];
   };
   # Prefer dark theme
   # dconf = {
@@ -147,7 +147,7 @@
     };
     history.size = 15000;
     history.path = "${config.home.homeDirectory}/zsh/history";
-    initExtra = ''
+    initContent = ''
       # pass
       bindkey '^H' backward-kill-word
     '';
@@ -177,25 +177,34 @@
     enable = true;
     plugins = [ pkgs.obs-studio-plugins.wlrobs ];
   };
-  programs.ags = {
+  # programs.ags = {
+  #   enable = true;
+  #   extraPackages = with pkgs; [
+  #     gtksourceview
+  #     webkitgtk
+  #     accountsservice
+  #   ];
+  # };
+  programs.zen-browser = {
     enable = true;
-    extraPackages = with pkgs; [
-      gtksourceview
-      webkitgtk
-      accountsservice
-    ];
+    nativeMessagingHosts = [pkgs.firefoxpwa];
+    policies = {
+      DisableAppUpdate = true;
+      DisableTelemetry = true;
+      # find more options here: https://mozilla.github.io/policy-templates/
+    };
   };
 
-  programs.rofi = {
-    enable = true;
-    package = pkgs.rofi-wayland.override {
-      plugins = [
-        inputs.rofi-vscode-mode.packages.${pkgs.stdenv.hostPlatform.system}.default
-      ];
-    };
-    # modi: 
-    extraConfig = {
-      modi = "drun,run,window,ssh";
-    };
-  };
+  # programs.rofi = {
+  #   enable = true;
+  #   package = pkgs.rofi-wayland.override {
+  #     plugins = [
+  #       inputs.rofi-vscode-mode.packages.${pkgs.stdenv.hostPlatform.system}.default
+  #     ];
+  #   };
+  #   # modi: 
+  #   extraConfig = {
+  #     modi = "drun,run,window,ssh";
+  #   };
+  # };
 }

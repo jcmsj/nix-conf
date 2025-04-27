@@ -7,15 +7,15 @@
   networking = {
     hostName = "nixos";
     networkmanager.enable = true;
-    extraHosts = ''
-      104.16.26.34 registry.npmjs.org
-    '';
-    nameservers = [ "1.1.1.1" "8.8.8.8" ];
+    # extraHosts = ''
+    #   104.16.26.34 registry.npmjs.org
+    # '';
+    # nameservers = [ "1.1.1.1" "8.8.8.8" ];
   };
   # To be able to use wpa_gui or wpa_cli as user put the following in your
   # networking.wireless.userControlled.enable = true;
-  systemd.services.NetworkManager-wait-online.enable = false;
-  services.mullvad-vpn.enable = true;
+  # systemd.services.NetworkManager-wait-online.enable = false;
+  # services.mullvad-vpn.enable = true;
 
   # wifi gui
   programs.nm-applet = {

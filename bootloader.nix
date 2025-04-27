@@ -1,9 +1,9 @@
 { lib, pkgs, ... }:
 {
   # For debugging and troubleshooting Secure Boot.
-  environment.systemPackages = with pkgs; [
-    sbctl
-  ];
+  # environment.systemPackages = with pkgs; [
+  #   sbctl
+  # ];
 
   boot = {
     loader = {
@@ -11,12 +11,13 @@
         canTouchEfiVariables = true;
         efiSysMountPoint = "/boot"; # ← use the same mount point here.
       };
+      systemd-boot = {
+        enable = true;
       # Lanzaboote currently replaces the systemd-boot module.
       # This setting is usually set to true in configuration.nix
       # generated at installation time. So we force it to false
       # for now.
-      systemd-boot = {
-        enable = lib.mkForce false;
+        # enable = lib.mkForce false;
       };
       # grub = {
       #   enable = true;
@@ -37,10 +38,10 @@
       #   '';
       # };
     };
-    lanzaboote = {
-      enable = true;
-      pkiBundle = "/etc/secureboot";
-    };
+    # lanzaboote = {
+    #   enable = true;
+    #   pkiBundle = "/etc/secureboot";
+    # };
     supportedFilesystems = [ "ntfs" ];
   };
 }

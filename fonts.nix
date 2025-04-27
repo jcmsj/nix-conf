@@ -7,7 +7,7 @@
     packages = with pkgs; [
       iosevka-bin
       source-serif-pro
-      noto-fonts-cjk
+      noto-fonts-cjk-sans
       noto-fonts-emoji
     ];
     fontconfig = {

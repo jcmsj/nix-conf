@@ -12,18 +12,19 @@
   };
   environment.localBinInPath = true;
   environment.sessionVariables = rec {
-    CHROME_EXECUTABLE = "google-chrome-unstable";
-    MOZ_ENABLE_WAYLAND = "1";
+    # CHROME_EXECUTABLE = "google-chrome-unstable";
+    # MOZ_ENABLE_WAYLAND = "1";
     # If cursor becomes invisible
     # WLR_NO_HARDWARE_CURSORS = "1";
     PNPM_HOME = "$HOME/.pnpm";
-    NIXOS_OZONE_WL = "1";
-    VSCODE_EXTENSIONS = "/opt/code/extensions";
-    GRIMBLAST_EDITOR = "swappy";
-    NOTIFICATION_TIMEOUT = "5"; # in seconds
-    QT_QPA_PLATFORM = "wayland;xcb";
-    QT_QPA_PLATFORMTHEME = "adwaita";
-    QT_STYLE_OVERRIDE = "adwaita-dark";
+    # NIXOS_OZONE_WL = "1";
+    # VSCODE_EXTENSIONS = "/opt/code/extensions";
+    # GRIMBLAST_EDITOR = "swappy";
+    # NOTIFICATION_TIMEOUT = "5"; # in seconds
+    # TODO: restore if QT apps don't follow theme
+    # QT_QPA_PLATFORM = "wayland;xcb";
+    # QT_QPA_PLATFORMTHEME = "adwaita";
+    # QT_STYLE_OVERRIDE = "adwaita-dark";
     # For nautilus to show media information
     GST_PLUGIN_SYSTEM_PATH_1_0 = lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" (with pkgs.gst_all_1; [
       gst-plugins-good
