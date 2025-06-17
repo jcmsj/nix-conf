@@ -28,8 +28,11 @@
       fsType = "ntfs3";
       options = [ "rw" "uid=1000" "nofail" ];
     };
-  
-  
+  fileSystems."/media/windows" =
+    { device = "/dev/disk/by-uuid/982834552834351A";
+      fsType = "ntfs3";
+      options = [ "ro" "uid=1000" "nofail" ];
+    };
   
   swapDevices = [{
     device = "/swapfile";
