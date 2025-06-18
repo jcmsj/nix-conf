@@ -2,6 +2,7 @@
   description = "Nixos flake configuration";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";  
+    niri.url = "github:sodiboo/niri-flake";
     # hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     # hyprland-plugins = {
     #   url = "github:hyprwm/hyprland-plugins";
@@ -49,7 +50,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = inputs@{ self, nixpkgs, home-manager, auto-cpufreq,... }:
+  outputs = inputs@{ self, nixpkgs, home-manager, auto-cpufreq,niri,... }:
     let
       username = "jcsan";
       system = "x86_64-linux";

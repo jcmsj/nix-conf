@@ -24,7 +24,7 @@ in
       # ./gaming.nix
       # ./syncthing.nix
       ./docker.nix
-      # ./bluetooth.nix
+      ./bluetooth.nix
     ];
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
@@ -47,19 +47,10 @@ in
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
 
-  # Gnome
-  # Enable the X11 windowing system.
-  services.enable = true;
-
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xkb = {
-    layout = "us";
-    variant = "";
-  };
+  # services.desktopManager.gnome.enable = true;
+  security.polkit.enable = true;
 
   # Automounting external drives
   services.gvfs.enable = true;
@@ -138,10 +129,15 @@ in
     hunspell
     hunspellDicts.en_US
     hyphen
-
+    caprine
     # osu-lazer-bin # app image ver w/ online functionality
     # patchelfUnstable
     # mullvad-vpn
+    # Niri stuff
+    waybar
+    fuzzel
+    mako
+
   ];
   programs.firefox.enable = true;
 
@@ -162,6 +158,10 @@ in
   #   # don't shutdown when power button is short-pressed
   #   HandlePowerKey=ignore
   # '';
+
+  programs.niri = {
+    enable = true;
+  };
 
   programs.direnv.enable = true;
   nixpkgs.overlays = [

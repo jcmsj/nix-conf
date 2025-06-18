@@ -9,6 +9,7 @@
       source-serif-pro
       noto-fonts-cjk-sans
       noto-fonts-emoji
+      nerd-fonts.symbols-only
     ];
     fontconfig = {
       enable = true;

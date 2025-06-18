@@ -22,6 +22,10 @@
     enable = true;
     # package = pkgs.mesa.drivers;
     extraPackages = with pkgs; [ 
+      # https://nixos.wiki/wiki/Intel_Graphics
+      vpl-gpu-rt
+
+  # https://nixos.wiki/wiki/Accelerated_Video_Playback
       intel-media-driver   # LIBVA_DRIVER_NAME=iHD
       intel-ocl 
       intel-vaapi-driver # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)

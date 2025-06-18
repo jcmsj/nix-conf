@@ -17,7 +17,8 @@
     # If cursor becomes invisible
     # WLR_NO_HARDWARE_CURSORS = "1";
     PNPM_HOME = "$HOME/.pnpm";
-    # NIXOS_OZONE_WL = "1";
+    NIXOS_OZONE_WL = "1";
+    ELECTRON_OZONE_PLATFORM_HINT = "auto";
     # VSCODE_EXTENSIONS = "/opt/code/extensions";
     # GRIMBLAST_EDITOR = "swappy";
     # NOTIFICATION_TIMEOUT = "5"; # in seconds
