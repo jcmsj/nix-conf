@@ -3,6 +3,7 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";  
     niri.url = "github:sodiboo/niri-flake";
+    swww.url = "github:LGFae/swww";
     # hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     # hyprland-plugins = {
     #   url = "github:hyprwm/hyprland-plugins";

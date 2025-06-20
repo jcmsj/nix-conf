@@ -137,8 +137,25 @@ in
     waybar
     fuzzel
     mako
+    lenovo-legion
+    linuxKernel.packages.linux_latest_libre.lenovo-legion-module
+    # latest kernel
 
+    gnome-system-monitor
+    nautilus
+    cheese
+    simple-scan
+    gnome-text-editor
+    gnome-clocks
+    gnome-calendar
+    gnome-online-accounts
+    gnome-online-accounts-gtk
+    gnome-decoder
+    gnome-calculator
+    gnome-sound-recorder
+    swww
   ];
+
   programs.firefox.enable = true;
 
   # Enable CUPS to print documents.
@@ -174,6 +191,6 @@ in
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "23.11"; # Did you read the comment?
+  system.stateVersion = "25.05"; # Did you read the comment?
 }
  
