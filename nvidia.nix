@@ -40,8 +40,11 @@
     modesetting.enable = true;
     open = false;
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.beta;
     powerManagement.enable = true;
+    # Fine-grained power management. Turns off GPU when not in use.
+    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
+    # powerManagement.finegrained = true;
     prime = {
       sync.enable = false;
       offload = {
@@ -70,9 +73,6 @@
             enableOffloadCmd = lib.mkForce false;
           };
         };
-      };
-      environment.sessionVariables = {
-        # AQ_DRM_DEVICES = lib.mkForce "$HOME/.config/hypr/nvidia";
       };
       # blacklist intel gpu driver
       boot.kernelParams = [ "module_blacklist=i915" ];

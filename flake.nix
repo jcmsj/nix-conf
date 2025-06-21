@@ -2,40 +2,24 @@
   description = "Nixos flake configuration";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";  
-    niri.url = "github:sodiboo/niri-flake";
-    swww.url = "github:LGFae/swww";
-    # hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    # hyprland-plugins = {
-    #   url = "github:hyprwm/hyprland-plugins";
-    #   inputs.hyprland.follows = "hyprland";
-    # };
-    # hyprpaper = {
-    #   url = "github:hyprwm/hyprpaper";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # hyprlock = {
-    #   url = "github:hyprwm/hyprlock";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
-    # hyprland-contrib = {
-    #   url = "github:hyprwm/contrib";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    swww = {
+      url = "github:LGFae/swww";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # ags = {
-    #   url = "github:Aylur/ags";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     # rofi-vscode-mode = {
     #   url = "github:jcmsj/rofi-vscode-mode";
     #   inputs.nixpkgs.follows = "nixpkgs";
     # };
     # aagl.url = "github:ezKEa/aagl-gtk-on-nix";
     # aagl.inputs.nixpkgs.follows = "nixpkgs"; # Name of nixpkgs input you want to use
-
     # lanzaboote = {
     #   url = "github:nix-community/lanzaboote/v0.4.1";
 
@@ -44,6 +28,7 @@
     # };
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     auto-cpufreq = {

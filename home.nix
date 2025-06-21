@@ -66,7 +66,7 @@
           };
           handlerToAttr = list: handler: builtins.listToAttrs (builtins.map (mime: {name = mime; value = handler; }) list);
         in {
-          "application/pdf" = "zen-browser.desktop";
+          "application/pdf" = "zen-beta.desktop";
           "text/plain" = "org.gnome.TextEditor.desktop";
           "text/*" = "org.gnome.TextEditor.desktop";
           "inode/directory" = "org.gnome.Nautilus.desktop";

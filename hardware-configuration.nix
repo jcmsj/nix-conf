@@ -12,6 +12,7 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" "lenovo-legion-module" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelParams = [ "nvidia-modeset.hdmi_deepcolor=0" ]; # fix for can't go 120hz+
   boot.extraModulePackages = with config.boot.kernelPackages; [ lenovo-legion-module ];
 
   fileSystems."/" =

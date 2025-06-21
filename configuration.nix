@@ -98,7 +98,7 @@ in
     nixd
     nodejs_24
     pnpm-shim
-    (python311.withPackages (ps: with ps; [
+    (python312.withPackages (ps: with ps; [
       jupyter
       notebook
       matplotlib
@@ -107,6 +107,7 @@ in
       numpy
       memory-profiler
       xlrd # optional dep of pandas for xlsx
+      img2pdf
     ]))
     
     espeak
