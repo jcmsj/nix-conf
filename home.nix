@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, system,... }:
 {
   imports = [
     # inputs.ags.homeManagerModules.default
@@ -14,7 +14,7 @@
   # introduces backwards incompatible changes.
   #
   # Only change this value if doing a fresh install of NixOS
-  home.stateVersion = "24.11"; # Please read the comment before changing.
+  home.stateVersion = "25.05"; # Please read the comment before changing.
 
   home.packages = [
     # (pkgs.callPackage ./osu-lazer.nix {})
@@ -148,7 +148,6 @@
     history.size = 15000;
     history.path = "${config.home.homeDirectory}/zsh/history";
     initContent = ''
-      # pass
       bindkey '^H' backward-kill-word
     '';
   };
@@ -195,6 +194,35 @@
     };
   };
 
+  xdg.desktopEntries =
+    let
+      ZEN_PROFILE_DIR = "${config.home.homeDirectory}/.zen";
+      PROFILE_IDS = [
+        { id = "j5n30c02.grit"; name = "Grit"; }
+        { id = "vd47b3qr.Work"; name = "Work"; }
+      ];
+      ZEN_EXE = "${inputs.zen-browser.packages.${system}.beta}/bin/zen-beta";
+      mkEntry = profile: {
+        name = "zen:${profile.name} Profile";
+        exec = "${ZEN_EXE} --profile ${ZEN_PROFILE_DIR}/${profile.id}";
+        icon = "zen-beta";
+        type = "Application";
+        categories = [ "Network" "WebBrowser" ];
+        startupNotify = true;
+        mimeType = [
+          "text/html" "text/xml" "application/xhtml+xml"
+          "application/xml" "application/rss+xml" "application/atom+xml"
+        ];
+      };
+    in
+      builtins.listToAttrs (
+        builtins.map
+          (profile: {
+            name = profile.name;
+            value = mkEntry profile;
+          })
+          PROFILE_IDS
+      );
   # programs.rofi = {
   #   enable = true;
   #   package = pkgs.rofi-wayland.override {

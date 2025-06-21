@@ -81,7 +81,7 @@
               home-manager.users.${username} = import ./home.nix;
               home-manager.backupFileExtension = "backup";
               # Optionally, use home-manager.extraSpecialArgs to pass
-              home-manager.extraSpecialArgs = { inherit inputs; };
+              home-manager.extraSpecialArgs = { inherit inputs; inherit system; };
               # arguments to home.nix
             }
             # aagl.nixosModules.default

@@ -154,6 +154,7 @@ in
     gnome-calculator
     gnome-sound-recorder
     swww
+    brightnessctl
   ];
 
   programs.firefox.enable = true;

@@ -74,7 +74,7 @@
   #   tempBat = 80;
   # };
 
-  # services.upower.enable = true; # needed by ags
+  services.upower.enable = true; # needed by ags
   environment.systemPackages = with pkgs; [
     powertop
     # undervolt
