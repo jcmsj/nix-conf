@@ -1,4 +1,15 @@
 { inputs, config, pkgs, system,... }:
+let 
+  SHARED_DRIVE = "/media/kozue";
+  userDirs = 
+      {
+        documents = "${SHARED_DRIVE}/docs";
+        videos = "${SHARED_DRIVE}/Videos";
+        music = "${SHARED_DRIVE}/music";
+        pictures = "${SHARED_DRIVE}/Pictures";
+        download = "${SHARED_DRIVE}/downloads";
+      };
+in
 {
   imports = [
     # inputs.ags.homeManagerModules.default
@@ -44,14 +55,9 @@
   services.mpd-mpris.enable = true;
   xdg = {
     enable = true;
-    # userDirs = {
-    #   enable = true;
-    #   documents = "/media/sorairo/Docs";
-    #   videos = "/media/sorairo/Videos";
-    #   music = "/media/sorairo/Music";
-    #   pictures = "/media/sorairo/Pics";
-    #   download = "/media/sorairo/Downloads";
-    # };
+    userDirs = {
+      enable = true;
+    } // userDirs;
 
     mimeApps = {
       enable = true;
@@ -92,12 +98,15 @@
     };
 
     gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
-    # gtk3.bookmarks = [
-    #   "file:///media/sorairo/Light%20Novels"
-    #   "file://${config.home.homeDirectory}/code"
-    #   "file://${config.home.homeDirectory}/.config/nix-conf"
-    #   "file:///media/sorairo/School"
-    # ];
+    gtk3.bookmarks = 
+    # <file://> + <xdg dir path>
+      builtins.map (dir: "file://${userDirs.${dir}}") (builtins.attrNames userDirs) 
+      ++ [
+        # add others here
+        "file://${SHARED_DRIVE}/sync"
+        "file://${SHARED_DRIVE}/Light%20Novels"
+        "file://${SHARED_DRIVE}/anime"
+      ];
   };
   # Prefer dark theme
   # dconf = {

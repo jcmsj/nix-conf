@@ -154,6 +154,7 @@ in
     gnome-decoder
     gnome-calculator
     gnome-sound-recorder
+    gnome-control-center
     swww
     brightnessctl
   ];
