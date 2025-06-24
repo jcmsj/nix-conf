@@ -220,7 +220,7 @@ in
         startupNotify = true;
         mimeType = [
           "text/html" "text/xml" "application/xhtml+xml"
-          "application/xml" "application/rss+xml" "application/atom+xml"
+          "application/xml" "application/rss+xml" "application/atom+xml" "application/pdf"
         ];
       };
     in

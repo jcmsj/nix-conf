@@ -10,7 +10,7 @@
     # extraHosts = ''
     #   104.16.26.34 registry.npmjs.org
     # '';
-    # nameservers = [ "1.1.1.1" "8.8.8.8" ];
+    nameservers = [ "1.1.1.1" "1.0.0.1" ];
   };
   # To be able to use wpa_gui or wpa_cli as user put the following in your
   # networking.wireless.userControlled.enable = true;

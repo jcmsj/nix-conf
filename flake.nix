@@ -31,12 +31,12 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    auto-cpufreq = {
-      url = "github:AdnanHodzic/auto-cpufreq";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # auto-cpufreq = {
+    #   url = "github:AdnanHodzic/auto-cpufreq";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
-  outputs = inputs@{ self, nixpkgs, home-manager, auto-cpufreq,niri,... }:
+  outputs = inputs@{ self, nixpkgs, home-manager,... }:
     let
       username = "jcsan";
       system = "x86_64-linux";
@@ -71,7 +71,7 @@
             }
             # aagl.nixosModules.default
             # lanzaboote.nixosModules.lanzaboote
-              auto-cpufreq.nixosModules.default
+              # auto-cpufreq.nixosModules.default
           ];
         };
       };

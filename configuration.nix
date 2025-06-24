@@ -23,7 +23,7 @@ in
       ./sound.nix
       # ./gaming.nix
       # ./syncthing.nix
-      ./docker.nix
+      # ./docker.nix
       ./bluetooth.nix
     ];
   nix.settings = {
@@ -118,7 +118,7 @@ in
     discord
     speechd
     nixpkgs-fmt
-    # google-chrome
+    google-chrome
     celluloid
     # caprine-bin
 
