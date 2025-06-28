@@ -14,10 +14,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # rofi-vscode-mode = {
-    #   url = "github:jcmsj/rofi-vscode-mode";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    rofi-vscode-mode = {
+      url = "github:jcmsj/rofi-vscode-mode";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # aagl.url = "github:ezKEa/aagl-gtk-on-nix";
     # aagl.inputs.nixpkgs.follows = "nixpkgs"; # Name of nixpkgs input you want to use
     # lanzaboote = {
@@ -56,6 +56,7 @@
           specialArgs = {
             inherit pkgs;
             inherit inputs; # will let de.nix be able to use the hyprland flake.
+            inherit system;
           };
           modules = [
             ./configuration.nix

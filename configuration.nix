@@ -23,24 +23,19 @@ in
       ./sound.nix
       # ./gaming.nix
       # ./syncthing.nix
-      # ./docker.nix
+      ./docker.nix
       ./bluetooth.nix
     ];
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;
-    # Cachix for hyprland - https://wiki.hyprland.org/Nix/Cachix/
     # cachic for devenv - https://devenv.sh/guides/using-with-flakes/#modifying-your-flakenix-file
     substituters = [
-      # "https://hyprland.cachix.org"
       "https://devenv.cachix.org"
-      # "https://ezkea.cachix.org"
       # "https://cuda-maintainers.cachix.org"
     ];
     trusted-public-keys = [
-      # "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
-      # "ezkea.cachix.org-1:ioBmUbJTZIKsHmWWXPe1FSFbeVe+afhfgqgTSNd34eI="
       # "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
     ];
   };
@@ -59,7 +54,7 @@ in
   users.users.jcsan = {
     isNormalUser = true;
     description = "Jean Carlo San Juan";
-    extraGroups = [ "networkmanager" "wheel" "adbuser" "docker" ];
+    extraGroups = [ "networkmanager" "wheel" "adbuser" "docker" "input" ];
     packages = with pkgs; [
 
     ];
@@ -74,7 +69,8 @@ in
     libnotify
     reisen
     # App launcher
-    # inputs.rofi-vscode-mode.packages.${system}.default
+    rofi-wayland
+    inputs.rofi-vscode-mode.packages.${system}.default
     # networkmanagerapplet
     # nerdfonts
     # bar
@@ -108,6 +104,7 @@ in
       memory-profiler
       xlrd # optional dep of pandas for xlsx
       img2pdf
+      openai-whisper
     ]))
     
     espeak
@@ -140,6 +137,7 @@ in
     mako
     lenovo-legion
     linuxKernel.packages.linux_latest_libre.lenovo-legion-module
+    esbuild
     # latest kernel
 
     gnome-system-monitor
@@ -157,6 +155,11 @@ in
     gnome-control-center
     swww
     brightnessctl
+    xwayland-satellite
+
+    aws-sam-cli
+    awscli2
+    qemu
   ];
 
   programs.firefox.enable = true;
