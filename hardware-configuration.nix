@@ -14,7 +14,6 @@
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = [ "nvidia-modeset.hdmi_deepcolor=0" ]; # fix for can't go 120hz+
   boot.extraModulePackages = with config.boot.kernelPackages; [ lenovo-legion-module ];
-
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/179ad3a0-940b-419b-bed1-9ab772380ce0";
       fsType = "ext4";

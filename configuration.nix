@@ -21,7 +21,7 @@ in
       ./shell-environment.nix
       ./network.nix
       ./sound.nix
-      # ./gaming.nix
+      ./gaming.nix
       # ./syncthing.nix
       ./docker.nix
       ./bluetooth.nix
@@ -49,6 +49,7 @@ in
 
   # Automounting external drives
   services.gvfs.enable = true;
+  services.udev.packages = [pkgs.libmtp.out];
   services.udisks2.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jcsan = {
@@ -92,7 +93,7 @@ in
 
     ### Language Runtimes & Managers
     nixd
-    nodejs_24
+    nodejs_22
     pnpm-shim
     (python312.withPackages (ps: with ps; [
       jupyter
@@ -119,7 +120,7 @@ in
     celluloid
     # caprine-bin
 
-    # qbittorrent
+    qbittorrent
     ffmpeg-full
     yt-dlp
 
@@ -132,11 +133,10 @@ in
     # patchelfUnstable
     # mullvad-vpn
     # Niri stuff
-    waybar
     fuzzel
     mako
     lenovo-legion
-    linuxKernel.packages.linux_latest_libre.lenovo-legion-module
+    linuxPackages_latest.lenovo-legion-module
     esbuild
     # latest kernel
 
@@ -153,6 +153,8 @@ in
     gnome-calculator
     gnome-sound-recorder
     gnome-control-center
+    gnome-font-viewer
+
     swww
     brightnessctl
     xwayland-satellite
@@ -160,6 +162,7 @@ in
     aws-sam-cli
     awscli2
     qemu
+    inputs.agsConf.packages.${system}.default
   ];
 
   programs.firefox.enable = true;

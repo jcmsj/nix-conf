@@ -80,23 +80,31 @@ in
           // (handlerToAttr imageHandler.items imageHandler.handler);
     };
   };
+
   home.pointerCursor = {
+    enable = true;
+    name = "BreezeX-RosePine-Linux";
+    package = pkgs.rose-pine-cursor;
+    size = 22;
     gtk.enable = true;
-    package = pkgs.bibata-cursors;
-    name = "Bibata-Modern-Classic";
-    size = 24;
+    x11.enable = true;
   };
   gtk = {
     enable = true;
     theme = {
-      package = pkgs.adw-gtk3;
-      name = "adw-gtk3-dark";
+      package = pkgs.rose-pine-gtk-theme;
+      name = "rose-pine-moon";
     };
     iconTheme = {
-      name = "Adwaita";
-      package = pkgs.adwaita-icon-theme;
+      name = "rose-pine-moon";
+      package = pkgs.rose-pine-icon-theme;
     };
-
+    cursorTheme = {
+      name = "BreezeX-RosePine-Linux";
+      package = pkgs.rose-pine-cursor;
+      size = 22;
+    };
+    
     gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
     gtk3.bookmarks = 
     # <file://> + <xdg dir path>
@@ -185,14 +193,7 @@ in
     enable = true;
     plugins = [ pkgs.obs-studio-plugins.wlrobs ];
   };
-  # programs.ags = {
-  #   enable = true;
-  #   extraPackages = with pkgs; [
-  #     gtksourceview
-  #     webkitgtk
-  #     accountsservice
-  #   ];
-  # };
+
   programs.zen-browser = {
     enable = true;
     nativeMessagingHosts = [pkgs.firefoxpwa];

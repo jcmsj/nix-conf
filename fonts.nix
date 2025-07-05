@@ -10,6 +10,7 @@
       noto-fonts-cjk-sans
       noto-fonts-emoji
       nerd-fonts.symbols-only
+      font-awesome
     ];
     fontconfig = {
       enable = true;
