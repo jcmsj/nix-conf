@@ -133,7 +133,6 @@ in
     # patchelfUnstable
     # mullvad-vpn
     # Niri stuff
-    fuzzel
     mako
     lenovo-legion
     linuxPackages_latest.lenovo-legion-module
@@ -158,6 +157,9 @@ in
     swww
     brightnessctl
     xwayland-satellite
+    cliphist
+    wl-clipboard
+    xdg-utils
 
     aws-sam-cli
     awscli2
