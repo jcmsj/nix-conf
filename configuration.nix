@@ -26,18 +26,11 @@ in
       ./docker.nix
       ./bluetooth.nix
     ];
+
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     auto-optimise-store = true;
     # cachic for devenv - https://devenv.sh/guides/using-with-flakes/#modifying-your-flakenix-file
-    substituters = [
-      "https://devenv.cachix.org"
-      # "https://cuda-maintainers.cachix.org"
-    ];
-    trusted-public-keys = [
-      "devenv.cachix.org-1:w1cLUi8dv3hnoSPGAuibQv+f9TZLr6cv/Hm9XgU50cw="
-      # "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
-    ];
   };
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
@@ -69,10 +62,9 @@ in
     # My scripts
     libnotify
     reisen
-    # App launcher
-    rofi-wayland
     inputs.rofi-vscode-mode.packages.${system}.default
-    # networkmanagerapplet
+    rofi-network-manager
+    niriswitcher
     # nerdfonts
     # bar
     vim
@@ -96,6 +88,7 @@ in
     nodejs_22
     pnpm-shim
     (python312.withPackages (ps: with ps; [
+      torch
       jupyter
       notebook
       matplotlib
@@ -107,7 +100,7 @@ in
       img2pdf
       openai-whisper
     ]))
-    
+ 
     espeak
     krita
     fastfetch
@@ -153,7 +146,7 @@ in
     gnome-sound-recorder
     gnome-control-center
     gnome-font-viewer
-
+    networkmanagerapplet
     swww
     brightnessctl
     xwayland-satellite
@@ -165,6 +158,12 @@ in
     awscli2
     qemu
     inputs.agsConf.packages.${system}.default
+    lutris
+    protonup-qt
+    yarn
+    # cuda packages needed by openai-whisper
+    cudaPackages_12_8.cudatoolkit
+    # cudaPackages_12_8.cudnn
   ];
 
   programs.firefox.enable = true;

@@ -1,6 +1,8 @@
-{ inputs, config, pkgs, system,... }:
+{ inputs, config, pkgs, system, lib,... }:
 let 
   SHARED_DRIVE = "/media/kozue";
+  username = "jcsan";
+  homeDirectory = "/home/${username}";
   userDirs = 
       {
         documents = "${SHARED_DRIVE}/docs";
@@ -18,8 +20,8 @@ in
   ];
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "jcsan";
-  home.homeDirectory = "/home/jcsan";
+  home.username = username;
+  home.homeDirectory = homeDirectory;
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
   # introduces backwards incompatible changes.
@@ -50,7 +52,7 @@ in
   };
   home.sessionPath = [
     # for pnpm to work
-    "$HOME/.pnpm"
+    "${homeDirectory}/.pnpm"
   ];
   services.mpd-mpris.enable = true;
   xdg = {
@@ -114,6 +116,7 @@ in
         "file://${SHARED_DRIVE}/sync"
         "file://${SHARED_DRIVE}/Light%20Novels"
         "file://${SHARED_DRIVE}/anime"
+        "file://${homeDirectory}/code"
       ];
   };
   # Prefer dark theme
@@ -190,6 +193,9 @@ in
     };
   };
   programs.obs-studio = {
+    package = (pkgs.obs-studio.override {
+      cudaSupport = true;
+    });
     enable = true;
     plugins = [ pkgs.obs-studio-plugins.wlrobs ];
   };
@@ -233,16 +239,20 @@ in
           })
           PROFILE_IDS
       );
-  # programs.rofi = {
-  #   enable = true;
-  #   package = pkgs.rofi-wayland.override {
-  #     plugins = [
-  #       inputs.rofi-vscode-mode.packages.${pkgs.stdenv.hostPlatform.system}.default
-  #     ];
-  #   };
-  #   # modi: 
-  #   extraConfig = {
-  #     modi = "drun,run,window,ssh";
-  #   };
-  # };
+  programs.rofi = {
+    enable = true;
+    package = pkgs.rofi-wayland;
+    # still broken
+    # extraConfig =
+    #   {
+    #     modi = (lib.concatStringsSep "," [
+    #       "run"
+    #       "drun"
+    #       "window"
+    #       "ssh"
+    #       "emoji"
+    #       "vscode-recent:${inputs.rofi-vscode-mode.packages.${system}.default}/bin/vscode-recent"
+    #     ] );
+    #   };
+  };
 }
