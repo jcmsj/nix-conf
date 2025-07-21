@@ -9,6 +9,8 @@
     py = "python";
     hm = "home-manager";
     remake = "reisen remake";
+    zd = "nix develop -c $SHELL";
+    dev = "npm run dev";
   };
   environment.localBinInPath = true;
   environment.sessionVariables = rec {
@@ -19,6 +21,7 @@
     PNPM_HOME = "$HOME/.pnpm";
     NIXOS_OZONE_WL = "1";
     ELECTRON_OZONE_PLATFORM_HINT = "auto";
+    OLLAMA_MODELS="/media/kozue/llm_models";
     # VSCODE_EXTENSIONS = "/opt/code/extensions";
     # GRIMBLAST_EDITOR = "swappy";
     # NOTIFICATION_TIMEOUT = "5"; # in seconds

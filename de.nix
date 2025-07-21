@@ -42,6 +42,13 @@
   };
   security = {
     pam.services.greetd.enableGnomeKeyring = true;
+
+    /**
+      Note that PAM must be configured to enable swaylock to perform authentication. The package installed through home-manager will not be able to unlock the session without this configuration.
+
+      On NixOS, this is by default enabled with the sway module, but for other compositors it can currently be enabled using:
+     */
+    pam.services.swaylock = { };
   };
 
   environment.systemPackages = with pkgs; [

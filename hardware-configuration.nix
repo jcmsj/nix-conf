@@ -12,7 +12,17 @@
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" "lenovo-legion-module" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelParams = [ "nvidia-modeset.hdmi_deepcolor=0" ]; # fix for can't go 120hz+
+  boot.kernelParams = [ 
+    # fix: can't go 120hz+
+    "nvidia-modeset.hdmi_deepcolor=0" 
+    # fix: screen flickering when on iGPU
+    "i915.enable_psr=0"
+  ]; 
+
+  # fix: hivernation issues NVIDIA
+  boot.extraModprobeConfig = ''
+    options nvidia_modeset vblank_sem_control=0
+  '';
   boot.extraModulePackages = with config.boot.kernelPackages; [ lenovo-legion-module ];
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/179ad3a0-940b-419b-bed1-9ab772380ce0";

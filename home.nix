@@ -1,16 +1,16 @@
-{ inputs, config, pkgs, system, lib,... }:
-let 
+{ inputs, config, pkgs, system, lib, ... }:
+let
   SHARED_DRIVE = "/media/kozue";
   username = "jcsan";
   homeDirectory = "/home/${username}";
-  userDirs = 
-      {
-        documents = "${SHARED_DRIVE}/docs";
-        videos = "${SHARED_DRIVE}/Videos";
-        music = "${SHARED_DRIVE}/music";
-        pictures = "${SHARED_DRIVE}/Pictures";
-        download = "${SHARED_DRIVE}/downloads";
-      };
+  userDirs =
+    {
+      documents = "${SHARED_DRIVE}/docs";
+      videos = "${SHARED_DRIVE}/Videos";
+      music = "${SHARED_DRIVE}/music";
+      pictures = "${SHARED_DRIVE}/Pictures";
+      download = "${SHARED_DRIVE}/downloads";
+    };
 in
 {
   imports = [
@@ -64,22 +64,23 @@ in
     mimeApps = {
       enable = true;
       defaultApplications =
-        let 
+        let
           video = [ "video/*" "video/mp4" "video/x-matroska" "video/mkv" "video/webm" "video/avi" "video/ogg" ];
-          audio = ["audio/*"  "audio/mp3" "audio/flac" "audio/ogg" "audio/wav" "audio/m4a" ];
+          audio = [ "audio/*" "audio/mp3" "audio/flac" "audio/ogg" "audio/wav" "audio/m4a" ];
           players = [ "vlc.desktop" "org.gnome.celluloid.desktop" ];
           imageHandler = {
-            items = ["image/*" "image/webp" "image/png" "image/jpeg" "image/gif" "image/jpg"];
+            items = [ "image/*" "image/webp" "image/png" "image/jpeg" "image/gif" "image/jpg" ];
             handler = "org.gnome.gThumb.desktop";
           };
-          handlerToAttr = list: handler: builtins.listToAttrs (builtins.map (mime: {name = mime; value = handler; }) list);
-        in {
+          handlerToAttr = list: handler: builtins.listToAttrs (builtins.map (mime: { name = mime; value = handler; }) list);
+        in
+        {
           "application/pdf" = "zen-beta.desktop";
           "text/plain" = "org.gnome.TextEditor.desktop";
           "text/*" = "org.gnome.TextEditor.desktop";
           "inode/directory" = "org.gnome.Nautilus.desktop";
-        } // (handlerToAttr (video ++ audio) players) 
-          // (handlerToAttr imageHandler.items imageHandler.handler);
+        } // (handlerToAttr (video ++ audio) players)
+        // (handlerToAttr imageHandler.items imageHandler.handler);
     };
   };
 
@@ -106,11 +107,11 @@ in
       package = pkgs.rose-pine-cursor;
       size = 22;
     };
-    
+
     gtk3.extraConfig.gtk-application-prefer-dark-theme = 1;
-    gtk3.bookmarks = 
-    # <file://> + <xdg dir path>
-      builtins.map (dir: "file://${userDirs.${dir}}") (builtins.attrNames userDirs) 
+    gtk3.bookmarks =
+      # <file://> + <xdg dir path>
+      builtins.map (dir: "file://${userDirs.${dir}}") (builtins.attrNames userDirs)
       ++ [
         # add others here
         "file://${SHARED_DRIVE}/sync"
@@ -202,7 +203,7 @@ in
 
   programs.zen-browser = {
     enable = true;
-    nativeMessagingHosts = [pkgs.firefoxpwa];
+    nativeMessagingHosts = [ pkgs.firefoxpwa ];
     policies = {
       DisableAppUpdate = true;
       DisableTelemetry = true;
@@ -226,19 +227,24 @@ in
         categories = [ "Network" "WebBrowser" ];
         startupNotify = true;
         mimeType = [
-          "text/html" "text/xml" "application/xhtml+xml"
-          "application/xml" "application/rss+xml" "application/atom+xml" "application/pdf"
+          "text/html"
+          "text/xml"
+          "application/xhtml+xml"
+          "application/xml"
+          "application/rss+xml"
+          "application/atom+xml"
+          "application/pdf"
         ];
       };
     in
-      builtins.listToAttrs (
-        builtins.map
-          (profile: {
-            name = profile.name;
-            value = mkEntry profile;
-          })
-          PROFILE_IDS
-      );
+    builtins.listToAttrs (
+      builtins.map
+        (profile: {
+          name = profile.name;
+          value = mkEntry profile;
+        })
+        PROFILE_IDS
+    );
   programs.rofi = {
     enable = true;
     package = pkgs.rofi-wayland;
@@ -254,5 +260,102 @@ in
     #       "vscode-recent:${inputs.rofi-vscode-mode.packages.${system}.default}/bin/vscode-recent"
     #     ] );
     #   };
+  };
+  services.swayidle = {
+    enable = true;
+    events = [
+      { event = "before-sleep"; command = "${pkgs.swaylock-effects}/bin/swaylock -fF"; }
+      { event = "lock"; command = "lock"; }
+    ];
+    timeouts = [
+      { timeout = 60; command = "${pkgs.swaylock-effects}/bin/swaylock -fF"; }
+      { timeout = 90; command = "${pkgs.systemd}/bin/systemctl suspend"; }
+    ];
+  };
+
+  programs.swaylock = {
+    enable = true;
+    package = pkgs.swaylock-effects;
+    settings = {
+      # Background and image settings
+      color = "1a0a1a"; # Deep dark purple/black background
+      image = "/home/jcsan/Wallpapers/AyaMaruyama.png";
+      scaling = "fill"; # Image scaling mode: stretch, fill, fit, center, tile, solid_color
+      
+      # Effects to enhance the magical/fantasy aesthetic
+      effect-blur = "7x5"; # Blur the image (radius x times)
+      effect-vignette = "0.3:0.7"; # Apply vignette effect (base:factor, 0-1)
+      
+      # Clock and indicator settings
+      clock = true; # Show time and date
+      timestr = "%I:%M:%S %p"; # 12-hour format with AM/PM
+      datestr = "%B %d, %Y"; # Full date format
+      
+      # Indicator appearance and behavior
+      indicator = true; # Always show the indicator
+      indicator-radius = 120; # Sets the indicator radius
+      indicator-thickness = 8; # Sets the indicator thickness
+      indicator-caps-lock = true; # Show Caps Lock state on indicator
+      indicator-idle-visible = true; # Show indicator even when idle
+      
+      # Additional indicator settings
+      show-keyboard-layout = true; # Display current xkb layout while typing
+      show-failed-attempts = true; # Show count of failed attempts
+      
+      # Ring colors (outer circle of indicator)
+      ring-color = "e91e63"; # Vibrant pink for normal state
+      ring-ver-color = "9c27b0"; # Purple when verifying password
+      ring-wrong-color = "f44336"; # Red for wrong password
+      ring-clear-color = "673ab7"; # Deep purple when cleared
+      ring-caps-lock-color = "ff9800"; # Orange when Caps Lock is active
+      
+      # Inside colors (inner circle of indicator)
+      inside-color = "2a1a2aee"; # Darker purple, more opaque
+      inside-ver-color = "9c27b0ee"; # Purple with high opacity for verification
+      inside-wrong-color = "f44336ee"; # Red with high opacity for wrong password
+      inside-clear-color = "673ab7ee"; # Deep purple with high opacity for clear
+      inside-caps-lock-color = "ff9800ee"; # Orange when Caps Lock is active
+      
+      # Line colors (between inside and ring)
+      line-color = "e91e6366"; # Pink separator, semi-transparent
+      line-ver-color = "9c27b0aa"; # Purple for verification
+      line-wrong-color = "f44336aa"; # Red for wrong password
+      line-clear-color = "673ab7aa"; # Deep purple for clear
+      line-caps-lock-color = "ff9800aa"; # Orange when Caps Lock is active
+      
+      # Text colors
+      text-color = "ffffff"; # White text for normal state
+      text-ver-color = "ffffff"; # White verification text
+      text-wrong-color = "ffffff"; # White wrong password text
+      text-clear-color = "ffffff"; # White clear text
+      text-caps-lock-color = "ffffff"; # White text when Caps Lock is active
+      
+      # Key highlight colors
+      key-hl-color = "ff6ec7"; # Bright pink highlight for key presses
+      caps-lock-key-hl-color = "ffc107"; # Yellow highlight when Caps Lock is active
+      bs-hl-color = "f44336"; # Red highlight for backspace
+      caps-lock-bs-hl-color = "ff5722"; # Orange-red backspace when Caps Lock is active
+      
+      # Separator color
+      separator-color = "e91e6355"; # Light pink separator
+      
+      # Font settings
+      font = "Iosevka"; # Match your terminal font
+      font-size = 22; # Fixed font size for indicator text
+      
+      # Layout text colors (for keyboard layout display)
+      layout-text-color = "ffffff"; # White layout text
+      layout-bg-color = "00000088"; # Semi-transparent background
+      layout-border-color = "e91e63"; # Pink border
+      
+      # Animation and behavior
+      fade-in = 0.3; # Smooth fade-in effect
+      grace = 3; # 3 seconds grace period
+      grace-no-mouse = true; # Require key press, not mouse during grace
+      ignore-empty-password = true; # Don't validate empty passwords
+      
+      # Disable caps lock text (we use indicator instead)
+      disable-caps-lock-text = true;
+    };
   };
 }

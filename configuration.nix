@@ -85,7 +85,8 @@ in
 
     ### Language Runtimes & Managers
     nixd
-    nodejs_22
+    nil
+    nodejs_24
     pnpm-shim
     (python312.withPackages (ps: with ps; [
       torch
@@ -164,6 +165,9 @@ in
     # cuda packages needed by openai-whisper
     cudaPackages_12_8.cudatoolkit
     # cudaPackages_12_8.cudnn
+   (pkgs.ollama.override { 
+      acceleration = "cuda";
+    })
   ];
 
   programs.firefox.enable = true;
@@ -185,6 +189,8 @@ in
   #   # don't shutdown when power button is short-pressed
   #   HandlePowerKey=ignore
   # '';
+
+  
 
   programs.niri = {
     enable = true;

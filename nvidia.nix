@@ -44,7 +44,7 @@
     powerManagement.enable = true;
     # Fine-grained power management. Turns off GPU when not in use.
     # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    # powerManagement.finegrained = true;
+    powerManagement.finegrained = true;
     prime = {
       sync.enable = false;
       offload = {
@@ -58,25 +58,25 @@
     };
   };
   environment.sessionVariables = {
-    # AQ_DRM_DEVICES = "$HOME/.config/hypr/intel:$HOME/.config/hypr/nvidia";
+
   };
   # External display
   specialisation = {
-    optimus-prime.configuration = {
-      system.nixos.tags = [ "OPTIMUS-PRIME" ];
-      hardware.nvidia = {
-        prime = {
-          # reverseSync.enable = lib.mkForce true; #does not work w/ hyprland yet
-          sync.enable = lib.mkForce true;
-          offload = {
-            enable = lib.mkForce false;
-            enableOffloadCmd = lib.mkForce false;
-          };
-        };
-      };
-      # blacklist intel gpu driver
-      boot.kernelParams = [ "module_blacklist=i915" ];
-    };
+    # optimus-prime.configuration = {
+    #   system.nixos.tags = [ "OPTIMUS-PRIME" ];
+    #   hardware.nvidia = {
+    #     prime = {
+    #       # reverseSync.enable = lib.mkForce true; #does not work w/ hyprland yet
+    #       sync.enable = lib.mkForce true;
+    #       offload = {
+    #         enable = lib.mkForce false;
+    #         enableOffloadCmd = lib.mkForce false;
+    #       };
+    #     };
+    #   };
+    #   # blacklist intel gpu driver
+    #   boot.kernelParams = [ "module_blacklist=i915" ];
+    # };
 
     intel-only.configuration = {
       system.nixos.tags = [ "INTEL-ONLY" ];
@@ -84,6 +84,7 @@
         blacklist nouveau
         options nouveau modeset=0
       '';
+
 
       services.udev.extraRules = ''
         # Remove NVIDIA USB xHCI Host Controller devices, if present
