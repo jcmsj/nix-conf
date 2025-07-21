@@ -168,6 +168,8 @@ in
    (pkgs.ollama.override { 
       acceleration = "cuda";
     })
+
+    rofi-network-manager
   ];
 
   programs.firefox.enable = true;
