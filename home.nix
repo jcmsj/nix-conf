@@ -268,8 +268,10 @@ in
       { event = "lock"; command = "lock"; }
     ];
     timeouts = [
-      { timeout = 60; command = "${pkgs.swaylock-effects}/bin/swaylock -fF"; }
-      { timeout = 90; command = "${pkgs.systemd}/bin/systemctl suspend"; }
+      # 5m lock
+      { timeout = 300; command = "${pkgs.swaylock-effects}/bin/swaylock -fF"; }
+      # 8m sleep
+      { timeout = 480; command = "${pkgs.systemd}/bin/systemctl suspend"; }
     ];
   };
 
