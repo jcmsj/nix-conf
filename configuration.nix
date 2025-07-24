@@ -23,6 +23,7 @@ in
       ./sound.nix
       ./gaming.nix
       # ./syncthing.nix
+      ./printers.nix
       ./docker.nix
       ./bluetooth.nix
     ];
@@ -42,7 +43,7 @@ in
 
   # Automounting external drives
   services.gvfs.enable = true;
-  services.udev.packages = [pkgs.libmtp.out];
+  services.udev.packages = [ pkgs.libmtp.out ];
   services.udisks2.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jcsan = {
@@ -101,7 +102,7 @@ in
       img2pdf
       openai-whisper
     ]))
- 
+
     espeak
     krita
     fastfetch
@@ -136,7 +137,6 @@ in
     gnome-system-monitor
     nautilus
     cheese
-    simple-scan
     gnome-text-editor
     gnome-clocks
     gnome-calendar
@@ -165,24 +165,16 @@ in
     # cuda packages needed by openai-whisper
     cudaPackages_12_8.cudatoolkit
     # cudaPackages_12_8.cudnn
-   (pkgs.ollama.override { 
+    (pkgs.ollama.override {
       acceleration = "cuda";
     })
 
     rofi-network-manager
+    drawio
   ];
 
   programs.firefox.enable = true;
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-  # services.printing.drivers = with pkgs; [ 
-  #   epson_201207w
-  #   gutenprint
-  #   gutenprintBin 
-  #   epson-escpr2
-  #   epson-escpr
-  # ];
   # For Piper to work
   services.ratbagd.enable = true;
   # programs.gamemode.enable = true;
@@ -191,8 +183,6 @@ in
   #   # don't shutdown when power button is short-pressed
   #   HandlePowerKey=ignore
   # '';
-
-  
 
   programs.niri = {
     enable = true;

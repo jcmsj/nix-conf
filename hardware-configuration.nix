@@ -20,9 +20,9 @@
   ]; 
 
   # fix: hivernation issues NVIDIA
-  boot.extraModprobeConfig = ''
-    options nvidia_modeset vblank_sem_control=0
-  '';
+  # boot.extraModprobeConfig = ''
+    # options nvidia_modeset vblank_sem_control=0
+  # '';
   boot.extraModulePackages = with config.boot.kernelPackages; [ lenovo-legion-module ];
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/179ad3a0-940b-419b-bed1-9ab772380ce0";
