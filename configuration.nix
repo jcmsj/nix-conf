@@ -74,6 +74,7 @@ in
     piper
     ## System utils
     p7zip
+    peazip
     jq
     socat
     ## Development

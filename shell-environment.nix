@@ -7,6 +7,8 @@
     pn = "pnpm";
     pnx = "pnpm dlx";
     py = "python";
+    pull = "git pull";
+    push = "git push";
     hm = "home-manager";
     remake = "reisen remake";
     zd = "nix develop -c $SHELL";
