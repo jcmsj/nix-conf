@@ -26,6 +26,7 @@ in
       ./printers.nix
       ./docker.nix
       ./bluetooth.nix
+      ./razer.nix
     ];
 
   nix.settings = {
@@ -59,6 +60,7 @@ in
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   # Note: ./de.nix adds more pkgs
+
   environment.systemPackages = with pkgs; [
     # My scripts
     libnotify
@@ -75,7 +77,10 @@ in
     ## System utils
     p7zip
     peazip
+    localstack
+    zip
     jq
+    realesrgan-ncnn-vulkan
     socat
     ## Development
     ### Editors
