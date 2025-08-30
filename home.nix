@@ -70,7 +70,7 @@ in
           players = [ "vlc.desktop" "org.gnome.celluloid.desktop" ];
           imageHandler = {
             items = [ "image/*" "image/webp" "image/png" "image/jpeg" "image/gif" "image/jpg" ];
-            handler = "org.gnome.gThumb.desktop";
+            handler = " org.gnome.Shotwell-Viewer.desktop";
           };
           handlerToAttr = list: handler: builtins.listToAttrs (builtins.map (mime: { name = mime; value = handler; }) list);
         in

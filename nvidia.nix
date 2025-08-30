@@ -34,7 +34,7 @@
   environment.sessionVariables = { LIBVA_DRIVER_NAME = "iHD"; }; # Force intel-media-driver
   # end of Accelerated Video Playback
 
-  services.xserver.videoDrivers = [ "nvidia" ];
+  services.xserver.videoDrivers = [ "nvidia" "modesetting" ];
   hardware.nvidia = {
     # Modesetting is needed for most Wayland compositors 
     modesetting.enable = true;

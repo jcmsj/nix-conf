@@ -27,6 +27,7 @@ in
       ./docker.nix
       ./bluetooth.nix
       ./razer.nix
+      # ./prisma.nix
     ];
 
   nix.settings = {
@@ -77,7 +78,7 @@ in
     ## System utils
     p7zip
     peazip
-    localstack
+    # localstack
     zip
     jq
     realesrgan-ncnn-vulkan
@@ -177,6 +178,11 @@ in
 
     rofi-network-manager
     drawio
+    proton-pass
+    # displaylink
+    telegram-desktop
+    redis
+    shotwell
   ];
 
   programs.firefox.enable = true;

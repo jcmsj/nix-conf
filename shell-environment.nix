@@ -6,6 +6,7 @@
     "rm-gens" = "nix-env --profile /nix/var/nix/profiles/system --delete-generations";
     pn = "pnpm";
     pnx = "pnpm dlx";
+    prs = "pnpm prisma";  
     py = "python";
     pull = "git pull";
     push = "git push";
@@ -13,6 +14,8 @@
     remake = "reisen remake";
     zd = "nix develop -c $SHELL";
     dev = "npm run dev";
+    wt = "git worktree";
+    wtls = "git worktree list";
   };
   environment.localBinInPath = true;
   environment.sessionVariables = rec {

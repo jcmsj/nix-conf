@@ -20,12 +20,12 @@
     };
     # aagl.url = "github:ezKEa/aagl-gtk-on-nix";
     # aagl.inputs.nixpkgs.follows = "nixpkgs"; # Name of nixpkgs input you want to use
-    # lanzaboote = {
-    #   url = "github:nix-community/lanzaboote/v0.4.1";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v0.4.2";
 
-    #   # Optional but recommended to limit the size of your system closure.
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+      # Optional but recommended to limit the size of your system closure.
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -53,7 +53,7 @@
       "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
     ];
   };
-  outputs = inputs@{ self, nixpkgs, home-manager,agsConf, ... }:
+  outputs = inputs@{ self, nixpkgs, home-manager,agsConf, lanzaboote, ... }:
     let
       username = "jcsan";
       system = "x86_64-linux";
@@ -81,6 +81,7 @@
               # given the users in this list the right to specify additional substituters via:
               #    1. `nixConfig.substituters` in `flake.nix`
               nix.settings.trusted-users = [ "jcsan" ];
+              nix.settings.download-buffer-size = 524288000; # 500 MiB
             }
             home-manager.nixosModules.home-manager
             {
@@ -93,7 +94,7 @@
               # arguments to home.nix
             }
             # aagl.nixosModules.default
-            # lanzaboote.nixosModules.lanzaboote
+            lanzaboote.nixosModules.lanzaboote
               # auto-cpufreq.nixosModules.default
           ];
         };
