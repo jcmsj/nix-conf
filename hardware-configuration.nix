@@ -9,8 +9,8 @@
     ];
 
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" "lenovo-legion-module" ];
+  boot.initrd.kernelModules = [ "evdi" ];
+  boot.kernelModules = [ "kvm-intel" "lenovo-legion-module" "snd-hda-intel" ];
   boot.kernelPackages = pkgs.linuxPackages_latest;
   boot.kernelParams = [ 
     # fix: can't go 120hz+
@@ -23,7 +23,7 @@
   # boot.extraModprobeConfig = ''
     # options nvidia_modeset vblank_sem_control=0
   # '';
-  boot.extraModulePackages = with config.boot.kernelPackages; [ lenovo-legion-module ];
+  boot.extraModulePackages = with config.boot.kernelPackages; [ lenovo-legion-module evdi ];
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/179ad3a0-940b-419b-bed1-9ab772380ce0";
       fsType = "ext4";

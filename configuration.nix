@@ -96,8 +96,7 @@ in
     nil
     nodejs_24
     pnpm-shim
-    (python312.withPackages (ps: with ps; [
-      torch
+    (python313.withPackages (ps: with ps; [
       jupyter
       notebook
       matplotlib
@@ -107,7 +106,6 @@ in
       memory-profiler
       xlrd # optional dep of pandas for xlsx
       img2pdf
-      openai-whisper
     ]))
 
     espeak
@@ -120,6 +118,7 @@ in
     nixpkgs-fmt
     google-chrome
     celluloid
+    totem
     # caprine-bin
 
     qbittorrent
@@ -139,6 +138,8 @@ in
     lenovo-legion
     linuxPackages_latest.lenovo-legion-module
     esbuild
+    cloudflared
+  
     # latest kernel
 
     gnome-system-monitor
@@ -169,13 +170,13 @@ in
     lutris
     protonup-qt
     yarn
-    # cuda packages needed by openai-whisper
-    cudaPackages_12_8.cudatoolkit
-    # cudaPackages_12_8.cudnn
+    openai-whisper
     (pkgs.ollama.override {
       acceleration = "cuda";
     })
 
+    sway-audio-idle-inhibit
+    # widevine-cdm
     rofi-network-manager
     drawio
     proton-pass

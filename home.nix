@@ -70,7 +70,7 @@ in
           players = [ "vlc.desktop" "org.gnome.celluloid.desktop" ];
           imageHandler = {
             items = [ "image/*" "image/webp" "image/png" "image/jpeg" "image/gif" "image/jpg" ];
-            handler = " org.gnome.Shotwell-Viewer.desktop";
+            handler = "org.gnome.Shotwell-Viewer.desktop";
           };
           handlerToAttr = list: handler: builtins.listToAttrs (builtins.map (mime: { name = mime; value = handler; }) list);
         in
@@ -203,7 +203,7 @@ in
 
   programs.zen-browser = {
     enable = true;
-    nativeMessagingHosts = [ pkgs.firefoxpwa ];
+    # nativeMessagingHosts = [ pkgs.firefoxpwa ];
     policies = {
       DisableAppUpdate = true;
       DisableTelemetry = true;
@@ -247,7 +247,7 @@ in
     );
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi-wayland;
+    package = pkgs.rofi;
     # still broken
     # extraConfig =
     #   {
