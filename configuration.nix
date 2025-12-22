@@ -6,6 +6,7 @@
 let
   reisen = pkgs.callPackage ./reisen/reisen.nix { };
   pnpm-shim = pkgs.callPackage ./pnpm-shim.nix { };
+  zed-latest = pkgs.callPackage ./zed-latest.nix { };
 in
 {
   imports =
@@ -81,14 +82,14 @@ in
     # localstack
     zip
     jq
-    realesrgan-ncnn-vulkan
+    # realesrgan-ncnn-vulkan
     socat
     ## Development
     ### Editors
     vscode.fhs # IMPORTANT!!!: I NEED FHS for VSCODE
-
+    aria2
     ### Version Control
-    gh
+    # zed-latest
     git
 
     ### Language Runtimes & Managers
@@ -105,11 +106,16 @@ in
       numpy
       memory-profiler
       xlrd # optional dep of pandas for xlsx
-      img2pdf
+      # img2pdf
+      pdf2image
+      nfcpy
     ]))
+    # cypress
+    libusb1
 
     espeak
-    krita
+    # krita
+    # gimp3
     fastfetch
     # inkscape
 
@@ -139,7 +145,7 @@ in
     linuxPackages_latest.lenovo-legion-module
     esbuild
     cloudflared
-  
+
     # latest kernel
 
     gnome-system-monitor
@@ -147,6 +153,7 @@ in
     cheese
     gnome-text-editor
     gnome-clocks
+    gnome-contacts
     gnome-calendar
     gnome-online-accounts
     gnome-online-accounts-gtk
@@ -155,6 +162,8 @@ in
     gnome-sound-recorder
     gnome-control-center
     gnome-font-viewer
+    share-preview
+    baobab
     networkmanagerapplet
     swww
     brightnessctl
@@ -163,27 +172,29 @@ in
     wl-clipboard
     xdg-utils
 
-    aws-sam-cli
+    # aws-sam-cli
     awscli2
     qemu
     inputs.agsConf.packages.${system}.default
-    lutris
+    # lutris
     protonup-qt
-    yarn
-    openai-whisper
-    (pkgs.ollama.override {
-      acceleration = "cuda";
-    })
+    # openai-whisper
+  #  (pkgs.ollama.override {
+  #    acceleration = "cuda";
+  #  })
+    # llama-cpp
 
     sway-audio-idle-inhibit
     # widevine-cdm
     rofi-network-manager
-    drawio
+    # drawio
     proton-pass
+    protonvpn-gui
+    proton-authenticator
     # displaylink
     telegram-desktop
-    redis
-    shotwell
+    # shotwell
+    zoom-us
   ];
 
   programs.firefox.enable = true;

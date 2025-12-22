@@ -22,6 +22,8 @@
 
       # Allow TCP port ranges
       allowedTCPPortRanges = [
+        # ssh
+        { from = 22; to = 22; }
         { from = 3000; to = 3999; } # For 3xxx range (e.g., 3000, 3001, ..., 3999)
         { from = 8000; to = 8999; } # For 8xxx range (e.g., 8000, 8001, ..., 8999)
         # You can add more ranges here as needed
@@ -38,4 +40,17 @@
     #   enable = true;
     # };
   };
+
+  services.openssh = {
+  enable = true;
+  ports = [ 22 ];
+  settings = {
+    PasswordAuthentication = true;
+    AllowUsers = null; # Allows all users by default. Can be [ "user1" "user2" ]
+    UseDns = true;
+    X11Forwarding = false;
+    PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
+  };
+};
+
 }

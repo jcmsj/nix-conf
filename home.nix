@@ -137,23 +137,29 @@ in
   };
   programs.git = {
     enable = true;
-    userName = "Jean Carlo San Juan";
-    userEmail = "sanjuan.jeancarlo@gmail.com";
-    extraConfig = {
-      init.defaultBranch = "main";
-      push.autoSetupRemote = true;
-    };
-    aliases = {
-      ci = "commit";
-      co = "checkout";
-      s = "status";
-      cam = "commit -am";
-      cm = "commit -m";
-      uncommit = "reset HEAD~1";
-      recommit = "commit --amend --no-edit";
-      edit = "commit --amend";
-      undo = "uncommit";
-      redo = "recommit";
+    settings = {
+      user = {
+        name = "Jean Carlo San Juan";
+        email = "sanjuan.jeancarlo@gmail.com";
+      };
+      init = {
+        defaultBranch = "main";
+      };
+      push = {
+        autoSetupRemote = true;
+      };
+      alias = {
+        ci = "commit";
+        co = "checkout";
+        s = "status";
+        cam = "commit -am";
+        cm = "commit -m";
+        uncommit = "reset HEAD~1";
+        recommit = "commit --amend --no-edit";
+        edit = "commit --amend";
+        undo = "uncommit";
+        redo = "recommit";
+      };
     };
   };
   programs.zsh = {
@@ -193,12 +199,19 @@ in
       "ctrl+down" = "neighboring_window down";
     };
   };
-  programs.obs-studio = {
-    package = (pkgs.obs-studio.override {
-      cudaSupport = true;
-    });
+  # programs.obs-studio = {
+  #   # package = (pkgs.obs-studio.override {
+  #   #   cudaSupport = true;
+  #   # });
+  #   enable = true;
+  #   plugins = [ pkgs.obs-studio-plugins.wlrobs ];
+  # };
+
+  programs.zed-editor = {
     enable = true;
-    plugins = [ pkgs.obs-studio-plugins.wlrobs ];
+    extensions = [
+      "nix" "toml" "material-icon-theme" "html" "dockerfile" "sql"
+    ];
   };
 
   programs.zen-browser = {
@@ -210,6 +223,8 @@ in
       # find more options here: https://mozilla.github.io/policy-templates/
     };
   };
+
+  
 
   xdg.desktopEntries =
     let

@@ -11,7 +11,7 @@
   boot.initrd.availableKernelModules = [ "xhci_pci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
   boot.initrd.kernelModules = [ "evdi" ];
   boot.kernelModules = [ "kvm-intel" "lenovo-legion-module" "snd-hda-intel" ];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages;
   boot.kernelParams = [ 
     # fix: can't go 120hz+
     "nvidia-modeset.hdmi_deepcolor=0" 
@@ -49,6 +49,13 @@
     device = "/swapfile";
     size = 12 * 1024; # 12GB
   }];
+
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 50;
+  };
+
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's
   # still possible to use this option, but it's recommended to use it in conjunction

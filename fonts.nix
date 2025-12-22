@@ -8,7 +8,7 @@
       iosevka-bin
       source-serif-pro
       noto-fonts-cjk-sans
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       nerd-fonts.symbols-only
       font-awesome
     ];
@@ -18,7 +18,7 @@
         sansSerif = [ "Iosevka" ];
         monospace = [ "Iosevka" ];
         serif = [ "Source Serif Pro" "Ioesevka" ];
-        emoji = [ "noto-fonts-emoji" ];
+        emoji = [ "noto-fonts-color-emoji" ];
       };
     };
   };

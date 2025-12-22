@@ -6,8 +6,8 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    swww = {
-      url = "github:LGFae/swww";
+    awww = {
+      url = "git+https://codeberg.org/LGFae/awww";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
@@ -18,10 +18,8 @@
       url = "github:jcmsj/rofi-vscode-mode";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # aagl.url = "github:ezKEa/aagl-gtk-on-nix";
-    # aagl.inputs.nixpkgs.follows = "nixpkgs"; # Name of nixpkgs input you want to use
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v0.4.2";
+      url = "github:nix-community/lanzaboote/v0.4.3";
 
       # Optional but recommended to limit the size of your system closure.
       inputs.nixpkgs.follows = "nixpkgs";
@@ -36,10 +34,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # auto-cpufreq = {
-    #   url = "github:AdnanHodzic/auto-cpufreq";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
   };
   nixConfig = {
     substituters = [
@@ -63,11 +57,9 @@
           allowUnfree = true; 
           firefox.speechSynthesisSupport = true;
           chromium.enableWideVine = true;
-          cudaSupport = true;
+          # cudaSupport = true;
         };
       };
-
-      # pkgs = legacyPackages.${system};
     in
     {
       nixosConfigurations = {
@@ -95,9 +87,7 @@
               home-manager.extraSpecialArgs = { inherit inputs; inherit system; };
               # arguments to home.nix
             }
-            # aagl.nixosModules.default
             lanzaboote.nixosModules.lanzaboote
-              # auto-cpufreq.nixosModules.default
           ];
         };
       };
