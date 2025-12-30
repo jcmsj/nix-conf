@@ -91,6 +91,7 @@ in
     ### Version Control
     # zed-latest
     git
+    gh
 
     ### Language Runtimes & Managers
     nixd

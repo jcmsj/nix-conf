@@ -284,9 +284,10 @@ in
     ];
     timeouts = [
       # 5m lock
-      { timeout = 300; command = "${pkgs.swaylock-effects}/bin/swaylock -fF"; }
-      # 8m sleep
-      { timeout = 480; command = "${pkgs.systemd}/bin/systemctl suspend"; }
+      # 15 mins lock
+      { timeout = 900; command = "${pkgs.swaylock-effects}/bin/swaylock -fF"; }
+      # 30m sleep
+      { timeout = 1800; command = "${pkgs.systemd}/bin/systemctl suspend"; }
     ];
   };
 
