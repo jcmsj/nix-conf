@@ -164,6 +164,8 @@ in
   };
   programs.zsh = {
     enable = true;
+    # lock in the legacy behavior for dotfiles directory (silence future warning)
+    dotDir = config.home.homeDirectory;
     enableCompletion = true;
     autosuggestion.enable = true;
     syntaxHighlighting.enable = true;
@@ -278,10 +280,11 @@ in
   };
   services.swayidle = {
     enable = true;
-    events = [
-      { event = "before-sleep"; command = "${pkgs.swaylock-effects}/bin/swaylock -fF"; }
-      { event = "lock"; command = "lock"; }
-    ];
+    # events now expects an attrset keyed by event name
+    events = {
+      "before-sleep" = "${pkgs.swaylock-effects}/bin/swaylock -fF";
+      lock = "lock";
+    };
     timeouts = [
       # 5m lock
       # 15 mins lock
@@ -297,7 +300,7 @@ in
     settings = {
       # Background and image settings
       color = "1a0a1a"; # Deep dark purple/black background
-      image = "/home/jcsan/Wallpapers/AyaMaruyama.png";
+      image = "/home/jcsan/Wallpapers/lockscreen.jpg";
       scaling = "fill"; # Image scaling mode: stretch, fill, fit, center, tile, solid_color
       
       # Effects to enhance the magical/fantasy aesthetic
