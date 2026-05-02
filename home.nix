@@ -59,6 +59,7 @@ in
     enable = true;
     userDirs = {
       enable = true;
+      setSessionVariables = true;
     } // userDirs;
 
     mimeApps = {
@@ -98,6 +99,7 @@ in
       package = pkgs.rose-pine-gtk-theme;
       name = "rose-pine-moon";
     };
+    gtk4.theme = config.gtk.theme;
     iconTheme = {
       name = "rose-pine-moon";
       package = pkgs.rose-pine-icon-theme;
@@ -201,13 +203,13 @@ in
       "ctrl+down" = "neighboring_window down";
     };
   };
-  # programs.obs-studio = {
-  #   # package = (pkgs.obs-studio.override {
-  #   #   cudaSupport = true;
-  #   # });
-  #   enable = true;
-  #   plugins = [ pkgs.obs-studio-plugins.wlrobs ];
-  # };
+  programs.obs-studio = {
+    package = (pkgs.obs-studio.override {
+      cudaSupport = true;
+    });
+    enable = true;
+    plugins = [ pkgs.obs-studio-plugins.wlrobs ];
+  };
 
   programs.zed-editor = {
     enable = true;

@@ -166,7 +166,7 @@ in
     share-preview
     baobab
     networkmanagerapplet
-    swww
+    awww
     brightnessctl
     xwayland-satellite
     cliphist
@@ -190,12 +190,14 @@ in
     rofi-network-manager
     # drawio
     proton-pass
-    protonvpn-gui
+    proton-vpn
     proton-authenticator
     # displaylink
     telegram-desktop
     # shotwell
     zoom-us
+
+    lmstudio
   ];
 
   programs.firefox.enable = true;
@@ -203,7 +205,7 @@ in
   # For Piper to work
   services.ratbagd.enable = true;
   # programs.gamemode.enable = true;
-  programs.adb.enable = true;
+  # programs.adb.enable = true;
   # services.logind.extraConfig = ''
   #   # don't shutdown when power button is short-pressed
   #   HandlePowerKey=ignore
@@ -214,9 +216,6 @@ in
   };
 
   programs.direnv.enable = true;
-  nixpkgs.overlays = [
-
-  ];
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

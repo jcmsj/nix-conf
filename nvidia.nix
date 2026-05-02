@@ -1,22 +1,6 @@
 { pkgs, lib, config, ... }:
 # https://wiki.nixos.org/wiki/Nvidia
 {
-  nixpkgs.config.packageOverrides = pkgs: 
-  let
-    nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
-      export __NV_PRIME_RENDER_OFFLOAD=1
-      export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
-      export __GLX_VENDOR_LIBRARY_NAME=nvidia
-      export __VK_LAYER_NV_optimus=NVIDIA_only
-      exec "$@"
-    '';
-  in
-  {
-    nvidia-offload = nvidia-offload;
-    # See https://nixos.wiki/wiki/Accelerated_Video_Playback
-    intel-vaapi-driver = pkgs.intel-vaapi-driver.override { enableHybridCodec = true; };
-  };
-
   # Make sure opengl is enabled
   hardware.graphics = {
     enable = true;
@@ -42,7 +26,7 @@
   hardware.nvidia = {
     # Modesetting is needed for most Wayland compositors 
     modesetting.enable = true;
-    open = false;
+    open = true;
     nvidiaSettings = true;
     package = config.boot.kernelPackages.nvidiaPackages.stable;
     powerManagement.enable = true;

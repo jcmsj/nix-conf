@@ -51,8 +51,25 @@
     let
       username = "jcsan";
       system = "x86_64-linux";
+      overlays = [
+        (final: prev:
+          let
+            nvidia-offload = prev.writeShellScriptBin "nvidia-offload" ''
+              export __NV_PRIME_RENDER_OFFLOAD=1
+              export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
+              export __GLX_VENDOR_LIBRARY_NAME=nvidia
+              export __VK_LAYER_NV_optimus=NVIDIA_only
+              exec "$@"
+            '';
+          in
+          {
+            inherit nvidia-offload;
+            intel-vaapi-driver = prev.intel-vaapi-driver.override { enableHybridCodec = true; };
+          })
+      ];
       pkgs = import nixpkgs {
         inherit system;
+        inherit overlays;
         config = { 
           allowUnfree = true; 
           firefox.speechSynthesisSupport = true;
@@ -65,11 +82,14 @@
       nixosConfigurations = {
         nixos = nixpkgs.lib.nixosSystem {
           specialArgs = {
-            inherit pkgs;
             inherit inputs; # will let de.nix be able to use the hyprland flake.
             inherit system;
           };
           modules = [
+            nixpkgs.nixosModules.readOnlyPkgs
+            {
+              nixpkgs.pkgs = pkgs;
+            }
             ./configuration.nix
             {
               # given the users in this list the right to specify additional substituters via:

@@ -17,6 +17,7 @@
       enable = true;
       allowedTCPPorts = [
         5173 # Your Vite web server
+        1234
         # Add any other individual TCP ports you need to allow here
       ];
 
